@@ -14,7 +14,6 @@ html {
 }
 body {
     margin: 0;
-    background-image: linear-gradient(to left bottom, #eff5ff, #f0f6ff);
     min-height: 100vh;
     flex-direction: column;
 }
@@ -26,6 +25,24 @@ section {
 
 .page-content {
     margin: 0.5em 0 0 0;
+}
+
+/* VERTICAL AND HORIZONTAL ALIGNMENT */
+
+.v-h-alignment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* END VERTICAL AND HORIZONTAL ALIGNMENT */
+
+.central, aside, .title-box{
+    flex-direction: column;
+}
+
+.title-box h1 {
+    margin: 0.5em;
 }
 
 /* END GENERAL CSS */
@@ -130,7 +147,6 @@ section {
     transform: translate(-50%, -50%);
     opacity: 0;
     visibility: hidden;
-    -webkit-transition: .25s 0s ease-in-out;
     transition: .25s 0s ease-in-out;
 }
 
@@ -159,32 +175,133 @@ section {
 
 .banner {
     width: 100%;
-    height: 4em;
+    min-height: 10em;
     margin-bottom: 0.5em;
     /* COSAS DE TESTING PARA BORRAR MÁS TARDE */
     color: blue;
     justify-content: center;
 }
 
+.banner-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-searchbar {
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+.nav-searchbar input {
+    height: 2.55em;
+    width: 20em;
+    border-radius: 1em 0 0 1em;
+}
+
+.nav-searchbar svg {
+    height: 2em;
+    width: 3em;
+    margin: 0.5em;
+}
+
+.nav-searchbar button {
+    height: 3em;
+    background-color: rgb(39, 39, 39);
+    border: rgb(39, 39, 39);
+    border-radius: 0 1em 1em 0;
+}
+
 /* END BANNER */
 
-/* CAROUSEL */
+/* CAROUSEL PROMOTIONS NEWS*/
 
-.carousel {
+.carousel, .promotions, .news{
+    flex-wrap: wrap;
     justify-content: space-around;
 }
 
-.carousel > div {
+.carousel > div, .promotions > div, .news > div{
     height: 10em;
-    width: 10em;
+    width: 15em;
     margin: 0.5em;
-    /* COSAS DE TESTING PARA BORRAR MÁS TARDE */
-    background: greenyellow;
-    border: solid red 2px;
+    border: solid 1px #444444;
+    border-radius: 1em;
+    background-image: linear-gradient(to left bottom, #eff5ff, #f0f6ff);
 }
 
-/* END CAROUSEL */
+.carousel>div img,
+.promotions>div img,
+.news>div img{
+    border-radius: 1em;
+}
 
+.carousel>div p,
+.promotions>div p,
+.news>div p {
+    margin: 0.5em;
+}
+
+/* END CAROUSEL PROMOTIONS NEWS */
+
+/* SPECIAL DEALS */
+
+.promotions {
+    border: solid 1px #444444;
+    background-image: linear-gradient(to left bottom, #eff5ff, #f0f6ff);
+}
+
+.trapezoid {
+    position: absolute;
+    width: 6em;
+    height: 2em;
+    background: red;
+    rotate: -45deg;
+    margin: 0.35em 0 0 -1.65em;
+    clip-path: polygon(33% 0%, 66% 0%, 100% 100%, 0% 100%);
+}
+
+.promotions strong{
+    color: #eff5ff;
+    margin: 0.5em 0 0 1.6em;
+}
+
+/* END SPECIAL DEALS */
+
+/* SOCIAL MEDIA */
+
+.social-media {
+    border: solid 1px #444444;
+    border-radius: 1em;
+    background-image: linear-gradient(to left bottom, #eff5ff, #f0f6ff);
+}
+
+.social-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 20% 10%;
+    border-radius: 1em;
+}
+
+.social-media .text {
+    flex-direction: column;
+    width: 100%;
+    padding: 1em;
+}
+
+.social-media h1 {
+    font-size: 1em;
+}
+
+/* END SOCIAL MEDIA */
+
+/* NEWS */
+
+
+/* END NEWS */
 
 /* FOOTER */
 
@@ -220,7 +337,7 @@ footer {
         width: 100%;
         align-items: center;
         justify-content: center;
-        box-shadow: 0.5em black;
+        background-image: linear-gradient(to left bottom, #eff5ff, #f0f6ff);
     }
 
     .nav-spacer {
@@ -232,11 +349,7 @@ footer {
         color: black;
         /* COSAS DE TESTING PARA BORRAR MÁS TARDE */
         border: solid blue 2px;
-        >li {
-            margin: 0.5em;
-            /* COSAS DE TESTING PARA BORRAR MÁS TARDE */
-            border: solid red 2px;
-        }
+        padding-right: 1em;
     }
 
     .landscape-nav-label ul {
@@ -249,23 +362,15 @@ footer {
     }
 
     .nav-searchbar {
-        justify-content: center;
-        align-items: center;
+        margin-top: 1.5em;
     }
 
     .nav-searchbar input {
         height: 3em;
-        width: 20em;
     }
-    .nav-searchbar svg {
-        height: 2em;
-        width: 3em;
-        margin: 0.5em;
-    }
+
     .nav-searchbar button {
-        background-color: rgb(39, 39, 39);
-        border: rgb(39, 39, 39);
-        border-radius: 0 1em 1em 0;
+        height: 3.3em;
     }
 
     /* HIDE HAMBURGER & SHOWING THE LANDSCAPE NAV*/
