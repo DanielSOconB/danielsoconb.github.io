@@ -19,7 +19,7 @@ body {
 }
 
 section {
-    background: lightcoral;
+    background: #f1fdf7;
     margin: 0.5em;
 }
 
@@ -248,11 +248,6 @@ section {
 
 /* SPECIAL DEALS */
 
-.promotions {
-    border: solid 1px #444444;
-    background-image: linear-gradient(to left bottom, #eff5ff, #f0f6ff);
-}
-
 .trapezoid {
     position: absolute;
     width: 6em;
@@ -330,6 +325,16 @@ footer {
      /* big landscape tablets, laptops, and desktops */
 
     /* NAVBAR */
+
+    .social-media {
+        max-height: 20em;
+    }
+
+    .social-media img {
+        height: 100%;
+        max-height: 20em;
+    }
+
     nav {
         position: fixed;
         top: 0;
@@ -338,6 +343,7 @@ footer {
         align-items: center;
         justify-content: center;
         background-image: linear-gradient(to left bottom, #eff5ff, #f0f6ff);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
     }
 
     .nav-spacer {
@@ -347,9 +353,16 @@ footer {
     nav a{
         text-decoration:none;
         color: black;
-        /* COSAS DE TESTING PARA BORRAR MÁS TARDE */
-        border: solid blue 2px;
+        text-align: center;
         padding-right: 1em;
+    }
+
+    .landscape-nav-label h1 {
+        width: 100%;
+    }
+
+    .landscape-nav-label a:hover {
+        background-color: #b1bac8;
     }
 
     .landscape-nav-label ul {
@@ -357,12 +370,11 @@ footer {
         margin: 0;
         justify-content: center;
         align-items: center;
-        /* COSAS DE TESTING PARA BORRAR MÁS TARDE */
-        border: solid yellow 2px;
     }
 
     .nav-searchbar {
         margin-top: 1.5em;
+        padding-right: 1.5em;
     }
 
     .nav-searchbar input {
