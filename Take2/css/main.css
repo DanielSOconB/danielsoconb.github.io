@@ -1,0 +1,106 @@
+/* GENERAL CSS */
+
+* {
+    font-family: 'Roboto';
+    z-index: 50;
+}
+
+* :not(title) {
+    display: flex;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+/* END GENERAL CSS */
+
+/* NAVBAR */
+
+.mobile-nav {
+    height: 3em;
+    width: 100%;
+    background: white;
+}
+
+/* END NAVBAR */
+
+/* BANNER */
+
+.banner {
+    padding: 3em 0 3em 0;
+    background: #0a4226;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+
+.banner button {
+    background: #1dbf73;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+}
+
+.banner .publish-work {
+    border-radius: 50%;
+    height: 2em;
+    width: 2em;
+}
+
+.banner input {
+    height: 100%;
+    margin: 0;
+    border: 0;
+}
+
+.banner form {
+    height: 2em;
+    border-radius: 0.5em;
+}
+
+.searchbar {
+    padding: 0 0.1em 0 0.3em;
+    border-radius: 0.5em 0 0 0.5em;
+}
+
+.searchbar-button {
+    padding: 0 0.3em 0 0.3em;
+    border-radius: 0 0.5em 0.5em 0;
+}
+
+.searchbar-button svg{
+    height: 2em;
+    width: 2em;
+}
+
+/* END BANNER */
+
+/* CONTENT */
+
+main {
+    height: 100vh;
+}
+
+.main-content, 
+main, 
+.content {
+    flex-direction: column;
+}
+
+/* END CONTENT */
+
+/* FOOTER */
+
+footer {
+    height: 5em;
+    width: 100%;
+    background: darkgrey;
+}
+
+/* END FOOTER */
