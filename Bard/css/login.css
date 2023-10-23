@@ -1,0 +1,42 @@
+.user-registration,
+.user-login {
+    width: 300px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.user-registration h2,
+.user-login h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-registration form,
+.user-login form {
+    margin-bottom: 20px;
+}
+
+.user-registration label,
+.user-login label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.user-registration input,
+.user-login input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.user-registration button,
+.user-login button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
