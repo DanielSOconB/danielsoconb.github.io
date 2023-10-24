@@ -16,6 +16,7 @@ header {
 }
 
 header h1 {
+    padding-top: 5em;
     font-size: 2em;
     font-weight: bold;
 }
@@ -29,6 +30,22 @@ main {
 }
 
 /* END GENERAL CSS */
+
+
+/* BANNER */
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    width: 100%;
+    height: 6em;
+    background: #454545;
+}
+
+/* END BANNER */
+
 
 /* BANNER SEARCHBAR */
 .search-bar {
@@ -83,9 +100,6 @@ main {
 }
 
 /* END CATEGORIES */
-
-/* CAROUSEL */
-/* END CAROUSEL */
 
 /* ELEMENTOS */
 section {
@@ -194,19 +208,45 @@ section li span {
 
 /* END ELEMENTOS */
 
+
+/* CAROUSEL */
+
+
+.carousel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel div {
+    background: #333;
+    margin: 0.5em;
+    height: 8em;
+    width: 20%;
+}
+
+.carousel button {
+    height: 2em;
+    width: 2em;
+    color: #333;
+    font-size: large;
+    border-radius: 50%;
+}
+
+/* END CAROUSEL */
+
 /* PROMOCIONES */
 
-.trapezoid {
+.highlight {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    width: 10em;
+    padding: 0.1em;
+    border-radius: 50%;
+    width: 2em;
     height: 2em;
     background: red;
-    rotate: 45deg;
-    margin: 1.5em 0 0 -2.7em;
-    clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
     color:#fff;
 }
 
@@ -378,6 +418,9 @@ section li span {
 /* END PAYMENT */
 
 footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-height: 4em;
     width: 100%;
     background: #333;
@@ -389,7 +432,38 @@ footer p {
     font-size: 0.8em;
 }
 
+
+/* NAVBAR */
+
+nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: fixed;
+    background: #fff;
+    width: 100%;
+    top: 0;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    > li {
+        margin: 0.5em;
+    }
+}
+
+/* END NAVBAR */
+
 @media (min-width: 768px) {
+
+    .categories-filter ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
     section li {
         display: flex;
         align-items: center;
@@ -417,6 +491,7 @@ footer p {
 
     .testimonials ul {
         display: flex;
+        justify-content: space-around;
         flex-wrap: wrap;
     }
 
@@ -431,11 +506,68 @@ footer p {
 
     /* PROMOCIONES */
 
-    .trapezoid {
-        margin: -3em 0 0 -2.7em;
-        overflow: hidden;
+    .highlight {
+        
     }
 
     /* END PROMOCIONES */
 
+}
+
+@media (min-width: 1024px) {
+    
+
+    .categories-filter ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    section li {
+        display: flex;
+        align-items: center;
+    }
+
+    section li figure {
+        margin-right: 10px;
+    }
+
+     li {
+        display: flex;
+        align-items: center;
+        max-width: 20em;
+        margin: 0 1em 0 0 ;
+    }
+
+    .gigs li figure {
+        margin-right: 10px;
+    }
+
+    .gigs ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .testimonials ul {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .testimonials li {
+        display: flex;
+        align-items: center;
+    }
+
+    .testimonials li figure {
+        margin-right: 10px;
+    }
+
+    /* PROMOCIONES */
+
+    .highlight {
+        
+    }
+
+    /* END PROMOCIONES */
 }
