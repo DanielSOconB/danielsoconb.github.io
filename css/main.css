@@ -1,13 +1,28 @@
+/* FONT */
+
+@import url(https://fonts.googleapis.com/css2?family=Roboto);
+
+/* END FONT */
+
+:root {
+    --dark-charcoal: #333;
+    --gray80: #ccc;
+    --raisin-black: #231f20;
+    --isabelline: #F5EFED;
+    --united-nations-blue:#3993DD;
+}
+
 /* GENERAL CSS */
 
 * {
     box-sizing: border-box;
+    font-family: Roboto;
 }
 
 body {
     margin: 0;
     font-family: sans-serif;
-    color: #333;
+    color: var(--dark-charcoal);
 }
 
 header {
@@ -56,14 +71,14 @@ main {
 .search-bar input {
     width: 70%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--gray80);
     border-radius: 5px;
 }
 
 .search-bar button {
     width: 20%;
     padding: 10px;
-    background-color: #333;
+    background-color: var(--dark-charcoal);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -89,14 +104,14 @@ main {
 .categories-filter li a {
     display: block;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--gray80);
     border-radius: 5px;
     text-decoration: none;
-    color: #333;
+    color: var(--dark-charcoal);
 }
 
 .categories-filter li a:hover {
-    background-color: #ccc;
+    background-color: var(--gray80);
 }
 
 /* END CATEGORIES */
@@ -199,7 +214,7 @@ section li span {
 .gigs li .gig-info a {
     display: block;
     padding: 10px;
-    background-color: #333;
+    background-color: var(--dark-charcoal);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -220,7 +235,7 @@ section li span {
 }
 
 .carousel div {
-    background: #333;
+    background: var(--dark-charcoal);
     margin: 0.5em;
     height: 8em;
     width: 20%;
@@ -229,7 +244,7 @@ section li span {
 .carousel button {
     height: 2em;
     width: 2em;
-    color: #333;
+    color: var(--dark-charcoal);
     font-size: large;
     border-radius: 50%;
 }
@@ -247,7 +262,7 @@ section li span {
     width: 2em;
     height: 2em;
     background: red;
-    color:#fff;
+    color: #fff;
 }
 
 /* END PROMOCIONES */
@@ -305,7 +320,7 @@ section li span {
 .messaging-system {
     width: 300px;
     margin: 0 auto;
-    border: 1px solid #ccc;
+    border: 1px solid var(--gray80);
     padding: 20px;
 }
 
@@ -334,14 +349,14 @@ section li span {
 .messaging-system form input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--gray80);
     border-radius: 5px;
 }
 
 .messaging-system form button {
     width: 100%;
     padding: 10px;
-    background-color: #333;
+    background-color: var(--dark-charcoal);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -391,14 +406,14 @@ section li span {
 .payment-form input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--gray80);
     border-radius: 5px;
 }
 
 .payment-form button {
     width: 100%;
     padding: 10px;
-    background-color: #333;
+    background-color: var(--dark-charcoal);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -423,7 +438,7 @@ footer {
     justify-content: center;
     min-height: 4em;
     width: 100%;
-    background: #333;
+    background: var(--dark-charcoal);
     color: #fff;
     text-align: center;
 }
@@ -449,7 +464,8 @@ nav ul {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    > li {
+
+    >li {
         margin: 0.5em;
     }
 }
@@ -473,11 +489,11 @@ nav ul {
         margin-right: 10px;
     }
 
-     li {
+    li {
         display: flex;
         align-items: center;
         max-width: 20em;
-        margin: 0 1em 0 0 ;
+        margin: 0 1em 0 0;
     }
 
     .gigs li figure {
@@ -506,16 +522,14 @@ nav ul {
 
     /* PROMOCIONES */
 
-    .highlight {
-        
-    }
+    .highlight {}
 
     /* END PROMOCIONES */
 
 }
 
 @media (min-width: 1024px) {
-    
+
 
     .categories-filter ul {
         display: flex;
@@ -532,11 +546,11 @@ nav ul {
         margin-right: 10px;
     }
 
-     li {
+    li {
         display: flex;
         align-items: center;
         max-width: 20em;
-        margin: 0 1em 0 0 ;
+        margin: 0 1em 0 0;
     }
 
     .gigs li figure {
@@ -565,9 +579,7 @@ nav ul {
 
     /* PROMOCIONES */
 
-    .highlight {
-        
-    }
+    .highlight {}
 
     /* END PROMOCIONES */
 }
