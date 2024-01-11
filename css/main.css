@@ -167,6 +167,8 @@ section li span {
 }
 
 .gigs ul {
+    display: flex;
+    justify-content: space-around;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -190,7 +192,11 @@ section li span {
 }
 
 .gig-info {
+    display: flex;
     padding: 0.5em;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .gigs li .gig-info {
