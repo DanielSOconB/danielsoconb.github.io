@@ -172,6 +172,7 @@ section li span {
     display: flex;
     justify-content: space-around;
     list-style-type: none;
+    flex-wrap: wrap;
     margin: 0;
     padding: 0;
 }
