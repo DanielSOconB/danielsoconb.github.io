@@ -1,45 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../css/main.css'>
-    <script src='main.js'></script>
+    <meta charset="UTF-8">
+    <title>Gig</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/gigs.css">
 </head>
+
 <body>
-    <div class="rating">
-        <span class="stars">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M8 0.5L9.94975 5.31371L15.799 6.28932L12.5686 10.6863L13.5328 15.499L8 13.6863L2.46719 15.499L3.43137 10.6863L0.200972 6.28932L6.05025 5.31371L8 0.5Z"
-                    fill="gold" />
-            </svg>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M8 0.5L9.94975 5.31371L15.799 6.28932L12.5686 10.6863L13.5328 15.499L8 13.6863L2.46719 15.499L3.43137 10.6863L0.200972 6.28932L6.05025 5.31371L8 0.5Z"
-                    fill="gold" />
-            </svg>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M8 0.5L9.94975 5.31371L15.799 6.28932L12.5686 10.6863L13.5328 15.499L8 13.6863L2.46719 15.499L3.43137 10.6863L0.200972 6.28932L6.05025 5.31371L8 0.5Z"
-                    fill="gold" />
-            </svg>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M8 0.5L9.94975 5.31371L15.799 6.28932L12.5686 10.6863L13.5328 15.499L8 13.6863L2.46719 15.499L3.43137 10.6863L0.200972 6.28932L6.05025 5.31371L8 0.5Z"
-                    fill="gold" />
-            </svg>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M8 0.5L9.94975 5.31371L15.799 6.28932L12.5686 10.6863L13.5328 15.499L8 13.6863L2.46719 15.499L3.43137 10.6863L0.200972 6.28932L6.05025 5.31371L8 0.5Z"
-                    fill="gold" />
-            </svg>
-        </span>
-        <span class="review">
-            El pibe, un crack. Me desmontó la cama y me la montó en la otra habitación en menos de lo que tardó mi mujer en quejarse.
-        </span>
-    </div>
+    <nav class="categories-filter">
+        <a href="../index.html">
+            <h3>Procrastizzz</h3>
+        </a>
+        <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="profile.html">Perfil</a></li>
+            <li><a href="payment.html">Pago</a></li>
+            <li><a href="worker.html">Trabajador</a></li>
+            <li><a href="#">Otro</a></li>
+            <li class="light-dark-mode"><label for="light-dark-mode-checkbox">Theme ☼<input type="checkbox"></label>
+            </li>
+        </ul>
+    </nav>
+    <header>
+        <h1 class="header-title">Javier Gonzalez</h1>
+    </header>
+    <main>
+        <section class="trabajo">
+            <figure>
+                <img src="https://wallpapercave.com/wp/wp6558834.jpg" alt="Logo Design">
+            </figure>
+            <div class="trabajo-info">
+                <h4 class="trabajo-info-title">Diseño de Logotipo</h4>
+                <p class="trabajo-info-description">Ofrezco servicios de diseño de logotipos únicos y creativos. Mi
+                    enfoque se
+                    centra en capturar la esencia de tu marca y transmitirla de manera efectiva a través de un diseño
+                    distintivo.
+                </p>
+                <p class="trabajo-info-price">Precio: 150€</p>
+                <p class="trabajo-info-availability">Disponibilidad: Abierto a nuevos proyectos</p>
+                <a href="payment.html" class="trabajo-info-a">Contratar directamente</a>
+                <a href="cart.html" class="trabajo-info-a">🛒</a>
+            </div>
+        </section>
+        <section class="testimonials">
+            <h3>Testimonios de Clientes Satisfechos con Javier Gonzalez</h3>
+            <ul>
+                <li>
+                    <figure>
+                        <img src="https://wallpapercave.com/wp/wp6558834.jpg" alt="Client Avatar">
+                    </figure>
+                    <p>"Me quedé impresionada con la rapidez y con lo bien que diseñaron mi nuevo logotipo. ¡Javier Gonzalez es
+                        increíble!"</p>
+                    <span>- Marta</span>
+                </li>
+                <li>
+                    <figure>
+                        <img src="https://wallpapercave.com/wp/wp6558834.jpg" alt="Client Avatar">
+                    </figure>
+                    <p>"Javier Gonzalez fue muy profesional en la creación de mi logotipo. ¡Ni siquiera tuve que moverme de mi cama para
+                        obtener un diseño asombroso!"</p>
+                    <span>- Julio</span>
+                </li>
+                <li>
+                    <figure>
+                        <img src="https://wallpapercave.com/wp/wp6558834.jpg" alt="Client Avatar">
+                    </figure>
+                    <p>"Nunca había conocido a nadie que trabajara tanto como Javier Gonzalez en el diseño de logos. ¡Me salvó el
+                        domingo con un logotipo increíble!"</p>
+                    <span>- Lucía</span>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>Copyright © 2023</p>
+    </footer>
 </body>
+
 </html>

@@ -1,9 +1,15 @@
 .user-registration,
-.user-login {
+.user-login,
+.come-back {
     width: 300px;
     margin: 0 auto;
-    border: 1px solid #ccc;
+    margin-top: 3rem;
     padding: 20px;
+}
+
+.user-registration,
+.user-login {
+    border: 1px solid #ccc;
 }
 
 .user-registration h2,
@@ -32,11 +38,17 @@
 }
 
 .user-registration button,
-.user-login button {
+.user-login button,
+.back-button {
     width: 100%;
     padding: 10px;
+    margin-top: 1rem;
     background-color: #333;
     color: #fff;
     border: none;
     border-radius: 5px;
+}
+
+.back-button {
+    text-decoration: none;
 }

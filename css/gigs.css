@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    font-family: Roboto;
+    color: var(--dark-charcoal);
+}
+
+.trabajo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: left;
+    /* Alinea el texto a la izquierda */
+    background-color: var(--isabelline);
+    /* Fondo suave */
+    border-radius: 10px;
+    /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+}
+
+.trabajo img {
+    max-width: 40%;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    /* Bordes redondeados para la imagen */
+}
+
+.trabajo-info-title {
+    font-size: 1.8em;
+    /* Tamaño de fuente aumentado */
+    font-weight: bold;
+    color: var(--united-nations-blue);
+    /* Color azul brillante */
+    margin-bottom: 10px;
+    /* Espacio entre el título y la descripción */
+}
+
+.trabajo-info-description,
+.trabajo-info-price,
+.trabajo-info-availability {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.trabajo-info-description {
+    font-style: italic;
+    /* Estilo cursiva para la descripción */
+}
+
+.trabajo-info-price {
+    font-weight: bold;
+    /* Texto en negrita para el precio */
+    color: var(--raisin-black);
+    /* Color más oscuro para el precio */
+}
+
+.trabajo-info-a {
+    display: inline-block;
+    /* Alinea el botón en línea con el texto */
+    padding: 15px;
+    background-color: var(--dark-charcoal);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 20px;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+    /* Transición suave para el color de fondo */
+}
+
+.trabajo-info-a:hover {
+    background-color: var(--united-nations-blue);
+    /* Cambia el color al pasar el ratón */
+}
+
+main {
+    margin-bottom: 6rem;
+}
+
+.testimonials {
+    margin-top: 7rem;
+}

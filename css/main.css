@@ -66,6 +66,8 @@ main {
 .search-bar {
     width: 100%;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .search-bar input {
@@ -396,6 +398,7 @@ section li span {
 /* PAYMENT */
 
 .payment-form {
+    margin-top: 6rem;
     margin-bottom: 20px;
 }
 
@@ -464,6 +467,11 @@ nav {
     background: #fff;
     width: 100%;
     top: 0;
+    >a{
+        text-decoration: none;
+        color: #333;
+        size: 2rem;
+    }
 }
 
 nav ul {
