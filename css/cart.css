@@ -1,4 +1,3 @@
-/* Nueva clase para centrar el enlace */
 .logo-link {
     display: flex;
     justify-content: center;
@@ -9,7 +8,7 @@
 .producto img {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    border-radius: 50rem;
 }
 
 .descripcion {
@@ -22,4 +21,20 @@
 
 figure {
     margin: 0;
+}
+
+#lista-productos li > *{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 0.5rem;
+}
+
+.controles > *{
+    margin: 0.2rem;
+}
+
+.m-0 {
+    min-width: 50px;
 }

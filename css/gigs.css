@@ -28,12 +28,9 @@ body {
 
 .trabajo-info-title {
     font-size: 1.8em;
-    /* Tamaño de fuente aumentado */
     font-weight: bold;
     color: var(--united-nations-blue);
-    /* Color azul brillante */
     margin-bottom: 10px;
-    /* Espacio entre el título y la descripción */
 }
 
 .trabajo-info-description,
@@ -45,19 +42,15 @@ body {
 
 .trabajo-info-description {
     font-style: italic;
-    /* Estilo cursiva para la descripción */
 }
 
 .trabajo-info-price {
     font-weight: bold;
-    /* Texto en negrita para el precio */
     color: var(--raisin-black);
-    /* Color más oscuro para el precio */
 }
 
 .trabajo-info-a {
     display: inline-block;
-    /* Alinea el botón en línea con el texto */
     padding: 15px;
     background-color: var(--dark-charcoal);
     color: #fff;
@@ -68,12 +61,10 @@ body {
     margin-top: 20px;
     font-size: 1.2em;
     transition: background-color 0.3s ease;
-    /* Transición suave para el color de fondo */
 }
 
 .trabajo-info-a:hover {
     background-color: var(--united-nations-blue);
-    /* Cambia el color al pasar el ratón */
 }
 
 main {
@@ -82,4 +73,10 @@ main {
 
 .testimonials {
     margin-top: 7rem;
+}
+
+.header-title {
+    font-size: 5rem;
+    text-align: center;
+    margin-top: 10rem;
 }
