@@ -461,6 +461,7 @@ footer p {
 /* NAVBAR */
 
 nav {
+    z-index: 1000;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -468,11 +469,13 @@ nav {
     background: #fff;
     width: 100%;
     top: 0;
-    >a{
-        text-decoration: none;
-        color: #333;
-        size: 2rem;
-    }
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav > a {
+    text-decoration: none;
+    color: #333;
+    size: 2rem;
 }
 
 nav ul {

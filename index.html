@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
     <head>
         <meta charset='utf-8'>
@@ -8,7 +8,6 @@
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <link rel='stylesheet' type='text/css' media='screen'
             href='css/main.css'>
-        <script src='main.js'></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
@@ -25,8 +24,13 @@
                 <li><a href="html/profile.html">Perfil</a></li>
                 <li><a href="html/payment.html">Pago</a></li>
                 <li><a href="html/worker.html">Trabajador</a></li>
+                <li><a href="html/organization.html">Información Organizativa</a></li>
                 <li><a href="#">Otro</a></li>
-                <li class="light-dark-mode"><label for="light-dark-mode-checkbox">Theme ☼<input type="checkbox"></label></li>
+                <li class="light-dark-mode">
+                    <label for="light-dark-mode-checkbox">Theme ☼<input type="checkbox">
+                        <input type="checkbox" id="light-dark-mode-checkbox">
+                    </label>
+                </li>
             </ul>
         </nav>
 
@@ -35,8 +39,10 @@
                 <h1>BANNER</h1>
             </section>
             <div class="search-bar">
-                <input type="text"
-                    placeholder="Busca a quién hará ese trabajo por ti">
+                <label>
+                    <input type="text"
+                        placeholder="Busca a quién hará ese trabajo por ti">
+                </label>
                 <button type="submit">Buscar</button>
             </div>
 
@@ -61,7 +67,7 @@
                         </figure>
                         <div class="gig-info">
                             <h4>Se busca fontanero</h4>
-                            <p>se busca fontanero para arreglar una cañería que
+                            <p>Se busca fontanero para arreglar una cañería que
                                 tengo tiempo que gotea.</p>
                             <span>15€</span>
                             <a href="html/gig.html">Aceptar el curro</a>
@@ -156,7 +162,7 @@
                         <div class="gig-info">
                             <div>
                                 <div class="highlight"><img
-                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABGklEQVR4nO2VMWoCQRSGR7ARtgi5g6mtbLUwEJGUStKk9ACx8AhJ4TWSY0Sw8wiijbtahrQKwS8sGeGhs89NyAxC9oOFZd/s/80wbxhjCnIAdIAVkABtEwq+hXvikOKFEM9Diq+BnX1aIcU9seJukGYBysBMiNP38q/y+UGzAH2O6Z/4J3HmHxQWSkDFzvyQ9FslZzPGstAW8g3wBESOgCHZDB3jI5u12UuBG9fMxiJoDTwAJVu7AN4V8QdwKbJugaWov2l78eoInAJ14JnTpKurARNH7UUTjzICP4FtDvHWjnUx0sQD/PGoie89iu80cdOjuKGJrzyKq5o4PXe+iDLF/xM8Yc5ZnHjwxnnE8qb6E6nzRiooMJ74AppNd1C11/Q1AAAAAElFTkSuQmCC"></div>
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABGklEQVR4nO2VMWoCQRSGR7ARtgi5g6mtbLUwEJGUStKk9ACx8AhJ4TWSY0Sw8wiijbtahrQKwS8sGeGhs89NyAxC9oOFZd/s/80wbxhjCnIAdIAVkABtEwq+hXvikOKFEM9Diq+BnX1aIcU9seJukGYBysBMiNP38q/y+UGzAH2O6Z/4J3HmHxQWSkDFzvyQ9FslZzPGstAW8g3wBESOgCHZDB3jI5u12UuBG9fMxiJoDTwAJVu7AN4V8QdwKbJugaWov2l78eoInAJ14JnTpKurARNH7UUTjzICP4FtDvHWjnUx0sQD/PGoie89iu80cdOjuKGJrzyKq5o4PXe+iDLF/xM8Yc5ZnHjwxnnE8qb6E6nzRiooMJ74AppNd1C11/Q1AAAAAElFTkSuQmCC" alt="crown"></div>
 
                                 <h4>Fontanero</h4>
                             </div>
@@ -175,7 +181,7 @@
                         <div class="gig-info">
                             <div>
                                 <div class="highlight"><img
-                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABGklEQVR4nO2VMWoCQRSGR7ARtgi5g6mtbLUwEJGUStKk9ACx8AhJ4TWSY0Sw8wiijbtahrQKwS8sGeGhs89NyAxC9oOFZd/s/80wbxhjCnIAdIAVkABtEwq+hXvikOKFEM9Diq+BnX1aIcU9seJukGYBysBMiNP38q/y+UGzAH2O6Z/4J3HmHxQWSkDFzvyQ9FslZzPGstAW8g3wBESOgCHZDB3jI5u12UuBG9fMxiJoDTwAJVu7AN4V8QdwKbJugaWov2l78eoInAJ14JnTpKurARNH7UUTjzICP4FtDvHWjnUx0sQD/PGoie89iu80cdOjuKGJrzyKq5o4PXe+iDLF/xM8Yc5ZnHjwxnnE8qb6E6nzRiooMJ74AppNd1C11/Q1AAAAAElFTkSuQmCC"></div>
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABGklEQVR4nO2VMWoCQRSGR7ARtgi5g6mtbLUwEJGUStKk9ACx8AhJ4TWSY0Sw8wiijbtahrQKwS8sGeGhs89NyAxC9oOFZd/s/80wbxhjCnIAdIAVkABtEwq+hXvikOKFEM9Diq+BnX1aIcU9seJukGYBysBMiNP38q/y+UGzAH2O6Z/4J3HmHxQWSkDFzvyQ9FslZzPGstAW8g3wBESOgCHZDB3jI5u12UuBG9fMxiJoDTwAJVu7AN4V8QdwKbJugaWov2l78eoInAJ14JnTpKurARNH7UUTjzICP4FtDvHWjnUx0sQD/PGoie89iu80cdOjuKGJrzyKq5o4PXe+iDLF/xM8Yc5ZnHjwxnnE8qb6E6nzRiooMJ74AppNd1C11/Q1AAAAAElFTkSuQmCC" alt="crown"></div>
 
                                 <h4>Programador Web</h4>
                             </div>
@@ -194,7 +200,7 @@
                         <div class="gig-info">
                             <div>
                                 <div class="highlight"><img
-                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABGklEQVR4nO2VMWoCQRSGR7ARtgi5g6mtbLUwEJGUStKk9ACx8AhJ4TWSY0Sw8wiijbtahrQKwS8sGeGhs89NyAxC9oOFZd/s/80wbxhjCnIAdIAVkABtEwq+hXvikOKFEM9Diq+BnX1aIcU9seJukGYBysBMiNP38q/y+UGzAH2O6Z/4J3HmHxQWSkDFzvyQ9FslZzPGstAW8g3wBESOgCHZDB3jI5u12UuBG9fMxiJoDTwAJVu7AN4V8QdwKbJugaWov2l78eoInAJ14JnTpKurARNH7UUTjzICP4FtDvHWjnUx0sQD/PGoie89iu80cdOjuKGJrzyKq5o4PXe+iDLF/xM8Yc5ZnHjwxnnE8qb6E6nzRiooMJ74AppNd1C11/Q1AAAAAElFTkSuQmCC"></div>
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABGklEQVR4nO2VMWoCQRSGR7ARtgi5g6mtbLUwEJGUStKk9ACx8AhJ4TWSY0Sw8wiijbtahrQKwS8sGeGhs89NyAxC9oOFZd/s/80wbxhjCnIAdIAVkABtEwq+hXvikOKFEM9Diq+BnX1aIcU9seJukGYBysBMiNP38q/y+UGzAH2O6Z/4J3HmHxQWSkDFzvyQ9FslZzPGstAW8g3wBESOgCHZDB3jI5u12UuBG9fMxiJoDTwAJVu7AN4V8QdwKbJugaWov2l78eoInAJ14JnTpKurARNH7UUTjzICP4FtDvHWjnUx0sQD/PGoie89iu80cdOjuKGJrzyKq5o4PXe+iDLF/xM8Yc5ZnHjwxnnE8qb6E6nzRiooMJ74AppNd1C11/Q1AAAAAElFTkSuQmCC" alt="crown"></div>
 
                                 <h4>Cocinero feliz</h4>
                             </div>
@@ -215,7 +221,7 @@
                         <div class="gig-info">
                             <div>
                                 <div class="highlight"><img
-                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABGklEQVR4nO2VMWoCQRSGR7ARtgi5g6mtbLUwEJGUStKk9ACx8AhJ4TWSY0Sw8wiijbtahrQKwS8sGeGhs89NyAxC9oOFZd/s/80wbxhjCnIAdIAVkABtEwq+hXvikOKFEM9Diq+BnX1aIcU9seJukGYBysBMiNP38q/y+UGzAH2O6Z/4J3HmHxQWSkDFzvyQ9FslZzPGstAW8g3wBESOgCHZDB3jI5u12UuBG9fMxiJoDTwAJVu7AN4V8QdwKbJugaWov2l78eoInAJ14JnTpKurARNH7UUTjzICP4FtDvHWjnUx0sQD/PGoie89iu80cdOjuKGJrzyKq5o4PXe+iDLF/xM8Yc5ZnHjwxnnE8qb6E6nzRiooMJ74AppNd1C11/Q1AAAAAElFTkSuQmCC"></div>
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABGklEQVR4nO2VMWoCQRSGR7ARtgi5g6mtbLUwEJGUStKk9ACx8AhJ4TWSY0Sw8wiijbtahrQKwS8sGeGhs89NyAxC9oOFZd/s/80wbxhjCnIAdIAVkABtEwq+hXvikOKFEM9Diq+BnX1aIcU9seJukGYBysBMiNP38q/y+UGzAH2O6Z/4J3HmHxQWSkDFzvyQ9FslZzPGstAW8g3wBESOgCHZDB3jI5u12UuBG9fMxiJoDTwAJVu7AN4V8QdwKbJugaWov2l78eoInAJ14JnTpKurARNH7UUTjzICP4FtDvHWjnUx0sQD/PGoie89iu80cdOjuKGJrzyKq5o4PXe+iDLF/xM8Yc5ZnHjwxnnE8qb6E6nzRiooMJ74AppNd1C11/Q1AAAAAElFTkSuQmCC" alt="crown"></div>
 
                                 <h4>Jardinero sónico</h4>
                             </div>
@@ -233,7 +239,7 @@
                         <div class="gig-info">
                             <div>
                                 <div class="highlight"><img
-                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABGklEQVR4nO2VMWoCQRSGR7ARtgi5g6mtbLUwEJGUStKk9ACx8AhJ4TWSY0Sw8wiijbtahrQKwS8sGeGhs89NyAxC9oOFZd/s/80wbxhjCnIAdIAVkABtEwq+hXvikOKFEM9Diq+BnX1aIcU9seJukGYBysBMiNP38q/y+UGzAH2O6Z/4J3HmHxQWSkDFzvyQ9FslZzPGstAW8g3wBESOgCHZDB3jI5u12UuBG9fMxiJoDTwAJVu7AN4V8QdwKbJugaWov2l78eoInAJ14JnTpKurARNH7UUTjzICP4FtDvHWjnUx0sQD/PGoie89iu80cdOjuKGJrzyKq5o4PXe+iDLF/xM8Yc5ZnHjwxnnE8qb6E6nzRiooMJ74AppNd1C11/Q1AAAAAElFTkSuQmCC"></div>
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABGklEQVR4nO2VMWoCQRSGR7ARtgi5g6mtbLUwEJGUStKk9ACx8AhJ4TWSY0Sw8wiijbtahrQKwS8sGeGhs89NyAxC9oOFZd/s/80wbxhjCnIAdIAVkABtEwq+hXvikOKFEM9Diq+BnX1aIcU9seJukGYBysBMiNP38q/y+UGzAH2O6Z/4J3HmHxQWSkDFzvyQ9FslZzPGstAW8g3wBESOgCHZDB3jI5u12UuBG9fMxiJoDTwAJVu7AN4V8QdwKbJugaWov2l78eoInAJ14JnTpKurARNH7UUTjzICP4FtDvHWjnUx0sQD/PGoie89iu80cdOjuKGJrzyKq5o4PXe+iDLF/xM8Yc5ZnHjwxnnE8qb6E6nzRiooMJ74AppNd1C11/Q1AAAAAElFTkSuQmCC" alt="crown"></div>
 
                                 <h4>Ingeniero de caminos</h4>
                             </div>
@@ -243,6 +249,7 @@
                             <a href="html/worker.html">Contratar</a>
                         </div>
                     </li>
+                </ul>
                 </section>
 
                 <section class="testimonials">
@@ -276,12 +283,11 @@
                             <span>- Lucía</span>
                         </li>
                     </ul>
-                </section>
-            </main>
+            </section>
+        </main>
 
-            <footer>
-                <p>Procrastizzz © 2023 Todos los derechos reservados.</p>
-            </footer>
-        </body>
-
-    </html>
+        <footer>
+            <p>Procrastizzz © 2023 Todos los derechos reservados.</p>
+        </footer>
+    </body>
+</html>
