@@ -1,12 +1,18 @@
 [
   {
-    "slug":"l9aQ7k",
-    "displayName":"Lidia",
-    "maxPlusOnes":1,
-    "date":"Sábado, 25 de Octubre de 2025",
-    "time":"17:00",
-    "venueName":"Finca Los Olivos",
-    "venueCity":"Tenerife",
-    "venueMap":"https://maps.google.com/?q=Finca+Los+Olivos+Tenerife"
+    "slug": "l9aQ7k",
+    "nombre": "Lidia",
+    "acompanantes": 1,
+    "fecha": "Sábado, 25 de Octubre de 2025",
+    "hora": "17:00",
+    "lugar": "Finca Los Olivos",
+    "ciudad": "Tenerife",
+    "mapa": "https://maps.google.com/?q=Finca+Los+Olivos+Tenerife",
+    "mensaje": "¡Nos hace mucha ilusión compartir este día contigo!"
+  },
+  {
+    "slug": "aB3xZ1",
+    "nombre": "Daniel",
+    "acompanantes": 0
   }
 ]

@@ -1,49 +1,45 @@
 (function(){
   const scene      = document.getElementById('scene');
   const resetBtn   = document.getElementById('resetBtn');
-  const $guestName = document.getElementById('guestName');
-  const $guestCode = document.getElementById('guestCode');
-  const $dateText  = document.getElementById('dateText');
-  const $venueLink = document.getElementById('venueLink');
-  const $plus      = document.getElementById('plus');
+  const mount      = document.getElementById('letterMount');
 
-  let opened = false;
-  function openEnvelope(){ if (opened) return; opened = true; scene.classList.add('open'); }
-  function resetEnvelope(){ opened = false; scene.classList.remove('open'); }
+  let opening = false;
 
-  // Click / teclado en toda la escena
-  scene.addEventListener('click', openEnvelope);
-  scene.setAttribute('tabindex','0');
-  scene.addEventListener('keydown', (e)=>{
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); }
-  });
-  resetBtn.addEventListener('click', resetEnvelope);
+  function renderLetter(g){
+    // Construye el contenido dinámicamente tras el primer clic
+    const venueFull = g.venueCity ? `${g.venueName}, ${g.venueCity}` : g.venueName;
+    const code = g.slug || '';
+    const extra = g.message ? `<p class="meta">${g.message}</p>` : '';
+    mount.innerHTML = `
+      <h2 class="title">¡Nos casamos!</h2>
+      <p class="who">Hola <strong>${g.displayName}</strong>, nos encantaría que nos acompañaras.</p>
+      <p class="meta"><strong>Cuándo:</strong> <span>${g.when || ''}</span></p>
+      <p class="meta"><strong>Dónde:</strong> <a href="${g.venueMap}" target="_blank" rel="noopener">${venueFull}</a></p>
+      <p class="meta"><strong>Acompañantes permitidos:</strong> <span>${g.plus}</span></p>
+      <p class="meta">Código: <code>${code}</code></p>
+      ${extra}
+    `;
+  }
 
-  // Rellena desde slug + guests.json
-  (async function bootstrap(){
+  async function onOpen(){
+    if (opening) return; opening = true;
     try {
-      const slug = window.Guest.inferSlug();
-      if (!slug) return;
-      $guestCode.textContent = slug;
-
-      const g = await window.Guest.load(slug);
-      if (!g) return;
-
-      if (g.displayName) $guestName.textContent = g.displayName;
-      if (typeof g.maxPlusOnes === 'number') $plus.textContent = g.maxPlusOnes;
-
-      if (g.date || g.time) {
-        const dateStr = [g.date, g.time].filter(Boolean).join(' – ');
-        if ($dateText) $dateText.textContent = dateStr;
-      }
-      if (g.venueName) {
-        if ($venueLink) {
-          $venueLink.textContent = g.venueName + (g.venueCity ? ', ' + g.venueCity : '');
-          $venueLink.href = g.venueMap || '#';
-        }
-      }
+      const guest = await window.Guest.loadAndNormalize();
+      renderLetter(guest);             // 1) inyecta contenido
+      scene.classList.add('open');     // 2) luego abre el sobre (animación)
     } catch (err) {
-      console.warn('Error rellenando invitación:', err);
+      console.warn('No se pudo cargar el invitado:', err);
+      // Rendereo mínimo para no dejar la carta vacía
+      mount.innerHTML = `<h2 class="title">Invitación</h2><p class="meta">No se pudo cargar tu enlace. Prueba de nuevo más tarde.</p>`;
+      scene.classList.add('open');
     }
-  })();
+  }
+
+  function onReset(){ opening = false; scene.classList.remove('open'); }
+
+  // Eventos: clic/teclado abren; reset para pruebas
+  scene.addEventListener('click', onOpen);
+  scene.setAttribute('tabindex','0');
+  scene.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); onOpen(); }});
+  resetBtn.addEventListener('click', onReset);
 })();

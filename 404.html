@@ -8,9 +8,8 @@
 <body>
 <script>
     (function redirectToRootWithHash(){
-      // User Page: base "/"
-      var original = location.pathname + location.search; // e.g. "/l9aQ7k"
-      location.replace(location.origin + '/#!' + encodeURIComponent(original.replace(/^\//,'')));
+      var original = (location.pathname + location.search).replace(/^\//,''); // ej: "l9aQ7k"
+      location.replace(location.origin + '/#!' + encodeURIComponent(original));
     })();
 </script>
 </body>

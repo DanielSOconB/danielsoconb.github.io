@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
@@ -16,7 +15,7 @@
             <div class="envelope__flap" aria-hidden="true"></div>
 
             <div class="seal" aria-hidden="true">
-                <!-- Tu sello (cámbialo a una imagen si quieres) -->
+                <!-- Sello (D ♥ A) -->
                 <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sello">
                     <defs>
                         <radialGradient id="g" cx="50%" cy="50%" r="60%">
@@ -31,15 +30,9 @@
                 </svg>
             </div>
 
+            <!-- La carta empieza vacía; se rellenará TRAS el primer clic -->
             <section class="letter letter--fill" aria-live="polite">
-                <div class="letter__inner">
-                    <h2 class="title">¡Nos casamos!</h2>
-                    <p class="who">Hola <strong id="guestName">invitado</strong>, nos encantaría que nos acompañaras.</p>
-                    <p class="meta" id="when"><strong>Cuándo:</strong> <span id="dateText">Sábado, 25 de Octubre de 2025 – 17:00</span></p>
-                    <p class="meta" id="where"><strong>Dónde:</strong> <a id="venueLink" href="#" target="_blank" rel="noopener">Finca Los Olivos, Tenerife</a></p>
-                    <p class="meta" id="plusOnes"><strong>Acompañantes permitidos:</strong> <span id="plus">0</span></p>
-                    <p class="meta">Código: <code id="guestCode">—</code></p>
-                </div>
+                <div id="letterMount" class="letter__inner"></div>
             </section>
         </div>
     </div>
@@ -47,6 +40,7 @@
 
 <button class="reset" id="resetBtn" title="Reiniciar animación">↻</button>
 
+<!-- Orden importa: primero Guest (utilidades/datos), luego Envelope (animación/clic) -->
 <script defer src="./js/guest.js"></script>
 <script defer src="./js/envelope.js"></script>
 </body>
