@@ -1,4 +1,12 @@
 [
-  { "slug": "l9aQ7k", "displayName": "Lidia", "language": "es", "maxPlusOnes": 1 },
-  { "slug": "aB3xZ1", "displayName": "Daniel", "language": "es", "maxPlusOnes": 0 }
+  {
+    "slug": "l9aQ7k",
+    "displayName": "Lidia",
+    "date": "Sábado, 25 de Octubre de 2025",
+    "time": "17:00",
+    "venueName": "Finca Los Olivos",
+    "venueCity": "Tenerife",
+    "venueMap": "https://maps.google.com/?q=Finca+Los+Olivos+Tenerife",
+    "maxPlusOnes": 1
+  }
 ]
