@@ -29,21 +29,28 @@
     `;
   }
 
-  async function onOpen() {
-    if (opening) return;
-    opening = true;
-    try {
-      const guest = await window.Guest.loadAndNormalize();
-      renderLetter(guest);
-      scene.classList.add("open");
-      mount.parentElement.style.opacity = "1"; // Forzar visibilidad
-    } catch (err) {
-      console.warn("No se pudo cargar el invitado:", err);
-      mount.innerHTML = `<h2 class="title">Invitación</h2><p class="meta">No se pudo cargar tu enlace. Prueba de nuevo más tarde.</p>`;
-      scene.classList.add("open");
-      mount.parentElement.style.opacity = "1"; // Forzar visibilidad
-    }
+async function onOpen() {
+  if (opening) return;
+  opening = true;
+  try {
+    const guest = await window.Guest.loadAndNormalize();
+    renderLetter(guest);
+    scene.classList.add("open");
+    mount.parentElement.style.opacity = "1";
+    // Espera a que termine la animación de la carta antes de mostrar el texto
+    setTimeout(() => {
+      mount.classList.add("show-text");
+    }, 900); // Ajusta el tiempo según la duración de la animación
+  } catch (err) {
+    console.warn("No se pudo cargar el invitado:", err);
+    mount.innerHTML = `<h2 class="title">Invitación</h2><p class="meta">No se pudo cargar tu enlace. Prueba de nuevo más tarde.</p>`;
+    scene.classList.add("open");
+    mount.parentElement.style.opacity = "1";
+    setTimeout(() => {
+      mount.classList.add("show-text");
+    }, 900);
   }
+}
 
   function onReset() {
     opening = false;
