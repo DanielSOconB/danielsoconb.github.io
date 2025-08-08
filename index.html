@@ -3,19 +3,202 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Invitación de Boda</title>
-    <link rel="stylesheet" href="./css/style.css" />
+    <title>Invitación de Boda – Sobre Interactivo</title>
+    <style>
+        :root{
+          --bg:#faf7f2;            /* fondo página */
+          --paper:#ffffff;         /* carta */
+          --envelope:#f2e8d9;      /* cuerpo sobre */
+          --envelope-shadow:#e8ddcc;
+          --flap:#eadcc7;          /* solapa */
+          --ink:#1b1b1b;           /* texto */
+          --accent:#7a4d2d;        /* detalles */
+
+          --dur-1: 450ms;          /* sello fade */
+          --dur-2: 800ms;          /* abrir solapa */
+          --dur-3: 900ms;          /* carta sale */
+          --delay-s: 120ms;        /* pequeño retardo encadenado */
+        }
+
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+          margin:0; display:grid; place-items:center; min-height:100vh; background:var(--bg); color:var(--ink);
+          font-family: system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+        }
+
+        .scene{
+          position:relative; width:min(92vw,720px); height:min(70vh,520px);
+          display:grid; place-items:center; perspective:1200px;
+          user-select:none; -webkit-tap-highlight-color:transparent;
+        }
+
+        .hint{position:absolute; top:12px; inset-inline:0; text-align:center; color:#6b6b6b; font-size:.95rem}
+
+        /* ENVELOPE STACK */
+        .envelope{
+          position:relative; width:min(86vw,640px); aspect-ratio:4/3; max-height:64vh;
+          transform-style:preserve-3d; display:grid; place-items:center;
+        }
+
+        /* Cuerpo del sobre */
+        .envelope__body{
+          position:absolute; inset:0; border-radius:18px; background:linear-gradient(#f7efe3,#eadfce);
+          background:var(--envelope);
+          box-shadow: 0 18px 40px rgba(0,0,0,.12), inset 0 -1px 0 var(--envelope-shadow);
+          z-index:2;
+        }
+
+        /* Solapa */
+        .envelope__flap{
+          position:absolute; left:0; right:0; top:0; height:55%; transform-origin:50% 0%;
+          background:var(--flap); border-top-left-radius:18px; border-top-right-radius:18px;
+          clip-path: polygon(0 0, 100% 0, 50% 100%);
+          z-index:3; backface-visibility:hidden; will-change:transform;
+          transform:rotateX(0deg);
+          box-shadow: 0 6px 20px rgba(0,0,0,.12);
+        }
+
+        /* Carta (contenido) */
+        .letter{
+          position:absolute; width:92%; height:86%; border-radius:16px; background:var(--paper);
+          box-shadow: 0 10px 40px rgba(0,0,0,.18); z-index:1; display:grid; place-items:center; padding:22px;
+          transform: translateY(18%) scale(.96); opacity:0; will-change:transform,opacity;
+        }
+
+        .letter__inner{ text-align:center; max-width:520px; }
+        .who{ font-size:1.15rem; margin:8px 0 18px; }
+        .title{ font-size:2rem; margin:0 0 8px; letter-spacing:.02em }
+        .meta{ color:#5b5b5b }
+
+        /* Sello (simple imagen/svg) */
+        .seal{ position:absolute; top:18%; left:50%; transform:translateX(-50%); z-index:4; pointer-events:none; }
+        .seal img, .seal svg{ width:96px; height:96px; display:block; filter: drop-shadow(0 6px 10px rgba(0,0,0,.25)); }
+
+        /* Estado abierto */
+        .scene.open .seal{ animation: sealFade var(--dur-1) ease forwards; }
+        @keyframes sealFade{ to{ opacity:0; filter:blur(1px) drop-shadow(0 0 0 rgba(0,0,0,0)); } }
+
+        .scene.open .envelope__flap{
+          animation: flapOpen var(--dur-2) var(--delay-s) cubic-bezier(.2,.7,.1,1) forwards;
+        }
+        @keyframes flapOpen{ to{ transform: rotateX(-178deg); box-shadow: 0 2px 10px rgba(0,0,0,.08);} }
+
+        .scene.open .letter{
+          animation: letterRise var(--dur-3) calc(var(--dur-1) + var(--dur-2) + var(--delay-s)) cubic-bezier(.2,.7,.1,1) forwards;
+        }
+        @keyframes letterRise{
+          0%{ transform: translateY(18%) scale(.96); opacity:0 }
+          60%{ opacity:1 }
+          100%{ transform: translateY(-6%) scale(1); opacity:1 }
+        }
+
+        /* Carta expande a pantalla tras salir */
+        .scene.open .letter--fill{
+          animation: letterFill 700ms calc(var(--dur-1)+var(--dur-2)+var(--dur-3)+200ms) cubic-bezier(.2,.7,.1,1) forwards;
+        }
+        @keyframes letterFill{
+          to{ width:100vw; height:92vh; max-height:92vh; border-radius:0; }
+        }
+
+        /* Click overlay para capturar el clic "en cualquier sitio" */
+        .clickcatch{
+          position:absolute; inset:0; z-index:10; cursor:pointer;
+        }
+        .scene.open .clickcatch{ display:none; }
+
+        /* Botón secundario para rearmar en pruebas (no visible en prod) */
+        .reset{ position:fixed; bottom:14px; right:14px; padding:8px 12px; border-radius:10px; background:#000; color:#fff; opacity:.08; border:0 }
+        .reset:hover{ opacity:.25 }
+
+        /* Responsive pequeños */
+        @media (max-width:520px){
+          .title{ font-size:1.6rem }
+          .who{ font-size:1rem }
+          .seal img,.seal svg{ width:84px; height:84px }
+        }
+    </style>
 </head>
 <body>
-<main id="app">
-    <div class="card">
-        <h1>✨ Nuestra Boda</h1>
-        <p class="subtitle">Cargando invitación…</p>
-        <div id="invite" class="hidden"></div>
-        <div id="error" class="hidden"></div>
-    </div>
-</main>
+<div class="scene" id="scene" aria-label="Abrir invitación">
+    <div class="hint">Toca para abrir ✨</div>
 
-<script src="./js/app.js"></script>
+    <div class="envelope">
+        <div class="envelope__body"></div>
+        <div class="envelope__flap" aria-hidden="true"></div>
+
+        <!-- Sello: usa una imagen tuya (PNG con fondo transparente) -->
+        <div class="seal" aria-hidden="true">
+            <!-- Si no tienes imagen aún, este SVG funciona de placeholder -->
+            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sello">
+                <defs>
+                    <radialGradient id="g" cx="50%" cy="50%" r="60%">
+                        <stop offset="0%" stop-color="#b36b3b"/>
+                        <stop offset="70%" stop-color="#8f4e26"/>
+                        <stop offset="100%" stop-color="#7a3f1e"/>
+                    </radialGradient>
+                </defs>
+                <circle cx="60" cy="60" r="44" fill="url(#g)"/>
+                <circle cx="60" cy="60" r="36" fill="none" stroke="#6a3418" stroke-width="3"/>
+                <text x="60" y="66" text-anchor="middle" font-size="18" fill="#f7e3d2" font-family="Georgia,serif">D ♥ L</text>
+            </svg>
+        </div>
+
+        <!-- La carta vive "dentro" del sobre al inicio -->
+        <section class="letter letter--fill" aria-live="polite">
+            <div class="letter__inner">
+                <h2 class="title">¡Nos casamos!</h2>
+                <p class="who">Hola <strong id="guestName">invitado</strong>, nos encantaría que nos acompañaras.</p>
+                <p class="meta"><strong>Cuándo:</strong> Sábado, 25 de Octubre de 2025 – 17:00</p>
+                <p class="meta"><strong>Dónde:</strong> Finca Los Olivos, Tenerife</p>
+                <p class="meta">Código: <code id="guestCode">—</code></p>
+            </div>
+        </section>
+    </div>
+
+    <button class="clickcatch" id="openBtn" aria-label="Abrir sobre"></button>
+</div>
+
+<!-- Botón de reintento para pruebas locales (elimina en prod) -->
+<button class="reset" id="resetBtn" title="Reiniciar animación">↻</button>
+
+<script>
+    // --- LÓGICA BÁSICA ---
+    const scene = document.getElementById('scene');
+    const openBtn = document.getElementById('openBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    let opened = false;
+
+    function openEnvelope(){
+      if (opened) return; opened = true; scene.classList.add('open');
+    }
+    function resetEnvelope(){ opened = false; scene.classList.remove('open'); }
+
+    openBtn.addEventListener('click', openEnvelope);
+    // Abre también con Enter/Espacio si tiene foco (accesibilidad)
+    openBtn.addEventListener('keydown', (e)=>{
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openEnvelope(); }
+    });
+    resetBtn.addEventListener('click', resetEnvelope);
+
+    // --- HOOKS para integrar con tu routing/guests.json ---
+    // Si usas el esquema de URLs /invitado/nombre--SLUG, aquí puedes extraer y pintar el nombre/código.
+    function inferSlugFromLocation(){
+      let path = window.location.pathname;
+      const hash = window.location.hash || '';
+      if (hash.startsWith('#!')) { try { path = decodeURIComponent(hash.slice(2)); } catch(_){} }
+      const parts = path.split('/').filter(Boolean);
+      const last = parts[parts.length-1] || '';
+      if (last.includes('--')) return last.split('--').pop();
+      return last || '';
+    }
+    const code = inferSlugFromLocation();
+    if (code) {
+      document.getElementById('guestCode').textContent = code;
+      // TODO: fetch('./data/guests.json').then(...).then(g => set name)
+      // document.getElementById('guestName').textContent = g.displayName
+    }
+</script>
 </body>
 </html>
