@@ -1,4 +1,4 @@
-// guest.js
+// Slug y carga de invitado desde /data/guests.json
 window.Guest = {
   inferSlug() {
     let path = window.location.pathname;
@@ -15,7 +15,8 @@ window.Guest = {
     return last.includes('--') ? last.split('--').pop() : last;
   },
 
-  async load(slug) {           // <-- ARREGLADO (sin 'function')
+  async load(slug) {
+    // Carga siempre desde la raíz del servidor (local y GitHub Pages)
     const url = `${window.location.origin}/data/guests.json?v=${Date.now()}`;
     const res = await fetch(url, { cache:'no-store' });
     if (!res.ok) throw new Error(`fetch ${url} -> ${res.status}`);

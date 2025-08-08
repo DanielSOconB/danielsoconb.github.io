@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Invitación de Boda – Sobre Interactivo</title>
-    <link rel="stylesheet" href="./envelope.css" />
+    <link rel="stylesheet" href="./css/envelope.css" />
 </head>
 <body>
 <div class="wrap">
@@ -16,8 +16,19 @@
             <div class="envelope__flap" aria-hidden="true"></div>
 
             <div class="seal" aria-hidden="true">
-                <!-- Sello D ♥ A -->
-                <!-- (tu SVG o <img src="./assets/sello.png">) -->
+                <!-- Tu sello (cámbialo a una imagen si quieres) -->
+                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sello">
+                    <defs>
+                        <radialGradient id="g" cx="50%" cy="50%" r="60%">
+                            <stop offset="0%" stop-color="#b36b3b"/>
+                            <stop offset="70%" stop-color="#8f4e26"/>
+                            <stop offset="100%" stop-color="#7a3f1e"/>
+                        </radialGradient>
+                    </defs>
+                    <circle cx="60" cy="60" r="44" fill="url(#g)"/>
+                    <circle cx="60" cy="60" r="36" fill="none" stroke="#6a3418" stroke-width="3"/>
+                    <text x="60" y="66" text-anchor="middle" font-size="18" fill="#f7e3d2" font-family="Georgia,serif">D ♥ A</text>
+                </svg>
             </div>
 
             <section class="letter letter--fill" aria-live="polite">
@@ -36,7 +47,7 @@
 
 <button class="reset" id="resetBtn" title="Reiniciar animación">↻</button>
 
-<script src="./guest.js"></script>
-<script src="./envelope.js"></script>
+<script defer src="./js/guest.js"></script>
+<script defer src="./js/envelope.js"></script>
 </body>
 </html>

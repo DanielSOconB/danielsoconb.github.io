@@ -3,23 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Invitación de Boda</title>
-    <link rel="stylesheet" href="./css/style.css" />
+    <title>Redirigiendo…</title>
 </head>
 <body>
-<main id="app">
-    <div class="card">
-        <h1>✨ Nuestra Boda</h1>
-        <p class="subtitle">Redirigiendo…</p>
-    </div>
-</main>
-
 <script>
     (function redirectToRootWithHash(){
+      // User Page: base es "/"
       var original = location.pathname + location.search; // /invitado/...
       location.replace(location.origin + '/#!' + encodeURIComponent(original));
     })();
 </script>
-<script src="./js/app.js"></script>
 </body>
 </html>
