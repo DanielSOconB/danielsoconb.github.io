@@ -16,6 +16,16 @@
     </div>
 </main>
 
+<script>
+    // Redirige las rutas profundas para que app.js las pueda interpretar
+    // Copia la path original en el hash si no existe (solo la primera vez)
+    (function ensureHashRouting(){
+      if (!location.hash || location.hash.length <= 1) {
+        var path = location.pathname + location.search;
+        location.replace((location.origin + location.pathname.replace(/\/[^/]*$/, '/') + '#') + encodeURIComponent(path));
+      }
+    })();
+</script>
 <script src="./js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,21 @@
+:root { --gap: 14px; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+  background: #faf7f2; color: #171717; display: grid; min-height: 100dvh; place-items: center;
+}
+#app { width: min(720px, 92vw); padding: 32px; }
+.card {
+  background: #fff; border-radius: 18px; padding: 28px; box-shadow: 0 10px 35px rgba(0,0,0,.07);
+}
+.subtitle { color: #666; }
+.hidden { display: none; }
+.hello { font-size: 1.2rem; }
+.info { background: #f6f2ea; border: 1px solid #e8e0d3; padding: 14px; border-radius: 12px; margin-top: var(--gap); }
+.btn {
+  display: inline-block; margin-top: var(--gap); padding: 10px 16px; border-radius: 10px; text-decoration: none;
+  background: #222; color: #fff; transition: transform .06s ease, opacity .2s ease;
+}
+.btn:hover { transform: translateY(-1px); opacity: .95; }
+.mt { margin-top: 14px; }
+.error { color: #b00020; font-weight: 600; }
