@@ -1,4 +1,4 @@
-// Utilidades para leer el slug y cargar el invitado desde /data/guests.json
+// guest.js
 window.Guest = {
   inferSlug() {
     let path = window.location.pathname;
@@ -15,10 +15,11 @@ window.Guest = {
     return last.includes('--') ? last.split('--').pop() : last;
   },
 
-  async load(slug) {
-    const res = await fetch('./data/guests.json', { cache: 'no-store' });
-    if (!res.ok) throw new Error('No se pudo cargar guests.json');
-    const guests = await res.json();
-    return guests.find(g => g.slug === slug);
+  async load(slug) {           // <-- ARREGLADO (sin 'function')
+    const url = `${window.location.origin}/data/guests.json?v=${Date.now()}`;
+    const res = await fetch(url, { cache:'no-store' });
+    if (!res.ok) throw new Error(`fetch ${url} -> ${res.status}`);
+    const data = await res.json();
+    return data.find(g => g.slug === slug);
   }
 };
