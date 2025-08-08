@@ -97,9 +97,6 @@ body {
   position: absolute;
   width: 92%;
   height: 86%;
-  border-radius: 16px;
-  background: var(--paper);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, .18);
   z-index: 4;
   display: grid;
   place-items: center;
