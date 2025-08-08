@@ -1,17 +1,12 @@
 [
   {
     "slug": "l9aQ7k",
-    "displayName": "Lidia",
-    "maxPlusOnes": 1,
-    "date": "Sábado, 25 de Octubre de 2025",
-    "time": "17:00",
-    "venueName": "Finca Los Olivos",
-    "venueCity": "Tenerife",
-    "venueMap": "https://maps.google.com/?q=Finca+Los+Olivos+Tenerife"
+    "nombre": "Lidia",
+    "mensaje": "¡Te invitamos a nuestra boda el 12 de junio de 2026!"
   },
   {
-    "slug": "aB3xZ1",
-    "displayName": "Daniel",
-    "maxPlusOnes": 0
+    "slug": "x8Bv3f",
+    "nombre": "Juan",
+    "mensaje": "¡Nos encantaría que nos acompañes en este día especial!"
   }
 ]

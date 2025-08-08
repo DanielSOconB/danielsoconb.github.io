@@ -1,4 +1,3 @@
-// Obtiene solo el slug de la URL
 window.Guest = {
   inferSlug() {
     let slug = window.location.pathname.replace(/^\//, '').trim();
