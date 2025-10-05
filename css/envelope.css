@@ -161,8 +161,12 @@ body {
   height: 86%;
   z-index: 4;
   display: grid;
-  place-items: center;
+  /* Dejar centrado horizontal pero anclar arriba verticalmente */
+  justify-items: center;
+  align-items: start;
   padding: 22px;
+  /* Pequeño padding superior para que el texto arranque desde arriba */
+  padding-top: 12px;
   transform: translateY(18%) scale(.96);
   opacity: 0;
   will-change: transform, opacity;
