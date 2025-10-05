@@ -33,11 +33,19 @@ body {
   background-color: #faf7f2;
   background-image:
     linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
-    url('../media/img/landscape_background.png');
+    url('../media/img/vertical_background.png');
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+@media (orientation: landscape) {
+  body {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
+        url('../media/img/landscape_background.png');
+  }
 }
 
 .wrap {
