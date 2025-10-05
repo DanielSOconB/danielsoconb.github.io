@@ -32,7 +32,7 @@ body {
   /* Fondo floral usando imagen local y gradiente para máxima compatibilidad */
   background-color: #faf7f2;
   background-image:
-    linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)),
+    linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
     url('../media/img/landscape_background.png');
   background-attachment: fixed;
   background-size: cover;
