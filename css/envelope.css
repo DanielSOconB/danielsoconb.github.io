@@ -9,6 +9,10 @@
   --dur-2: 800ms;
   --dur-3: 900ms;
   --delay-s: 120ms;
+  /* Papel con fibras finas (marfil) para el sobre */
+  --tx-envelope: url('../media/img/letter_texture.png');
+  /* Lino/tejido muy fino para el flap */
+  --tx-flap: url('../media/img/flap_texture.png');
 }
 
 * {
@@ -89,9 +93,36 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 18px;
-  background: var(--envelope);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(0,0,0,.08) 100%),
+      var(--tx-envelope),
+      var(--envelope);
+  background-blend-mode: soft-light, normal, normal;
+  background-size: 100% 100%, 220px 220px, auto;
+  background-position: center, top left, center;
   box-shadow: 0 18px 40px rgba(0, 0, 0, .12), inset 0 -1px 0 var(--envelope-shadow);
   z-index: 2;
+}
+
+/* Detalle de pliegue bajo el flap (sutil) */
+.envelope__body::after{
+  content:"";
+  position:absolute;
+  left:16px; right:16px; top:55%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,0,0,.10),transparent);
+  opacity:.55;
+  pointer-events:none;
+  z-index:2;
+}
+
+/* Borde superior del flap para dar volumen */
+.envelope__flap--outer::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; top:0; height:12px;
+  background:linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,0));
+  pointer-events:none;
 }
 
 .envelope__flap {
@@ -110,6 +141,18 @@ body {
   will-change: transform;
   transform: rotateX(0deg);
   box-shadow: 0 6px 20px rgba(0, 0, 0, .12);
+}
+
+.envelope__flap,
+.envelope__flap--inner,
+.envelope__flap--outer{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.75) 0%, rgba(0,0,0,.12) 100%),
+    var(--tx-flap),
+    var(--flap);
+  background-blend-mode: soft-light, normal, normal;
+  background-size: 100% 100%, 220px 220px, auto;
+  background-position: top center, top left, center;
 }
 
 .letter {
@@ -153,7 +196,7 @@ body {
 
 .seal {
   position: absolute;
-  top: 18%;
+  top: 43%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
