@@ -26,7 +26,7 @@ html, body {
 /* === Fondo floral estático (vertical por defecto) === */
 body {
   margin: 0;
-  /*background: var(--bg);*/
+  /*background: var(--bg); */
   color: var(--ink);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
   display: grid;
@@ -46,9 +46,9 @@ body {
 
 @media (orientation: landscape) {
   body {
-      background-image:
-        linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
-        url('../media/img/landscape_background.png');
+    background-image:
+      linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
+      url('../media/img/landscape_background.png');
   }
 }
 
@@ -92,14 +92,16 @@ body {
 .envelope__body {
   position: absolute;
   inset: 0;
-  border-radius: 18px;
-    background:
-      linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(0,0,0,.08) 100%),
-      var(--tx-envelope),
-      var(--envelope);
+  border-radius: 5px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(0,0,0,.08) 100%),
+    var(--tx-envelope),
+    var(--envelope);
   background-blend-mode: soft-light, normal, normal;
-  background-size: 100% 100%, 220px 220px, auto;
-  background-position: center, top left, center;
+  /* ⬇️ Imagen única que cubre el sobre + sin repetición */
+  background-size: 100% 100%, cover, auto;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center, center, center;
   box-shadow: 0 18px 40px rgba(0, 0, 0, .12), inset 0 -1px 0 var(--envelope-shadow);
   z-index: 2;
 }
@@ -151,8 +153,10 @@ body {
     var(--tx-flap),
     var(--flap);
   background-blend-mode: soft-light, normal, normal;
-  background-size: 100% 100%, 220px 220px, auto;
-  background-position: top center, top left, center;
+  /* ⬇️ Imagen única que cubre el flap + sin repetición */
+  background-size: 100% 100%, cover, auto;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center, center, center;
 }
 
 .letter {
