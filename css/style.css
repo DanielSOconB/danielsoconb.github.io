@@ -9,11 +9,20 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
-  background: #faf7f2;
   color: #171717;
   display: grid;
   min-height: 100dvh;
   place-items: center;
+
+/* Fondo floral natural y sutil */
+  background-color: #faf7f2;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
+    url("https://cdn.pixabay.com/photo/2016/11/23/00/39/flowers-1854075_1280.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #app {
