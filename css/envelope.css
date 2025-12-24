@@ -299,3 +299,8 @@ body {
     height: 84px
   }
 }
+
+/* Motion controla el flap; desactivamos la animación CSS del flap */
+.scene.open .envelope__flap--outer {
+  animation: none !important;
+}
