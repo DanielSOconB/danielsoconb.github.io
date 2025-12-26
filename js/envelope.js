@@ -45,7 +45,7 @@ import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+es
     await animate(seal, { opacity: [1, 0], scale: [1, 0.92] }, { duration: 0.45, easing: "ease-out" }).finished;
   }
 
-  // 2) Flap: apertura + asentado (clic final adelantado) + micro-rebote
+  // 2) Flap: apertura + asentado (clic final al 30%) + micro-rebote
   async function openFlapTighterAndSyncText(startTextFade) {
     play("clickStart", 0.55); // despegue
 
@@ -56,7 +56,7 @@ import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+es
       { duration: 0.92, easing: spring({ stiffness: 110, damping: 24 }), transformOrigin: "50% 0%" }
     ).finished;
 
-    // Asentado más corto
+    // Asentado corto
     const settleDuration = 0.18; // 180 ms
     const settle = animate(
       flap,
@@ -64,12 +64,12 @@ import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+es
       { duration: settleDuration, easing: spring({ stiffness: 160, damping: 26 }) }
     ).finished;
 
-    // Clic final ADELANTADO (al 75% del asentado)
-    const clickTiming = wait(settleDuration * 1000 * 0.75).then(() => play("clickEnd", 1.0));
+    // Clic FINAL al 30% del asentado
+    const clickTiming = wait(settleDuration * 1000 * 0.30).then(() => play("clickEnd", 1.0));
 
-    // Fade-in del texto 10 ms tras el clic (muy pegado) y solapado con el micro-rebote
+    // Fade-in del texto 5 ms tras el clic (muy pegado) y solapado con el micro-rebote
     const textTiming = (async () => {
-      await wait(settleDuration * 1000 * 0.75 + 10);
+      await wait(settleDuration * 1000 * 0.30 + 5);
       await startTextFade(); // por defecto 220 ms en fadeInText()
     })();
 
