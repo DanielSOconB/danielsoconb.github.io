@@ -321,3 +321,6 @@ body {
 /* Motion controla el flap; anulamos la animación CSS nativa */
 .scene.open .envelope__flap { animation: none !important; }
 
+/* Motion controla también el sello; anulamos la animación CSS nativa */
+.scene.open .seal { animation: none !important; }
+

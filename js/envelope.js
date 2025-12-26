@@ -99,6 +99,16 @@ import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+es
     `;
   }
 
+    // --------- Animación del SELLO ---------
+  async function fadeSealFirst() {
+    if (!seal) return;
+    await animate(
+      seal,
+      { opacity: [1, 0], scale: [1, 0.92] },
+      { duration: 0.45, easing: "ease-out" }
+    ).finished;
+  }
+
   // --------- Animación del FLAP con rebote y clics ---------
   async function openFlapWithBounceAndClicks() {
     // Clic de “despegue” (suave) justo antes de arrancar
@@ -127,7 +137,7 @@ import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+es
     ).finished;
   }
 
-  // --------- Secuencia de apertura ---------
+  // Sustituye COMPLETO tu onOpen() por este:
   async function onOpen() {
     if (opening) return;
     opening = true;
@@ -135,6 +145,9 @@ import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+es
     try {
       const guest = await window.Guest.loadAndNormalize();
       renderLetter(guest);
+
+      // 🔧 Mostrar el contenido de la carta (letter__inner) que estaba en opacity:0
+      if (mount) mount.style.opacity = "1";
       if (letterEl) letterEl.style.opacity = "1";
 
       if (reduceMotion) {
@@ -147,13 +160,13 @@ import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+es
         return;
       }
 
-      // 1) Flap: spring + rebote + clics
+      // 1) ✨ Sello primero
+      await fadeSealFirst();
+
+      // 2) 📨 Luego el flap (con click de inicio, spring, y micro-rebote + click final)
       await openFlapWithBounceAndClicks();
 
-      // 2) Sello fuera
-      animate(seal, { opacity: [1, 0], scale: [1, 0.92] }, { duration: 0.45, easing: "ease-out" });
-
-      // 3) Carta: subir + aparecer (spring)
+      // 3) 📄 Por último, la carta asciende con spring
       await animate(
         letterEl,
         { transform: ["translateY(18%) scale(0.96)", "translateY(-6%) scale(1)"], opacity: [0, 1] },
@@ -164,6 +177,7 @@ import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+es
       console.warn("No se pudo cargar el invitado:", err);
       if (letterEl) {
         letterEl.style.opacity = "1";
+        mount && (mount.style.opacity = "1");
         letterEl.innerHTML = `<h2 class="title">Invitación</h2><p class="meta">No se pudo cargar tu enlace. Prueba de nuevo más tarde.</p>`;
         letterEl.style.transform = "translateY(-6%) scale(1)";
       }
