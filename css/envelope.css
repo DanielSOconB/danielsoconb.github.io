@@ -300,7 +300,24 @@ body {
   }
 }
 
-/* Motion controla el flap; desactivamos la animación CSS del flap */
-.scene.open .envelope__flap--outer {
-  animation: none !important;
+/* Desactivamos animaciones CSS que ahora controlará Motion */
+.scene.open .envelope__flap--outer { animation: none !important; }
+.scene.open .letter { animation: none !important; }
+.scene.open .letter--fill { animation: none !important; }
+
+/* Estados iniciales claros para la carta (Motion parte de aquí) */
+.letter {
+  transform: translateY(18%) scale(.96);
+  opacity: 0;
+  will-change: transform, opacity, width, height;
 }
+.envelope { will-change: transform, filter; }
+
+/* Respeto a usuarios con reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .scene, .envelope, .letter { animation: none !important; transition: none !important; }
+}
+
+/* Motion controla el flap; anulamos la animación CSS nativa */
+.scene.open .envelope__flap { animation: none !important; }
+
