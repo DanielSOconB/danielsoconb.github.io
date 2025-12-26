@@ -324,3 +324,35 @@ body {
 /* Motion controla también el sello; anulamos la animación CSS nativa */
 .scene.open .seal { animation: none !important; }
 
+/* Motion controla el flap y el sello (evitar doble animación CSS) */
+.scene.open .envelope__flap { animation: none !important; }
+.scene.open .seal { animation: none !important; }
+
+/* Carta centrada, sin traslación por defecto (el texto no sube solo) */
+.letter {
+  display: grid;
+  place-items: center;      /* <-- centrado real */
+  transform: none !important; /* <-- evita el salto hacia arriba */
+  opacity: 0;               /* la mostramos con JS */
+}
+
+/* El contenido interno empieza oculto para hacer fade-in */
+.letter__inner { opacity: 0; }
+
+/* Motion controla flap, sello y carta; sin animaciones CSS paralelas */
+.scene.open .envelope__flap { animation: none !important; }
+.scene.open .seal          { animation: none !important; }
+.scene.open .letter        { animation: none !important; }
+.scene.open .letter--fill  { animation: none !important; }
+
+/* Carta centrada y sin traslación por defecto */
+.letter {
+  display: grid;
+  place-items: center;
+  transform: none !important;  /* evita el salto hacia arriba */
+  opacity: 0;                  /* el fade-in lo hace JS */
+}
+
+/* El contenido interno arranca oculto (JS hará el fade-in) */
+.letter__inner { opacity: 0; }
+
