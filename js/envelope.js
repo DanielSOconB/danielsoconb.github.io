@@ -1,65 +1,24 @@
-// js/envelope.js (ESM): sello → flap (más lento) → texto (fade-in)
+// js/envelope.js (ESM): sello → flap (lento) → texto (fade-in)
 import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
 
 (() => {
   const scene     = document.getElementById("scene");
   const resetBtn  = document.getElementById("resetBtn");
-  const mount     = document.getElementById("letterMount");    // .letter__inner
-  const letterEl  = mount?.parentElement;                       // <section class="letter">
+  const mount     = document.getElementById("letterMount");   // .letter__inner
+  const letterEl  = mount?.parentElement;                      // <section class="letter">
   const flap      = document.querySelector(".envelope__flap");
   const seal      = document.querySelector(".seal");
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let opening = false;
-  let audioCtx = null;
 
-  // --------- Audio helpers (idénticos a los tuyos) ---------
-  function getAudioCtx() {
-    if (!audioCtx) {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AC();
-    }
-    return audioCtx;
-  }
-  function playSyntheticClick(volume = 1.0) {
-    try {
-      const ctx = getAudioCtx();
-      const now = ctx.currentTime;
-      const len = 0.07;
-      const buffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * len), ctx.sampleRate);
-      const data = buffer.getChannelData(0);
-      for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / data.length, 3);
-      const noise = ctx.createBufferSource(); noise.buffer = buffer;
-      const bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 1800; bp.Q.value = 6;
-      const g = ctx.createGain();
-      const target = Math.max(0.0001, 0.5 * volume);
-      g.gain.setValueAtTime(0.0001, now);
-      g.gain.linearRampToValueAtTime(target, now + 0.006);
-      g.gain.exponentialRampToValueAtTime(0.0001, now + len);
-      noise.connect(bp).connect(g).connect(ctx.destination);
-      noise.start(now); noise.stop(now + len);
-      const osc = ctx.createOscillator(); osc.type = "triangle"; osc.frequency.setValueAtTime(450, now);
-      const og = ctx.createGain();
-      const tTarget = Math.max(0.0001, 0.12 * volume);
-      og.gain.setValueAtTime(0.0001, now);
-      og.gain.linearRampToValueAtTime(tTarget, now + 0.01);
-      og.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
-      osc.connect(og).connect(ctx.destination);
-      osc.start(now); osc.stop(now + 0.09);
-    } catch {}
-  }
-  function playSound(id, volume = 1.0) {
-    if (reduceMotion) return;
+  // --- util audio (usa tus <audio id="clickStart/clickEnd"> si existen) ---
+  function play(id, vol = 1) {
     const el = document.getElementById(id);
-    if (!el) return playSyntheticClick(volume);
-    try {
-      const src = el.currentSrc || el.src; if (!src) return playSyntheticClick(volume);
-      const a = new Audio(src); a.volume = Math.max(0, Math.min(1, volume));
-      a.play().catch(() => playSyntheticClick(volume));
-    } catch { playSyntheticClick(volume); }
+    if (!el) return;
+    try { const a = new Audio(el.currentSrc || el.src); a.volume = Math.max(0, Math.min(1, vol)); a.play(); } catch {}
   }
 
-  // --------- Render carta ---------
   function renderLetter(g) {
     const venueFull = g.venueCity ? `${g.venueName}, ${g.venueCity}` : g.venueName;
     const extra = g.message ? `<p class="meta">${g.message}</p>` : "";
@@ -73,45 +32,45 @@ import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+es
     `;
   }
 
-  // --------- Sello primero ---------
+  // 1) SELLO primero
   async function fadeSealFirst() {
     if (!seal) return;
     await animate(seal, { opacity: [1, 0], scale: [1, 0.92] }, { duration: 0.45, easing: "ease-out" }).finished;
   }
 
-  // --------- Flap más lento + micro-rebote + clics ---------
+  // 2) FLAP más lento + rebote + clics
   async function openFlapSlowWithBounceAndClicks() {
-    playSound("clickStart", 0.55);
-    // Apertura lenta (más amortiguada)
+    play("clickStart", 0.55); // despegue
     await animate(
       flap,
       { rotateX: -182 },
       { duration: 1.15, easing: spring({ stiffness: 110, damping: 22 }), transformOrigin: "50% 0%" }
     ).finished;
-    // Asentado al ángulo final
     await animate(
       flap,
       { rotateX: -178 },
       { duration: 0.45, easing: spring({ stiffness: 160, damping: 26 }) }
     ).finished;
-    // Micro-rebote + clic final
-    playSound("clickEnd", 1.0);
+    play("clickEnd", 1.0); // asentado
     await animate(flap, { rotateX: [-178, -176.4, -178] }, { duration: 0.18, easing: "ease-out" }).finished;
   }
 
-  // --------- Texto: F A D E  I N (sin desplazar la carta) ---------
+  // 3) TEXTO: fade-in (sin mover carta)
   async function fadeInText() {
     if (!letterEl || !mount) return;
     // Asegura carta visible y sin transform
     letterEl.style.opacity = "1";
     letterEl.style.transform = "none";
-    // El contenido aparece con fade + blur, sin mover nada
+    // Contenido con opacidad+blur, sin traslación
     mount.style.opacity = "0";
     mount.style.filter = "blur(6px)";
-    await animate(mount, { opacity: [0, 1], filter: ["blur(6px)", "blur(0px)"] }, { duration: 0.45, easing: "ease-out" }).finished;
+    await animate(
+      mount,
+      { opacity: [0, 1], filter: ["blur(6px)", "blur(0px)"] },
+      { duration: 0.45, easing: "ease-out" }
+    ).finished;
   }
 
-  // --------- Secuencia ---------
   async function onOpen() {
     if (opening) return;
     opening = true;
@@ -123,14 +82,14 @@ import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+es
       if (reduceMotion) {
         seal && (seal.style.opacity = "0");
         flap && (flap.style.transform = "rotateX(-178deg)");
-        if (letterEl) letterEl.style.opacity = "1";
-        if (mount)    mount.style.opacity = "1";
+        letterEl && (letterEl.style.opacity = "1");
+        mount && (mount.style.opacity = "1");
         return;
       }
 
-      await fadeSealFirst();                   // 1) Sello
-      await openFlapSlowWithBounceAndClicks(); // 2) Flap (más lento)
-      await fadeInText();                      // 3) Texto (fade-in)
+      await fadeSealFirst();                   // 1) sello
+      await openFlapSlowWithBounceAndClicks(); // 2) flap (más lento)
+      await fadeInText();                      // 3) texto (fade-in)
 
     } catch (err) {
       console.warn("No se pudo cargar el invitado:", err);
@@ -154,8 +113,6 @@ import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+es
 
   scene.addEventListener("click", onOpen);
   scene.setAttribute("tabindex", "0");
-  scene.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onOpen(); }
-  });
+  scene.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onOpen(); }});
   resetBtn.addEventListener("click", onReset);
 })();
