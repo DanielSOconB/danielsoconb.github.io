@@ -1,4 +1,4 @@
-// js/envelope.js (ESM): sello → flap (más lento) → texto (fade-in sincronizado)
+// js/envelope.js (ESM): sello → flap (más lento pero ágil al final) → texto (fade-in sincronizado)
 import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
 
 (() => {
@@ -45,40 +45,49 @@ import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+es
     await animate(seal, { opacity: [1, 0], scale: [1, 0.92] }, { duration: 0.45, easing: "ease-out" }).finished;
   }
 
-  // 2) Flap: más lento + asentado + micro-rebote y sincronía con clics
-  async function openFlapGentlerAndSyncText(startTextFade) {
+  // 2) Flap: apertura + asentado (con clic final adelantado) + micro-rebote
+  async function openFlapTighterAndSyncText(startTextFade) {
     play("clickStart", 0.55); // despegue
 
-    // Apertura más lenta (ligeramente amortiguada)
+    // Apertura principal (estable, pero no lenta)
     await animate(
       flap,
       { rotateX: -181.5 },
-      { duration: 0.95, easing: spring({ stiffness: 110, damping: 24 }), transformOrigin: "50% 0%" }
+      { duration: 0.92, easing: spring({ stiffness: 110, damping: 24 }), transformOrigin: "50% 0%" }
     ).finished;
 
-    // Asentado al ángulo final
-    await animate(
+    // Asentado: más corto
+    const settleDuration = 0.20; // 200 ms
+    const settle = animate(
       flap,
       { rotateX: -178 },
-      { duration: 0.28, easing: spring({ stiffness: 160, damping: 26 }) }
+      { duration: settleDuration, easing: spring({ stiffness: 160, damping: 26 }) }
     ).finished;
 
-    // Clic final + micro–rebote (−178 → −176.5 → −178)
-    play("clickEnd", 1.0);
+    // Clic final ADELANTADO (al 85% del asentado)
+    const clickTiming = wait(settleDuration * 1000 * 0.85).then(() => play("clickEnd", 1.0));
+
+    // Fade-in del texto 30 ms después del clic, SOLAPADO con el micro-rebote posterior
+    const textTiming = (async () => {
+      await wait(settleDuration * 1000 * 0.85 + 30);
+      await startTextFade(); // por defecto 240–280 ms en fadeInText()
+    })();
+
+    // Espera a terminar el asentado
+    await settle;
+
+    // Micro-rebote más corto (suave)
     const rebound = animate(
       flap,
-      { rotateX: [-178, -176.5, -178] },
-      { duration: 0.12, easing: "ease-out" }
+      { rotateX: [-178, -176.6, -178] },
+      { duration: 0.10, easing: "ease-out" }
     ).finished;
 
-    // Sincroniza el fade-in del texto casi pegado al clic final
-    const text = (async () => { await wait(60); await startTextFade(); })();
-
-    await Promise.all([rebound, text]);
+    await Promise.all([rebound, clickTiming, textTiming]);
   }
 
   // 3) Texto: fade-in breve (sin mover la carta)
-  async function fadeInText(ms = 280) {
+  async function fadeInText(ms = 260) {
     if (!letterEl || !mount) return;
     letterEl.style.opacity = "1";
     letterEl.style.transform = "none";
@@ -108,8 +117,8 @@ import { animate, spring } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+es
         return;
       }
 
-      await fadeSealFirst();                                   // 1) sello
-      await openFlapGentlerAndSyncText(() => fadeInText(280)); // 2) flap + texto solapado con micro-rebote
+      await fadeSealFirst();                                        // 1) sello
+      await openFlapTighterAndSyncText(() => fadeInText(260));      // 2) flap + texto casi pegado al clic final
 
     } catch (err) {
       console.warn("No se pudo cargar el invitado:", err);
