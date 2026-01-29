@@ -1,73 +1,29 @@
 :root{
   --bg:#faf7f2;
   --ink:#1b1b1b;
-  --card:#ffffff;
-  --muted:#5b5b5b;
-  --shadow:0 10px 28px rgba(0,0,0,.16);
   --accent:#0b1220;
-
-  /* Offset del parallax del fondo (lo actualiza JS) */
-  --bg-y: 0px;
 }
 
-/* ===== Fondo floral (parallax) ===== */
+/* ===== Reset básico ===== */
 html, body { height: 100%; }
 body{
   margin:0; color:var(--ink);
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
-  min-height:100dvh;
-
-  /* 2 degradados + 1 imagen con “camino” pintado */
-  background-color:#faf7f2;
-  background-image:
-    radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.55), rgba(255,255,255,0) 45%),
-    radial-gradient(ellipse at 80% 0%, rgba(255,255,255,.35), rgba(255,255,255,0) 40%),
-    url('../media/img/vertical_background.png');
-
-  /* Sólo movemos la capa de la IMAGEN (tercera) con --bg-y */
-  background-position:
-    center center,
-    center center,
-    center var(--bg-y);
-  background-size:
-    cover,
-    cover,
-    cover;
-  background-repeat:
-    no-repeat,
-    no-repeat,
-    no-repeat;
-
-  /* Importante: la imagen debe “viajar”, no quedarse fija */
-  background-attachment:
-    scroll,
-    scroll,
-    scroll;
-
-  will-change: background-position;
+  background-color:var(--bg);
 }
 
-@media (orientation:landscape){
-  body{
-    background-image:
-      radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.55), rgba(255,255,255,0) 45%),
-      radial-gradient(ellipse at 80% 0%, rgba(255,255,255,.35), rgba(255,255,255,0) 40%),
-      url('../media/img/landscape_background.png');
-  }
-}
-
-/* Mientras el vídeo reproduce, bloquea scroll */
+/* Bloquea scroll mientras está el vídeo */
 body.no-scroll { overflow:hidden; height:100dvh; }
 
-/* ===== Stage vídeo full-screen (FIJO) ===== */
+/* ===== Vídeo full-screen fijo ===== */
 .envelope-stage{
-  position: fixed;             /* <<< clave para que NO se mueva con el scroll */
+  position: fixed;
   inset: 0;
   width: 100vw;
   height: 100dvh;
   overflow: hidden;
   background: #000;
-  z-index: 999;                /* por encima del sitio mientras dura */
+  z-index: 999;
 }
 .envelope-video{
   position: absolute; inset: 0;
@@ -94,10 +50,9 @@ body.no-scroll { overflow:hidden; height:100dvh; }
   position: absolute; inset: 0; background: #fff; opacity: 0; transition: opacity 220ms ease;
   pointer-events: none; z-index: 1000;
 }
-/* Oculta el stage al terminar para que aparezca la web normal */
 .envelope-stage.is-done{ display: none; }
 
-/* ===== Aparición de la web ===== */
+/* ===== Aparición del sitio ===== */
 .site{
   position: relative; z-index: 1;
   opacity: 0; visibility: hidden; transform: translateY(6px);
@@ -108,81 +63,83 @@ body.no-scroll { overflow:hidden; height:100dvh; }
   transition: opacity .32s ease, transform .32s ease, visibility 0s;
 }
 
-/* ===== Hero / tarjeta ===== */
-.hero{ padding: 20px 16px 8px; }
-.invite-card{
-  margin: 0 auto; max-width: 760px;
-  background: var(--card); border-radius: 16px; box-shadow: var(--shadow);
-  padding: 22px 18px; text-align:center;
+/* ===== BLOQUES 100% ANCHO, SIN MÁRGENES ENTRE SECCIONES ===== */
+.block{
+  width: 100%;
+  margin: 0;
+  padding: 24px 14px;           /* padding interno del bloque */
+  box-sizing: border-box;
 }
-.title{ font-size: 2rem; margin: 0 0 10px; }
-.who{ font-size: 1.1rem; margin: 8px 0 16px; }
-.meta{ color: var(--muted); }
-@media (max-width: 420px){
-  .title{ font-size: 1.7rem; }
-  .who{ font-size: 1rem; }
+.block + .block{ margin-top: 0; }
+
+/* ===== Bloque 1: presentación (fondo oscuro) ===== */
+.block-hero{ background: #0b1220; color: #fff; padding: 0; }
+.hero-figure{ margin: 0; position: relative; }
+.hero-figure img{
+  width: 100%; height: 48vh; min-height: 320px; display: block; object-fit: cover;
+}
+.hero-caption{
+  position: absolute; left: 14px; bottom: 10px; right: 14px;
+  color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.65);
+}
+.hero-caption h1{ margin: 0 0 4px; font-size: clamp(1.6rem, 4vw, 2.2rem); }
+.hero-caption p { margin: 0; }
+
+/* ===== Bloque 2: guest (usa landscape_background.png) ===== */
+.block-guest{
+  background-image: url('../media/img/floral_background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Si quieres más “aire” arriba/abajo, ajusta el padding del bloque: */
+  /* padding: 40px 14px; */
+}
+#letterMount .title{ font-size: 1.9rem; margin: 0 0 8px; }
+#letterMount .who{ font-size: 1.1rem; margin: 6px 0 12px; }
+#letterMount .meta{ color: #5b5b5b; }
+
+/* ===== Bloque 3: countdown ===== */
+.block-countdown{ background: #f3eee6; text-align:center; }
+.block-countdown h3{ margin: 0 0 10px; }
+.count-grid{
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 10px;
+}
+.count-grid div{ padding: 12px 8px; }
+.count-grid span{ display:block; font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 800; }
+.count-grid small{ color:#555; }
+.cd-note{ margin: 8px 0 0; color:#555; }
+
+/* ===== Bloque 4: venue ===== */
+.block-venue{ background: #ffffff; }
+.venue-figure{ margin: 0 0 12px; }
+.venue-figure img{
+  width: 100%; height: auto; display: block; object-fit: cover;
+}
+#mapEmbed{
+  width: 100%; height: 340px; border: 0;
 }
 
-/* ===== Stories alternas ===== */
-.story{ padding: 12px 16px; }
-.story-inner{
-  display: grid; grid-template-columns: 1fr; gap: 12px;
-  max-width: 980px; margin: 0 auto; align-items: center;
-}
-.story-image img{
-  width: 100%; height: 100%; object-fit: cover; display:block;
-  border-radius: 16px; box-shadow: 0 12px 30px rgba(0,0,0,.14);
-}
-.story-text{ text-align: left; }
-.story.right .story-text{ text-align: right; }
-.story-text h3{ margin: 0 0 8px; font-size: 1.3rem; }
-.story-text p{ margin: 0; color: #333; }
-.timeline{ list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
-.timeline .time{ font-weight: 700; margin-right: 8px; }
-@media (min-width: 768px){
-  .story-inner{ grid-template-columns: 1fr 1fr; gap: 22px; }
-  .story.left  .story-image{ order: 1; }
-  .story.left  .story-text { order: 2; }
-  .story.right .story-image{ order: 2; }
-  .story.right .story-text { order: 1; }
-}
+/* ===== Bloque 5: info ===== */
+.block-info{ background: #f7f7f7; }
+.block-info h3{ margin: 0 0 10px; text-align:center; }
+.info-list{ color:#333; padding-left: 18px; margin: 0; }
 
-/* ===== Galería ===== */
-.gallery{ padding: 12px 16px 4px; }
-.section-title{
-  margin: 10px auto 12px; max-width: 760px; padding: 0 2px;
-  font-size: 1.15rem; color:#333; text-align: center;
-}
-.grid{
-  margin: 0 auto; max-width: 980px;
-  display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr);
-}
-.grid img{
-  width: 100%; height: 100%; object-fit: cover; display: block;
-  border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,.10);
-}
-@media (min-width: 720px){
-  .grid{ grid-template-columns: repeat(3, 1fr); }
-}
-
-/* ===== Info práctica & CTA ===== */
-.practical{ padding: 12px 16px; }
-.bullets{
-  margin: 0 auto; max-width: 720px; color:#444; padding-left: 18px;
-}
-.bullets li{ margin: 6px 0; }
-.center{ text-align:center; }
-.small{ font-size:.9rem; color:#666; }
+/* ===== Bloque 6: RSVP ===== */
+.block-rsvp{ background: #0b1220; color: #fff; text-align:center; }
 .btn{
   display: inline-block; text-decoration: none;
-  background: #111; color:#fff; padding: .7rem 1rem; border-radius: 999px;
+  background: #fff; color:#0b1220; padding: .8rem 1.15rem; border-radius: 999px; font-weight: 700;
 }
-.btn:hover{ filter: brightness(1.05); }
-.btn-accent{ background: var(--accent); }
+.btn:hover{ filter: brightness(0.95); }
+.small{ font-size:.9rem; opacity:.9; }
 
-/* ===== Footer ===== */
-.footer{ text-align:center; color:#666; padding: 18px 12px 32px; }
+/* ===== Bloque 7: thanks ===== */
+.block-thanks{ background: #ffffff; text-align:center; }
+.block-thanks p{ margin: 0; }
 
-/* ===== Reveal on scroll ===== */
+/* Footer */
+.footer{ text-align:center; color:#666; padding: 12px 12px 28px; margin: 0; }
+
+/* Reveal */
 .reveal-up{ opacity: 0; transform: translateY(18px); will-change: transform, opacity; }
 .reveal-up.in{ opacity: 1; transform: translateY(0); transition: opacity .48s ease, transform .48s ease; }

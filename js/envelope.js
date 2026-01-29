@@ -1,83 +1,162 @@
-// vídeo full-screen FIJO → flash blanco → mostrar web normal (scrollable)
-// + Parallax del background moviendo sólo la capa de imagen con --bg-y
-import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
-
+// Vídeo full-screen FIJO → fade-out → aparece la web (bloques)
+// Autoscroll al Bloque 2 (letterMount). Sin parallax ni tarjetas internas.
 (() => {
-  const body        = document.body;
-  const stage       = document.querySelector(".envelope-stage");
-  const video       = document.getElementById("envelopeVideo");
-  const whitefade   = document.querySelector(".whitefade");
-  const playBtn     = document.getElementById("videoPlayBtn");
-  const skipBtn     = document.getElementById("skipVideoBtn");
-  const site        = document.getElementById("site");
-  const mount       = document.getElementById("letterMount");
-  const mapLink     = document.getElementById("mapLink");
-  const rsvpBtn     = document.getElementById("rsvpBtn");
+  const body      = document.body;
+  const stage     = document.querySelector(".envelope-stage");
+  const video     = document.getElementById("envelopeVideo");
+  const whitefade = document.querySelector(".whitefade");
+  const playBtn   = document.getElementById("videoPlayBtn");
+  const skipBtn   = document.getElementById("skipVideoBtn");
+  const site      = document.getElementById("site");
+
+  const blockGuest = document.getElementById("blockGuest");
+  const mapEmbed   = document.getElementById("mapEmbed");
+  const infoList   = document.getElementById("infoList");
+  const rsvpBtn    = document.getElementById("rsvpBtn");
+
+  // Countdown refs
+  const cdDays    = document.getElementById("cdDays");
+  const cdHours   = document.getElementById("cdHours");
+  const cdMinutes = document.getElementById("cdMinutes");
+  const cdSeconds = document.getElementById("cdSeconds");
+  const cdNote    = document.getElementById("cdNote");
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let started = false;
 
+  // TRUE: tras el vídeo, el bloque del invitado queda "arriba"
+  const SCROLL_TO_GUEST = true;
+
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
 
-  /* ===== Contenido de invitación ===== */
-  function renderLetter(g) {
-    const venueFull = g.venueCity ? `${g.venueName}, ${g.venueCity}` : g.venueName;
-    const extra = g.message ? `<p class="meta">${g.message}</p>` : "";
-    const html = `
-      <h2 class="title">¡Nos casamos!</h2>
-      <p class="who">Hola <strong>${g.displayName}</strong>, nos encantaría que nos acompañaras.</p>
-      <p class="meta"><strong>Cuándo:</strong> <span>${g.when || ""}</span></p>
-      <p class="meta"><strong>Dónde:</strong> <a id="mapLinkInner" href="${g.venueMap}" target="_blank" rel="noopener">${venueFull}</a></p>
-      <p class="meta"><strong>Acompañantes permitidos:</strong> <span>${g.plus}</span></p>
-      ${extra}
-    `;
-    if (mount) mount.innerHTML = html;
-    if (mapLink && g.venueMap) mapLink.href = g.venueMap;
-    if (rsvpBtn && g.rsvpUrl)  rsvpBtn.href = g.rsvpUrl;
+  /* ===== Carga de invitado y pintado de bloques dependientes ===== */
+  async function loadGuestAndRender() {
+    try {
+      const g = await window.Guest.loadAndNormalize();
+
+      // Bloque 4: mapa embebido (embed preferente)
+      if (mapEmbed) {
+        if (g.venueMapEmbed) {
+          mapEmbed.src = g.venueMapEmbed;
+        } else if (g.venueMap) {
+          mapEmbed.src = g.venueMap;
+        }
+      }
+
+      // Bloque 5: info práctica
+      if (infoList) {
+        infoList.innerHTML = "";
+        if (g.dressCode) {
+          const li = document.createElement("li");
+          li.textContent = `Dress code: ${g.dressCode}.`;
+          infoList.appendChild(li);
+        }
+        const liPlus = document.createElement("li");
+        liPlus.textContent = g.plus > 0
+          ? `Puedes venir con ${g.plus} acompañante(s).`
+          : `Sin acompañante.`;
+        infoList.appendChild(liPlus);
+
+        if (Array.isArray(g.notes) && g.notes.length) {
+          g.notes.forEach(n => {
+            const li = document.createElement("li");
+            li.textContent = n;
+            infoList.appendChild(li);
+          });
+        }
+      }
+
+      // Bloque 6: RSVP
+      if (rsvpBtn && g.rsvpUrl) rsvpBtn.href = g.rsvpUrl;
+
+      // Bloque 3: countdown
+      initCountdown(g.eventDateISO, g.when);
+
+    } catch {
+      initCountdown(null, null);
+    }
   }
 
-  /* ===== Mostrar web ===== */
-  function showSiteInstant() {
-    stage?.classList.add("is-done");               // oculta stage fijo
+  /* ===== Countdown ===== */
+  function initCountdown(eventISO, whenText) {
+    let target = null;
+    if (eventISO) {
+      const t = Date.parse(eventISO);
+      if (!Number.isNaN(t)) target = t;
+    }
+
+    function render(diffMs) {
+      if (diffMs <= 0) {
+        cdDays && (cdDays.textContent = "0");
+        cdHours && (cdHours.textContent = "0");
+        cdMinutes && (cdMinutes.textContent = "0");
+        cdSeconds && (cdSeconds.textContent = "0");
+        cdNote  && (cdNote.textContent  = "¡Hoy es el gran día!");
+        return;
+      }
+      const sec = Math.floor(diffMs / 1000);
+      const d = Math.floor(sec / 86400);
+      const h = Math.floor((sec % 86400) / 3600);
+      const m = Math.floor((sec % 3600) / 60);
+      const s = sec % 60;
+
+      if (cdDays)    cdDays.textContent    = String(d);
+      if (cdHours)   cdHours.textContent   = h.toString().padStart(2,"0");
+      if (cdMinutes) cdMinutes.textContent = m.toString().padStart(2,"0");
+      if (cdSeconds) cdSeconds.textContent = s.toString().padStart(2,"0");
+      if (cdNote && whenText) cdNote.textContent = whenText;
+    }
+
+    if (!target) {
+      cdNote && (cdNote.textContent = whenText || "");
+      return;
+    }
+
+    render(target - Date.now());
+    setInterval(() => { render(target - Date.now()); }, 1000);
+  }
+
+  /* ===== Mostrar sitio ===== */
+  function showSiteBase() {
+    stage?.classList.add("is-done");         // oculta el vídeo fijo
     site?.classList.add("site--visible");
     site?.setAttribute("aria-hidden", "false");
     body.classList.remove("no-scroll");
-    startParallax();                                // inicia parallax del fondo
     startReveals();
+  }
+
+  function showSiteInstant() {
+    showSiteBase();
+    if (SCROLL_TO_GUEST && blockGuest) {
+      setTimeout(() => { blockGuest.scrollIntoView({ behavior: "auto", block: "start" }); }, 30);
+    } else {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
   }
 
   async function fadeToSite() {
     if (whitefade) whitefade.style.opacity = "1";
     await wait(220);
-    stage?.classList.add("is-done");
-    if (site) {
-      site.classList.add("site--visible");
-      site.setAttribute("aria-hidden", "false");
-    }
+    showSiteBase();
     if (whitefade) whitefade.style.opacity = "0";
-    body.classList.remove("no-scroll");
-    startParallax();
-    startReveals();
+
+    if (SCROLL_TO_GUEST && blockGuest) {
+      setTimeout(() => { blockGuest.scrollIntoView({ behavior: "auto", block: "start" }); }, 30);
+    } else {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
   }
 
-  /* ===== Vídeo fijo ===== */
+  /* ===== Vídeo ===== */
   async function startVideo() {
     if (started) return;
     started = true;
 
-    // Carga datos del invitado
-    try {
-      const guest = await window.Guest.loadAndNormalize();
-      renderLetter(guest);
-    } catch {
-      if (mount) mount.innerHTML = `<h2 class="title">Invitación</h2><p class="meta">No se pudo cargar tu enlace. Prueba más tarde.</p>`;
-    }
+    await loadGuestAndRender();
 
     if (reduceMotion) { showSiteInstant(); return; }
 
-    // Bloquea scroll mientras está el stage fijo encima
     body.classList.add("no-scroll");
-
     try {
       if (video) {
         video.currentTime = 0;
@@ -99,32 +178,10 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
   playBtn?.addEventListener("click", startVideo);
   skipBtn?.addEventListener("click", skipVideo);
   video?.addEventListener("ended", handleEnded);
-
   stage?.setAttribute("tabindex", "0");
   stage?.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); startVideo(); }
   });
-
-  /* ===== Parallax del background (sólo capa de imagen) ===== */
-  function startParallax() {
-    if (reduceMotion) return; // respeta accesibilidad
-    let ticking = false;
-    const factor = 0.25; // velocidad del fondo (ajusta: 0.15–0.35)
-
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const y = Math.round(window.scrollY * factor);
-        document.body.style.setProperty("--bg-y", `${y}px`);
-        ticking = false;
-      });
-    }
-
-    // Inicializa con la posición actual
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-  }
 
   /* ===== Reveal on scroll ===== */
   function startReveals() {
@@ -136,7 +193,19 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
           io.unobserve(en.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: "0px 0px -10% 0px" });
+    }, { threshold: 0, rootMargin: "0px 0px -5% 0px" });
+
     items.forEach(el => io.observe(el));
+
+    requestAnimationFrame(() => {
+      items.forEach(el => {
+        const r = el.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        if (r.top < vh * 0.95 && r.bottom > 0) {
+          el.classList.add("in");
+          io.unobserve(el);
+        }
+      });
+    });
   }
 })();

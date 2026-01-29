@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/envelope.css" />
 </head>
 <body>
-<!-- ===== Stage de vídeo a pantalla completa ===== -->
+<!-- ===== Stage de vídeo a pantalla completa (fijo) ===== -->
 <div class="envelope-stage" aria-label="Sobre de invitación">
     <video
             id="envelopeVideo"
@@ -22,123 +22,71 @@
     <button id="videoPlayBtn" class="video-play" type="button" aria-label="Reproducir vídeo">Abrir</button>
     <button id="skipVideoBtn" class="skip-video" type="button" aria-label="Saltar vídeo">Saltar</button>
 
-    <!-- Flash blanco para la transición -->
+    <!-- Flash blanco para transición al sitio -->
     <div class="whitefade" aria-hidden="true"></div>
 </div>
 
-<!-- ===== Capa de fondo con el camino (SVG fijo) ===== -->
-<svg id="pathLayer" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-    <defs>
-        <linearGradient id="trailGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"  stop-color="rgba(200,169,106,0.85)"/>
-            <stop offset="100%" stop-color="rgba(200,169,106,0.45)"/>
-        </linearGradient>
-        <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="2" result="blur"/>
-            <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-        </filter>
-    </defs>
-    <!-- Trazado completo (se revela con dashoffset) -->
-    <path id="pathTrail" class="trail" d="" fill="none" stroke="url(#trailGrad)" stroke-width="6" stroke-linecap="round" filter="url(#softGlow)"/>
-    <!-- Guinda: un puntito que “viaja” por el camino -->
-    <circle id="pathDot" r="6" fill="rgba(200,169,106,0.9)" cx="0" cy="0" />
-</svg>
-
-<!-- ===== Web normal (se revela tras el vídeo) ===== -->
+<!-- ===== Web normal (aparece tras el vídeo) ===== -->
 <main id="site" class="site" aria-live="polite" aria-hidden="true">
-    <!-- Hero / tarjeta de invitación -->
-    <section class="hero reveal-up">
-        <div id="letterMount" class="invite-card"></div>
+    <!-- Bloque 1: presentación (100% ancho, sin margen) -->
+    <section id="blockHero" class="block block-hero reveal-up">
+        <figure class="hero-figure">
+            <img src="./media/hero/couple.jpg" alt="Nuestra foto" loading="eager" />
+            <figcaption class="hero-caption">
+                <h1>¡Nos casamos!</h1>
+                <p>Qué ilusión compartir este día contigo.</p>
+            </figcaption>
+        </figure>
     </section>
 
-    <!-- Story 1 (foto izquierda) -->
-    <section class="story left reveal-up">
-        <div class="story-inner">
-            <div class="story-image">
-                <img src="./media/sections/01.jpg" alt="Nosotros" loading="lazy" />
-            </div>
-            <div class="story-text">
-                <h3>Cómo empezó</h3>
-                <p>Un mensaje, un café, y el principio de nuestro camino juntos.</p>
-            </div>
+    <!-- Bloque 2: guest.json (letterMount) -->
+    <section id="blockGuest" class="block block-guest reveal-up">
+        <div id="letterMount"></div>
+    </section>
+
+    <!-- Bloque 3: countdown -->
+    <section id="blockCountdown" class="block block-countdown reveal-up">
+        <h3>Cuenta atrás</h3>
+        <div class="count-grid" aria-live="polite">
+            <div><span id="cdDays">--</span><small>Días</small></div>
+            <div><span id="cdHours">--</span><small>Horas</small></div>
+            <div><span id="cdMinutes">--</span><small>Min</small></div>
+            <div><span id="cdSeconds">--</span><small>Seg</small></div>
         </div>
+        <p id="cdNote" class="cd-note"></p>
     </section>
 
-    <!-- Story 2 (foto derecha) -->
-    <section class="story right reveal-up">
-        <div class="story-inner">
-            <div class="story-image">
-                <img src="./media/sections/02.jpg" alt="Un lugar especial" loading="lazy" />
-            </div>
-            <div class="story-text">
-                <h3>El lugar</h3>
-                <p>Elegimos un rincón que nos inspira y queremos compartirlo contigo.</p>
-            </div>
-        </div>
+    <!-- Bloque 4: imagen del sitio + mapa embebido -->
+    <section id="blockVenue" class="block block-venue reveal-up">
+        <figure class="venue-figure">
+            <img src="./media/venue/site.jpg" alt="El lugar de la celebración" loading="lazy" />
+        </figure>
+        <iframe id="mapEmbed" title="Mapa del lugar" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
     </section>
 
-    <!-- Story 3 (foto izquierda) -->
-    <section class="story left reveal-up">
-        <div class="story-inner">
-            <div class="story-image">
-                <img src="./media/sections/03.jpg" alt="Nuestros planes" loading="lazy" />
-            </div>
-            <div class="story-text">
-                <h3>El gran día</h3>
-                <ul class="timeline">
-                    <li><span class="time">17:30</span> Ceremonia</li>
-                    <li><span class="time">18:30</span> Cóctel</li>
-                    <li><span class="time">20:00</span> Cena</li>
-                    <li><span class="time">23:30</span> Fiesta 🎉</li>
-                </ul>
-            </div>
-        </div>
+    <!-- Bloque 5: info práctica -->
+    <section id="blockInfo" class="block block-info reveal-up">
+        <h3>Información útil</h3>
+        <ul class="info-list" id="infoList"></ul>
     </section>
 
-    <!-- Galería simple -->
-    <section class="gallery reveal-up">
-        <h3 class="section-title">Momentos que nos encantan</h3>
-        <div class="grid">
-            <img src="./media/gallery/01.jpg" alt="Galería 1" loading="lazy" />
-            <img src="./media/gallery/02.jpg" alt="Galería 2" loading="lazy" />
-            <img src="./media/gallery/03.jpg" alt="Galería 3" loading="lazy" />
-            <img src="./media/gallery/04.jpg" alt="Galería 4" loading="lazy" />
-            <img src="./media/gallery/05.jpg" alt="Galería 5" loading="lazy" />
-            <img src="./media/gallery/06.jpg" alt="Galería 6" loading="lazy" />
-        </div>
+    <!-- Bloque 6: RSVP (Google Forms) -->
+    <section id="blockRSVP" class="block block-rsvp reveal-up">
+        <a id="rsvpBtn" class="btn btn-accent" href="#" target="_blank" rel="noopener">Confirma tu asistencia</a>
+        <p class="small">Se abrirá un formulario de Google Forms.</p>
     </section>
 
-    <!-- Info práctica -->
-    <section class="practical reveal-up">
-        <h3 class="section-title">Información útil</h3>
-        <ul class="bullets">
-            <li>Dress code: elegante cómodo.</li>
-            <li>Aparcamiento disponible.</li>
-            <li>Alérgenos: avísanos con antelación.</li>
-        </ul>
-        <p class="center">
-            <a id="mapLink" class="btn" href="#" target="_blank" rel="noopener">Ver ubicación en Google Maps</a>
-        </p>
-    </section>
-
-    <!-- CTA final: Google Forms -->
-    <section class="rsvp reveal-up">
-        <h3 class="section-title">¿Te vienes?</h3>
-        <p class="center">
-            <a id="rsvpBtn" class="btn btn-accent" href="#" target="_blank" rel="noopener">Confirma tu asistencia</a>
-        </p>
-        <p class="center small">Se abrirá un formulario de Google Forms.</p>
+    <!-- Bloque 7: agradecimiento -->
+    <section id="blockThanks" class="block block-thanks reveal-up">
+        <p>Gracias por formar parte de nuestra historia ❤️</p>
     </section>
 
     <footer class="footer">
-        <p>Con cariño ❤️</p>
+        <p>Con cariño</p>
     </footer>
 </main>
 
-<!-- Datos invitado + lógica del vídeo + camino + reveals -->
+<!-- Datos invitado + lógica de vídeo + reveals + countdown -->
 <script defer src="./js/guest.js"></script>
 <script type="module" src="./js/envelope.js"></script>
 </body>

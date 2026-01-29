@@ -3,12 +3,19 @@
     {
       "slug": "default",
       "displayName": "Familia y amigos",
+      "message": "Nos hará muchísima ilusión contar contigo en este día tan especial.",
       "when": "Sábado, 20 de junio de 2026 · 17:30",
+      "eventDateISO": "2026-06-20T17:30:00+01:00",
       "venueName": "Finca Los Naranjos",
       "venueCity": "La Laguna",
       "venueMap": "https://maps.google.com/?q=Finca+Los+Naranjos+La+Laguna",
+      "venueMapEmbed": "https://www.google.com/maps/embed?pb=!1m18!...(tu-embed-aquí)...",
       "plus": 0,
-      "message": "Confirma tu asistencia cuando puedas ❤️",
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
       "rsvpUrl": "https://forms.gle/XXXXXXXXXXXXXXX"
     }
   ]
