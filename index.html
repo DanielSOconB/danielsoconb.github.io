@@ -9,32 +9,29 @@
 <div class="wrap">
     <div class="hint">Haz clic o pulsa Enter para abrir ✨</div>
 
-    <div class="scene" id="scene" aria-label="Abrir invitación">
-        <div class="envelope">
-            <div class="envelope__body"></div>
-            <div class="envelope__flap" aria-hidden="true"></div>
+    <!-- Escenario del vídeo del sobre -->
+    <div class="envelope-stage" aria-label="Sobre de invitación">
+        <video
+                id="envelopeVideo"
+                class="envelope-video"
+                playsinline
+                preload="metadata"
+                muted
+                poster="./media/img/envelope_poster.jpg"
+                src="./media/video/envelope-open.mp4">
+            <!-- Opcional: añade también WebM para mejor compat. -->
+            <!-- <source src="./media/video/envelope-open.webm" type="video/webm"> -->
+            <!-- <source src="./media/video/envelope-open.mp4" type="video/mp4"> -->
+        </video>
 
-            <div class="seal" aria-hidden="true">
-                <!-- Sello (D ♥ A) -->
-                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sello">
-                    <defs>
-                        <radialGradient id="g" cx="50%" cy="50%" r="60%">
-                            <stop offset="0%" stop-color="#b36b3b"/>
-                            <stop offset="70%" stop-color="#8f4e26"/>
-                            <stop offset="100%" stop-color="#7a3f1e"/>
-                        </radialGradient>
-                    </defs>
-                    <circle cx="60" cy="60" r="44" fill="url(#g)"/>
-                    <circle cx="60" cy="60" r="36" fill="none" stroke="#6a3418" stroke-width="3"/>
-                    <text x="60" y="66" text-anchor="middle" font-size="18" fill="#f7e3d2" font-family="Georgia,serif">D ♥ A</text>
-                </svg>
-            </div>
+        <!-- Overlay para “clic para abrir” (opcional) -->
+        <button id="videoPlayBtn" class="video-play" type="button" aria-label="Reproducir vídeo">Abrir</button>
 
-            <!-- La carta empieza vacía; se rellenará TRAS el primer clic -->
-            <section class="letter letter--fill" aria-live="polite">
-                <div id="letterMount" class="letter__inner"></div>
-            </section>
-        </div>
+        <!-- Fade blanco para la transición -->
+        <div class="whitefade" aria-hidden="true"></div>
+
+        <!-- Botón para saltar (accesibilidad) -->
+        <button id="skipVideoBtn" class="skip-video" type="button" aria-label="Saltar vídeo">Saltar</button>
     </div>
 </div>
 
