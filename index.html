@@ -7,27 +7,25 @@
     <link rel="stylesheet" href="./css/envelope.css" />
 </head>
 <body>
-<div class="wrap">
-    <div class="hint">Haz clic o pulsa Enter para abrir ✨</div>
+<!-- Escenario del vídeo del sobre a pantalla completa -->
+<div class="envelope-stage" aria-label="Sobre de invitación">
+    <video
+            id="envelopeVideo"
+            class="envelope-video"
+            playsinline
+            preload="metadata"
+            muted
+            poster="./media/img/envelope_poster.jpg"
+            src="./media/video/envelope-open.mp4">
+    </video>
 
-    <!-- Escenario del vídeo del sobre -->
-    <div class="envelope-stage" aria-label="Sobre de invitación">
-        <video
-                id="envelopeVideo"
-                class="envelope-video"
-                playsinline
-                preload="metadata"
-                muted
-                poster="./media/img/envelope_poster.jpg"
-                src="./media/video/envelope-open.mp4">
-        </video>
+    <button id="videoPlayBtn" class="video-play" type="button" aria-label="Reproducir vídeo">Abrir</button>
+    <button id="skipVideoBtn" class="skip-video" type="button" aria-label="Saltar vídeo">Saltar</button>
 
-        <button id="videoPlayBtn" class="video-play" type="button" aria-label="Reproducir vídeo">Abrir</button>
-        <div class="whitefade" aria-hidden="true"></div>
-        <button id="skipVideoBtn" class="skip-video" type="button" aria-label="Saltar vídeo">Saltar</button>
-    </div>
+    <!-- Flash blanco para la transición -->
+    <div class="whitefade" aria-hidden="true"></div>
 
-    <!-- Tarjeta de invitación (contenedor para #letterMount) -->
+    <!-- Carta: overlay centrado tras el vídeo -->
     <section class="letter" aria-live="polite">
         <div id="letterMount" class="letter__inner"></div>
     </section>

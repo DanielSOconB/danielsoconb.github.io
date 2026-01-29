@@ -1,15 +1,15 @@
-// envelope.js (ESM): vídeo del sobre → flash blanco → carta con fade-in
+// envelope.js (ESM): vídeo del sobre a pantalla completa → flash blanco → carta con fade-in
 import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
 
 (() => {
-  const resetBtn   = document.getElementById("resetBtn");
-  const stage      = document.querySelector(".envelope-stage");  // ✅ contenedor real
-  const video      = document.getElementById("envelopeVideo");
-  const whitefade  = document.querySelector(".whitefade");
-  const playBtn    = document.getElementById("videoPlayBtn");
-  const skipBtn    = document.getElementById("skipVideoBtn");
-  const mount      = document.getElementById("letterMount");     // .letter__inner
-  const letterEl   = mount?.parentElement;                        // <section class="letter">
+  const body        = document.body;
+  const stage       = document.querySelector(".envelope-stage");
+  const video       = document.getElementById("envelopeVideo");
+  const whitefade   = document.querySelector(".whitefade");
+  const playBtn     = document.getElementById("videoPlayBtn");
+  const skipBtn     = document.getElementById("skipVideoBtn");
+  const mount       = document.getElementById("letterMount");   // .letter__inner
+  const letterEl    = mount?.parentElement;                      // <section class="letter">
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   let started = false;
@@ -30,22 +30,24 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
 
   function showLetterInstant() {
     if (!letterEl || !mount) return;
+    stage?.classList.add("is-done");
     letterEl.style.opacity = "1";
-    letterEl.style.transform = "none";
     mount.style.opacity = "1";
     mount.style.filter = "none";
-    stage?.classList.add("is-done");
+    body.classList.remove("no-scroll");
   }
 
   async function fadeToLetter() {
+    // 1) Flash blanco breve
     whitefade && (whitefade.style.opacity = "1");
-    await wait(260); // flash breve
+    await wait(260);
 
+    // 2) Oculta vídeo (estado final del stage)
     stage?.classList.add("is-done");
 
+    // 3) Aparece la carta con fade-in (blur → nítido)
     if (letterEl && mount) {
       letterEl.style.opacity = "1";
-      letterEl.style.transform = "none";
       mount.style.opacity = "0";
       mount.style.filter = "blur(6px)";
       await animate(
@@ -55,14 +57,16 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
       ).finished;
     }
 
+    // 4) Retira flash y vuelve a permitir scroll (si hay contenido largo)
     whitefade && (whitefade.style.opacity = "0");
+    body.classList.remove("no-scroll");
   }
 
   async function startVideo() {
     if (started) return;
     started = true;
 
-    // Cargar datos del invitado
+    // Prepara datos del invitado
     try {
       const guest = await window.Guest.loadAndNormalize();
       renderLetter(guest);
@@ -72,13 +76,18 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
 
     if (reduceMotion) { showLetterInstant(); return; }
 
+    // Estado "reproduciendo" + bloquea scroll
     stage?.classList.add("is-playing");
+    body.classList.add("no-scroll");
+
+    // Inicia el vídeo (iOS requiere interacción previa: este click la satisface)
     try {
       if (video) {
         video.currentTime = 0;
         await video.play();
       }
     } catch {
+      // Si falla por políticas de autoplay, muestra el botón Abrir
       if (playBtn) playBtn.style.display = "inline-flex";
     }
   }
@@ -89,27 +98,16 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
   // Eventos
   stage?.addEventListener("click", (e) => {
     const target = e.target;
-    if (target && target.id === "skipVideoBtn") return; // ✅ JS puro (sin 'as')
+    if (target && target.id === "skipVideoBtn") return; // no iniciar si clican "Saltar"
     startVideo();
   });
   playBtn?.addEventListener("click", startVideo);
   skipBtn?.addEventListener("click", skipVideo);
   video?.addEventListener("ended", handleEnded);
 
-  // Accesibilidad por teclado: usamos el propio stage (no #scene)
-  const focusEl = stage || document.body;                // ✅ evita null
-  focusEl.setAttribute("tabindex", "0");
-  focusEl.addEventListener("keydown", (e) => {
+  // Accesible por teclado (usar el propio stage como foco)
+  stage?.setAttribute("tabindex", "0");
+  stage?.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); startVideo(); }
-  });
-
-  // Reset (dev)
-  resetBtn?.addEventListener("click", () => {
-    started = false;
-    stage?.classList.remove("is-playing", "is-done");
-    if (whitefade) whitefade.style.opacity = "0";
-    if (letterEl)  letterEl.style.opacity = "0";
-    if (mount) { mount.style.opacity = "0"; mount.style.filter = ""; }
-    try { if (video) { video.pause(); video.currentTime = 0; } } catch {}
   });
 })();
