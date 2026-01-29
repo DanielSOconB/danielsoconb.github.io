@@ -1,4 +1,4 @@
-// envelope.js (ESM): vídeo del sobre a pantalla completa → flash blanco → carta con fade-in
+// envelope.js (ESM): vídeo full-screen → flash blanco → mostrar web normal (scrollable)
 import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
 
 (() => {
@@ -8,57 +8,57 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
   const whitefade   = document.querySelector(".whitefade");
   const playBtn     = document.getElementById("videoPlayBtn");
   const skipBtn     = document.getElementById("skipVideoBtn");
-  const mount       = document.getElementById("letterMount");   // .letter__inner
-  const letterEl    = mount?.parentElement;                      // <section class="letter">
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const site        = document.getElementById("site");
+  const mount       = document.getElementById("letterMount"); // contenedor de la tarjeta
 
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let started = false;
+
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
 
+  // Rellena la tarjeta con datos del invitado y enlaza el mapa
   function renderLetter(g) {
     const venueFull = g.venueCity ? `${g.venueName}, ${g.venueCity}` : g.venueName;
     const extra = g.message ? `<p class="meta">${g.message}</p>` : "";
-    mount && (mount.innerHTML = `
+    const html = `
       <h2 class="title">¡Nos casamos!</h2>
       <p class="who">Hola <strong>${g.displayName}</strong>, nos encantaría que nos acompañaras.</p>
       <p class="meta"><strong>Cuándo:</strong> <span>${g.when || ""}</span></p>
-      <p class="meta"><strong>Dónde:</strong> <a href="${g.venueMap}" target="_blank" rel="noopener">${venueFull}</a></p>
+      <p class="meta"><strong>Dónde:</strong> <a id="mapLinkInner" href="${g.venueMap}" target="_blank" rel="noopener">${venueFull}</a></p>
       <p class="meta"><strong>Acompañantes permitidos:</strong> <span>${g.plus}</span></p>
       ${extra}
-    `);
+    `;
+    if (mount) mount.innerHTML = html;
+
+    // También actualiza el CTA de mapa del footer si existe
+    const mapLink = document.getElementById("mapLink");
+    if (mapLink && g.venueMap) mapLink.href = g.venueMap;
   }
 
-  function showLetterInstant() {
-    if (!letterEl || !mount) return;
+  function showSiteInstant() {
+    // Oculta el stage y muestra la web sin animaciones
     stage?.classList.add("is-done");
-    letterEl.style.opacity = "1";
-    mount.style.opacity = "1";
-    mount.style.filter = "none";
+    site?.classList.add("site--visible");
+    site?.setAttribute("aria-hidden", "false");
     body.classList.remove("no-scroll");
   }
 
-  async function fadeToLetter() {
+  async function fadeToSite() {
     // 1) Flash blanco breve
-    whitefade && (whitefade.style.opacity = "1");
-    await wait(260);
+    if (whitefade) whitefade.style.opacity = "1";
+    await wait(220);
 
-    // 2) Oculta vídeo (estado final del stage)
+    // 2) Oculta stage de vídeo
     stage?.classList.add("is-done");
 
-    // 3) Aparece la carta con fade-in (blur → nítido)
-    if (letterEl && mount) {
-      letterEl.style.opacity = "1";
-      mount.style.opacity = "0";
-      mount.style.filter = "blur(6px)";
-      await animate(
-        mount,
-        { opacity: [0, 1], filter: ["blur(6px)", "blur(0px)"] },
-        { duration: 0.28, easing: "ease-out" }
-      ).finished;
+    // 3) Revela la web
+    if (site) {
+      site.classList.add("site--visible");
+      site.setAttribute("aria-hidden", "false");
     }
 
-    // 4) Retira flash y vuelve a permitir scroll (si hay contenido largo)
-    whitefade && (whitefade.style.opacity = "0");
+    // 4) Quita flash y permite scroll
+    if (whitefade) whitefade.style.opacity = "0";
     body.classList.remove("no-scroll");
   }
 
@@ -66,21 +66,20 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
     if (started) return;
     started = true;
 
-    // Prepara datos del invitado
+    // Carga datos del invitado
     try {
       const guest = await window.Guest.loadAndNormalize();
       renderLetter(guest);
     } catch {
-      mount && (mount.innerHTML = `<h2 class="title">Invitación</h2><p class="meta">No se pudo cargar tu enlace. Prueba de nuevo más tarde.</p>`);
+      if (mount) mount.innerHTML = `<h2 class="title">Invitación</h2><p class="meta">No se pudo cargar tu enlace. Prueba más tarde.</p>`;
     }
 
-    if (reduceMotion) { showLetterInstant(); return; }
+    if (reduceMotion) { showSiteInstant(); return; }
 
     // Estado "reproduciendo" + bloquea scroll
-    stage?.classList.add("is-playing");
     body.classList.add("no-scroll");
 
-    // Inicia el vídeo (iOS requiere interacción previa: este click la satisface)
+    // Inicia el vídeo (este click satisface la interacción requerida en iOS)
     try {
       if (video) {
         video.currentTime = 0;
@@ -92,20 +91,20 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
     }
   }
 
-  function handleEnded() { fadeToLetter(); }
-  function skipVideo()   { try { video?.pause(); } catch {} showLetterInstant(); }
+  function handleEnded() { fadeToSite(); }
+  function skipVideo()   { try { video?.pause(); } catch {} showSiteInstant(); }
 
   // Eventos
   stage?.addEventListener("click", (e) => {
-    const target = e.target;
-    if (target && target.id === "skipVideoBtn") return; // no iniciar si clican "Saltar"
+    const t = e.target;
+    if (t && t.id === "skipVideoBtn") return; // no iniciar si clican "Saltar"
     startVideo();
   });
   playBtn?.addEventListener("click", startVideo);
   skipBtn?.addEventListener("click", skipVideo);
   video?.addEventListener("ended", handleEnded);
 
-  // Accesible por teclado (usar el propio stage como foco)
+  // Accesible por teclado: Enter/Espacio en el stage
   stage?.setAttribute("tabindex", "0");
   stage?.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); startVideo(); }

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/envelope.css" />
 </head>
 <body>
-<!-- Escenario del vídeo del sobre a pantalla completa -->
+<!-- ===== Stage de vídeo a pantalla completa ===== -->
 <div class="envelope-stage" aria-label="Sobre de invitación">
     <video
             id="envelopeVideo"
@@ -24,12 +24,49 @@
 
     <!-- Flash blanco para la transición -->
     <div class="whitefade" aria-hidden="true"></div>
-
-    <!-- Carta: overlay centrado tras el vídeo -->
-    <section class="letter" aria-live="polite">
-        <div id="letterMount" class="letter__inner"></div>
-    </section>
 </div>
+
+<!-- ===== Web normal (se revela tras el vídeo) ===== -->
+<main id="site" class="site" aria-live="polite" aria-hidden="true">
+    <!-- Hero / tarjeta de invitación -->
+    <section class="hero">
+        <div id="letterMount" class="invite-card">
+            <!-- JS (guest.js) inyecta aquí los datos del invitado -->
+        </div>
+    </section>
+
+    <!-- Galería (sustituye src por tus fotos reales) -->
+    <section class="gallery">
+        <h3 class="section-title">Unas fotos nuestras y del lugar</h3>
+        <div class="grid">
+            <img src="./media/gallery/01.jpg" alt="Foto 1" loading="lazy" />
+            <img src="./media/gallery/02.jpg" alt="Foto 2" loading="lazy" />
+            <img src="./media/gallery/03.jpg" alt="Foto 3" loading="lazy" />
+            <img src="./media/gallery/04.jpg" alt="Foto 4" loading="lazy" />
+            <img src="./media/gallery/05.jpg" alt="Foto 5" loading="lazy" />
+            <img src="./media/gallery/06.jpg" alt="Foto 6" loading="lazy" />
+        </div>
+    </section>
+
+    <!-- Info adicional -->
+    <section class="details">
+        <h3 class="section-title">Detalles</h3>
+        <ul class="bullets">
+            <li>Dress code: elegante cómodo.</li>
+            <li>Aparcamiento disponible en el recinto.</li>
+            <li>Si tienes alergias alimentarias, avísanos con tiempo.</li>
+        </ul>
+    </section>
+
+    <!-- CTA / Mapa -->
+    <section class="cta">
+        <a id="mapLink" class="btn" href="#" target="_blank" rel="noopener">Ver ubicación en Google Maps</a>
+    </section>
+
+    <footer class="footer">
+        <p>Con cariño ❤️</p>
+    </footer>
+</main>
 
 <!-- Datos invitado + lógica del vídeo -->
 <script defer src="./js/guest.js"></script>
