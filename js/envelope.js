@@ -2,15 +2,14 @@
 import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
 
 (() => {
-  const scene        = document.getElementById("scene");
-  const resetBtn     = document.getElementById("resetBtn");
-  const stage        = document.querySelector(".envelope-stage");
-  const video        = document.getElementById("envelopeVideo");
-  const whitefade    = document.querySelector(".whitefade");
-  const playBtn      = document.getElementById("videoPlayBtn");
-  const skipBtn      = document.getElementById("skipVideoBtn");
-  const mount        = document.getElementById("letterMount");   // .letter__inner
-  const letterEl     = mount?.parentElement;                      // <section class="letter">
+  const resetBtn   = document.getElementById("resetBtn");
+  const stage      = document.querySelector(".envelope-stage");  // ✅ contenedor real
+  const video      = document.getElementById("envelopeVideo");
+  const whitefade  = document.querySelector(".whitefade");
+  const playBtn    = document.getElementById("videoPlayBtn");
+  const skipBtn    = document.getElementById("skipVideoBtn");
+  const mount      = document.getElementById("letterMount");     // .letter__inner
+  const letterEl   = mount?.parentElement;                        // <section class="letter">
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   let started = false;
@@ -19,14 +18,14 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
   function renderLetter(g) {
     const venueFull = g.venueCity ? `${g.venueName}, ${g.venueCity}` : g.venueName;
     const extra = g.message ? `<p class="meta">${g.message}</p>` : "";
-    mount.innerHTML = `
+    mount && (mount.innerHTML = `
       <h2 class="title">¡Nos casamos!</h2>
       <p class="who">Hola <strong>${g.displayName}</strong>, nos encantaría que nos acompañaras.</p>
       <p class="meta"><strong>Cuándo:</strong> <span>${g.when || ""}</span></p>
       <p class="meta"><strong>Dónde:</strong> <a href="${g.venueMap}" target="_blank" rel="noopener">${venueFull}</a></p>
       <p class="meta"><strong>Acompañantes permitidos:</strong> <span>${g.plus}</span></p>
       ${extra}
-    `;
+    `);
   }
 
   function showLetterInstant() {
@@ -39,14 +38,11 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
   }
 
   async function fadeToLetter() {
-    // 1) Flash blanco breve
-    whitefade.style.opacity = "1";
-    await wait(260);
+    whitefade && (whitefade.style.opacity = "1");
+    await wait(260); // flash breve
 
-    // 2) Oculta vídeo
     stage?.classList.add("is-done");
 
-    // 3) Aparece contenido (fade-in)
     if (letterEl && mount) {
       letterEl.style.opacity = "1";
       letterEl.style.transform = "none";
@@ -59,73 +55,61 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
       ).finished;
     }
 
-    // 4) Quita el blanco
-    whitefade.style.opacity = "0";
+    whitefade && (whitefade.style.opacity = "0");
   }
 
   async function startVideo() {
     if (started) return;
     started = true;
 
-    // Carga datos de invitado
+    // Cargar datos del invitado
     try {
       const guest = await window.Guest.loadAndNormalize();
       renderLetter(guest);
-    } catch (e) {
-      mount.innerHTML = `<h2 class="title">Invitación</h2><p class="meta">No se pudo cargar tu enlace. Prueba de nuevo más tarde.</p>`;
+    } catch {
+      mount && (mount.innerHTML = `<h2 class="title">Invitación</h2><p class="meta">No se pudo cargar tu enlace. Prueba de nuevo más tarde.</p>`);
     }
 
-    if (reduceMotion) {
-      // Sin vídeo por accesibilidad
-      showLetterInstant();
-      return;
-    }
+    if (reduceMotion) { showLetterInstant(); return; }
 
-    // Reproducción del vídeo
     stage?.classList.add("is-playing");
     try {
-      video.currentTime = 0;
-      await video.play();
+      if (video) {
+        video.currentTime = 0;
+        await video.play();
+      }
     } catch {
-      // Si falla por políticas de autoplay, mostramos el botón
-      playBtn.style.display = "inline-flex";
+      if (playBtn) playBtn.style.display = "inline-flex";
     }
   }
 
-  function handleEnded() {
-    // Al terminar el vídeo: transición a la carta
-    fadeToLetter();
-  }
+  function handleEnded() { fadeToLetter(); }
+  function skipVideo()   { try { video?.pause(); } catch {} showLetterInstant(); }
 
-  function skipVideo() {
-    try { video.pause(); } catch {}
-    showLetterInstant();
-  }
-
-  // Eventos de reproducción
+  // Eventos
   stage?.addEventListener("click", (e) => {
-    // Evita que el click en "Saltar" dispare el play (JS puro, sin TypeScript)
     const target = e.target;
-    if (target && target.id === "skipVideoBtn") return;
+    if (target && target.id === "skipVideoBtn") return; // ✅ JS puro (sin 'as')
     startVideo();
   });
   playBtn?.addEventListener("click", startVideo);
   skipBtn?.addEventListener("click", skipVideo);
   video?.addEventListener("ended", handleEnded);
 
-  // Accesible por teclado
-  scene.setAttribute("tabindex", "0");
-  scene.addEventListener("keydown", (e) => {
+  // Accesibilidad por teclado: usamos el propio stage (no #scene)
+  const focusEl = stage || document.body;                // ✅ evita null
+  focusEl.setAttribute("tabindex", "0");
+  focusEl.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); startVideo(); }
   });
 
-  // Reset (útil en desarrollo)
+  // Reset (dev)
   resetBtn?.addEventListener("click", () => {
     started = false;
     stage?.classList.remove("is-playing", "is-done");
-    whitefade.style.opacity = "0";
-    if (letterEl) letterEl.style.opacity = "0";
+    if (whitefade) whitefade.style.opacity = "0";
+    if (letterEl)  letterEl.style.opacity = "0";
     if (mount) { mount.style.opacity = "0"; mount.style.filter = ""; }
-    try { video.pause(); video.currentTime = 0; } catch {}
+    try { if (video) { video.pause(); video.currentTime = 0; } } catch {}
   });
 })();

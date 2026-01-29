@@ -1,424 +1,72 @@
-:root {
-  --bg: #faf7f2;
-  --paper: #ffffff;
-  --envelope: #f2e8d9;
-  --envelope-shadow: #e8ddcc;
-  --flap: #eadcc7;
-  --ink: #1b1b1b;
-  --dur-1: 450ms;
-  --dur-2: 800ms;
-  --dur-3: 900ms;
-  --delay-s: 120ms;
-  /* Papel con fibras finas (marfil) para el sobre */
-  --tx-envelope: url('../media/img/letter_texture.png');
-  /* Lino/tejido muy fino para el flap */
-  --tx-flap: url('../media/img/flap_texture.png');
+:root{
+  --bg:#faf7f2;
+  --ink:#1b1b1b;
 }
 
-* {
-  box-sizing: border-box
-}
-
-html, body {
-  height: 100%
-}
-
-/* === Fondo floral estático (vertical por defecto) === */
-body {
-  margin: 0;
-  /*background: var(--bg);*/
-  color: var(--ink);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
-  display: grid;
-  min-height: 100vh;
-  place-items: center;
-
-  /* Fondo floral usando imagen local y gradiente para máxima compatibilidad */
-  background-color: #faf7f2;
+/* Fondo floral estático */
+html,body{height:100%}
+body{
+  margin:0; color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+  display:grid; place-items:center; min-height:100vh;
+  background-color:#faf7f2;
   background-image:
-    linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
+    linear-gradient(rgba(255,255,255,.08),rgba(255,255,255,.08)),
     url('../media/img/vertical_background.png');
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-attachment:fixed; background-size:cover; background-position:center; background-repeat:no-repeat;
+}
+@media (orientation:landscape){
+  body{ background-image:
+    linear-gradient(rgba(255,255,255,.08),rgba(255,255,255,.08)),
+    url('../media/img/landscape_background.png'); }
 }
 
-@media (orientation: landscape) {
-  body {
-      background-image:
-        linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
-        url('../media/img/landscape_background.png');
-  }
-}
+.wrap{display:flex; flex-direction:column; align-items:center; gap:12px; width:min(92vw,720px)}
+.hint{color:#6b6b6b; font-size:.95rem; text-align:center; line-height:1.2}
 
-.wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: min(92vw, 720px);
-}
-
-.hint {
-  color: #6b6b6b;
-  font-size: .95rem;
-  text-align: center;
-  line-height: 1.2;
-}
-
-.scene {
-  position: relative;
-  width: min(92vw, 720px);
-  height: min(70vh, 520px);
-  display: grid;
-  place-items: center;
-  perspective: 1200px;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
-}
-
-.envelope {
-  position: relative;
-  width: min(86vw, 640px);
-  aspect-ratio: 4/3;
-  max-height: 64vh;
-  transform-style: preserve-3d;
-  display: grid;
-  place-items: center;
-}
-
-.envelope__body {
-  position: absolute;
-  inset: 0;
-  border-radius: 18px;
-    background:
-      linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(0,0,0,.08) 100%),
-      var(--tx-envelope),
-      var(--envelope);
-  background-blend-mode: soft-light, normal, normal;
-  background-size: 100% 100%, 220px 220px, auto;
-  background-position: center, top left, center;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, .12), inset 0 -1px 0 var(--envelope-shadow);
-  z-index: 2;
-}
-
-/* Detalle de pliegue bajo el flap (sutil) */
-.envelope__body::after{
-  content:"";
-  position:absolute;
-  left:16px; right:16px; top:55%;
-  height:1px;
-  background:linear-gradient(90deg,transparent,rgba(0,0,0,.10),transparent);
-  opacity:.55;
-  pointer-events:none;
-  z-index:2;
-}
-
-/* Borde superior del flap para dar volumen */
-.envelope__flap--outer::after{
-  content:"";
-  position:absolute;
-  left:0; right:0; top:0; height:12px;
-  background:linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,0));
-  pointer-events:none;
-}
-
-.envelope__flap {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 55%;
-  transform-origin: 50% 0%;
-  background: var(--flap);
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  z-index: 3;
-  backface-visibility: hidden;
-  will-change: transform;
-  transform: rotateX(0deg);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, .12);
-}
-
-.envelope__flap,
-.envelope__flap--inner,
-.envelope__flap--outer{
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.75) 0%, rgba(0,0,0,.12) 100%),
-    var(--tx-flap),
-    var(--flap);
-  background-blend-mode: soft-light, normal, normal;
-  background-size: 100% 100%, 220px 220px, auto;
-  background-position: top center, top left, center;
-}
-
-.letter {
-  position: absolute;
-  width: 92%;
-  height: 86%;
-  z-index: 4;
-  display: grid;
-  /* Dejar centrado horizontal pero anclar arriba verticalmente */
-  justify-items: center;
-  align-items: start;
-  padding: 22px;
-  /* Pequeño padding superior para que el texto arranque desde arriba */
-  padding-top: 12px;
-  transform: translateY(18%) scale(.96);
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
-.letter__inner {
-  text-align: center;
-  max-width: 520px;
-  opacity: 0;
-  transition: opacity 600ms cubic-bezier(.2, .7, .1, 1);
-}
-
-.scene.open .letter__inner {
-  opacity: 1;
-}
-
-.who {
-  font-size: 1.15rem;
-  margin: 8px 0 18px;
-}
-
-.title {
-  font-size: 2rem;
-  margin: 0 0 8px;
-  letter-spacing: .02em
-}
-
-.meta {
-  color: #5b5b5b
-}
-
-.seal {
-  position: absolute;
-  top: 43%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
-  pointer-events: none;
-}
-
-.seal img, .seal svg {
-  width: 96px;
-  height: 96px;
-  display: block;
-  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .25));
-}
-
-.scene.open .seal {
-  animation: sealFade var(--dur-1) ease forwards;
-}
-
-@keyframes sealFade {
-  to {
-    opacity: 0;
-    filter: blur(1px) drop-shadow(0 0 0 rgba(0, 0, 0, 0));
-  }
-}
-
-.scene.open .envelope__flap {
-  animation: flapOpen var(--dur-2) var(--delay-s) cubic-bezier(.2, .7, .1, 1) forwards;
-}
-
-@keyframes flapOpen {
-  to {
-    transform: rotateX(-178deg);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
-  }
-}
-
-.scene.open .letter {
-  animation: letterRise var(--dur-3) calc(var(--dur-1) + var(--dur-2) + var(--delay-s)) cubic-bezier(.2, .7, .1, 1) forwards;
-}
-
-@keyframes letterRise {
-  0% {
-    transform: translateY(18%) scale(.96);
-    opacity: 0
-  }
-
-  60% {
-    opacity: 1
-  }
-
-  100% {
-    transform: translateY(-6%) scale(1);
-    opacity: 1
-  }
-}
-
-.scene.open .letter--fill {
-  animation: letterFill 700ms calc(var(--dur-1)+var(--dur-2)+var(--dur-3)+200ms) cubic-bezier(.2, .7, .1, 1) forwards;
-}
-
-@keyframes letterFill {
-  to {
-    width: 100vw;
-    height: 92vh;
-    max-height: 92vh;
-    border-radius: 0;
-  }
-}
-
-.reset {
-  position: fixed;
-  bottom: 14px;
-  right: 14px;
-  padding: 8px 12px;
-  border-radius: 10px;
-  background: #000;
-  color: #fff;
-  opacity: .08;
-  border: 0
-}
-
-.reset:hover {
-  opacity: .25
-}
-
-@media (max-width:520px) {
-  .title {
-    font-size: 1.6rem
-  }
-
-  .who {
-    font-size: 1rem
-  }
-
-  .seal img, .seal svg {
-    width: 84px;
-    height: 84px
-  }
-}
-
-/* Desactivamos animaciones CSS que ahora controlará Motion */
-.scene.open .envelope__flap--outer { animation: none !important; }
-.scene.open .letter { animation: none !important; }
-.scene.open .letter--fill { animation: none !important; }
-
-/* Estados iniciales claros para la carta (Motion parte de aquí) */
-.letter {
-  transform: translateY(18%) scale(.96);
-  opacity: 0;
-  will-change: transform, opacity, width, height;
-}
-.envelope { will-change: transform, filter; }
-
-/* Respeto a usuarios con reducción de movimiento */
-@media (prefers-reduced-motion: reduce) {
-  .scene, .envelope, .letter { animation: none !important; transition: none !important; }
-}
-
-/* Motion controla el flap; anulamos la animación CSS nativa */
-.scene.open .envelope__flap { animation: none !important; }
-
-/* Motion controla también el sello; anulamos la animación CSS nativa */
-.scene.open .seal { animation: none !important; }
-
-/* Motion controla el flap y el sello (evitar doble animación CSS) */
-.scene.open .envelope__flap { animation: none !important; }
-.scene.open .seal { animation: none !important; }
-
-/* Carta centrada, sin traslación por defecto (el texto no sube solo) */
-.letter {
-  display: grid;
-  place-items: center;      /* <-- centrado real */
-  transform: none !important; /* <-- evita el salto hacia arriba */
-  opacity: 0;               /* la mostramos con JS */
-}
-
-/* El contenido interno empieza oculto para hacer fade-in */
-.letter__inner { opacity: 0; }
-
-/* Motion controla flap, sello y carta; sin animaciones CSS paralelas */
-.scene.open .envelope__flap { animation: none !important; }
-.scene.open .seal          { animation: none !important; }
-.scene.open .letter        { animation: none !important; }
-.scene.open .letter--fill  { animation: none !important; }
-
-/* Carta centrada y sin traslación por defecto */
-.letter {
-  display: grid;
-  place-items: center;
-  transform: none !important;  /* evita el salto hacia arriba */
-  opacity: 0;                  /* el fade-in lo hace JS */
-}
-
-/* El contenido interno arranca oculto (JS hará el fade-in) */
-.letter__inner { opacity: 0; }
-
-/* ===== Escenario de vídeo del sobre ===== */
+/* ===== Escenario de vídeo ===== */
 .envelope-stage{
-  position: relative;
-  width: min(86vw, 640px);
-  aspect-ratio: 4/3;
-  max-height: 64vh;
-  border-radius: 18px;
-  box-shadow: 0 18px 40px rgba(0,0,0,.12);
-  overflow: hidden;
-  display: grid;
-  place-items: center;
+  position:relative; width:min(86vw,640px); aspect-ratio:4/3; max-height:64vh;
+  border-radius:18px; box-shadow:0 18px 40px rgba(0,0,0,.12); overflow:hidden;
+  display:grid; place-items:center;
 }
-
-.envelope-video{
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; /* o 'contain' si tu vídeo tiene márgenes */
-  display: block;
-  background: #000; /* por si tarda en pintar el frame */
-}
-
-/* Botón centrado “Abrir” */
+.envelope-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#000}
 .video-play{
-  position: relative;
-  z-index: 2;
-  padding: .7rem 1rem;
-  border-radius: 999px;
-  border: 0;
-  background: #111;
-  color: #fff;
-  font-weight: 700;
-  opacity: .85;
-  cursor: pointer;
+  position:relative; z-index:2; padding:.7rem 1rem; border-radius:999px; border:0;
+  background:#111; color:#fff; font-weight:700; opacity:.85; cursor:pointer;
 }
-.video-play:hover{ opacity: 1; }
-
-/* Botón “Saltar” arriba-derecha */
+.video-play:hover{opacity:1}
 .skip-video{
-  position: absolute; top: 10px; right: 10px;
-  z-index: 3;
-  padding: .45rem .7rem; border-radius: 10px;
-  border: 0;
-  background: rgba(0,0,0,.55);
-  color: #fff; font-size: .9rem;
-  cursor: pointer;
+  position:absolute; top:10px; right:10px; z-index:3;
+  padding:.45rem .7rem; border-radius:10px; border:0;
+  background:rgba(0,0,0,.55); color:#fff; font-size:.9rem; cursor:pointer;
 }
-.skip-video:hover{ background: rgba(0,0,0,.75); }
-
-/* Flash blanco para transición */
+.skip-video:hover{background:rgba(0,0,0,.75)}
 .whitefade{
-  position: absolute; inset: 0;
-  background: #fff;
-  opacity: 0;
-  transition: opacity 350ms ease;
-  pointer-events: none;
-  z-index: 2;
+  position:absolute; inset:0; background:#fff; opacity:0; transition:opacity 350ms ease;
+  pointer-events:none; z-index:2;
+}
+.envelope-stage.is-playing .video-play{display:none}
+.envelope-stage.is-done .envelope-video{display:none}
+@media (prefers-reduced-motion:reduce){
+  .envelope-video,.video-play,.skip-video{display:none !important}
 }
 
-/* Estados de transición */
-.envelope-stage.is-playing .video-play{ display: none; }
-.envelope-stage.is-done .envelope-video{ display: none; }
-
-/* Respeto a reducción de movimiento: ocultar vídeo y mostrar contenido */
-@media (prefers-reduced-motion: reduce){
-  .envelope-video, .video-play, .skip-video { display: none !important; }
+/* ===== Tarjeta de invitación ===== */
+.letter{
+  margin-top:14px;
+  width:min(86vw,640px); min-height:180px;
+  background:#fff; border-radius:14px; box-shadow:0 10px 24px rgba(0,0,0,.08);
+  display:grid; place-items:center; padding:20px;
+  opacity:0; /* la mostramos con JS */
+}
+.letter__inner{
+  max-width:520px; text-align:center; opacity:0; /* fade-in por JS */
+}
+.title{font-size:2rem; margin:0 0 8px}
+.who{font-size:1.15rem; margin:8px 0 18px}
+.meta{color:#5b5b5b}
+@media (max-width:520px){
+  .title{font-size:1.6rem}
+  .who{font-size:1rem}
 }

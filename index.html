@@ -1,8 +1,9 @@
+<!doctype html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Invitación de Boda – Sobre Interactivo</title>
+    <title>Invitación de Boda</title>
     <link rel="stylesheet" href="./css/envelope.css" />
 </head>
 <body>
@@ -19,28 +20,21 @@
                 muted
                 poster="./media/img/envelope_poster.jpg"
                 src="./media/video/envelope-open.mp4">
-            <!-- Opcional: añade también WebM para mejor compat. -->
-            <!-- <source src="./media/video/envelope-open.webm" type="video/webm"> -->
-            <!-- <source src="./media/video/envelope-open.mp4" type="video/mp4"> -->
         </video>
 
-        <!-- Overlay para “clic para abrir” (opcional) -->
         <button id="videoPlayBtn" class="video-play" type="button" aria-label="Reproducir vídeo">Abrir</button>
-
-        <!-- Fade blanco para la transición -->
         <div class="whitefade" aria-hidden="true"></div>
-
-        <!-- Botón para saltar (accesibilidad) -->
         <button id="skipVideoBtn" class="skip-video" type="button" aria-label="Saltar vídeo">Saltar</button>
     </div>
+
+    <!-- Tarjeta de invitación (contenedor para #letterMount) -->
+    <section class="letter" aria-live="polite">
+        <div id="letterMount" class="letter__inner"></div>
+    </section>
 </div>
 
-<button class="reset" id="resetBtn" title="Reiniciar animación">↻</button>
-
-<!-- Orden importa: primero Guest (utilidades/datos), luego Envelope (animación/clic) -->
+<!-- Datos invitado + lógica del vídeo -->
 <script defer src="./js/guest.js"></script>
 <script type="module" src="./js/envelope.js"></script>
-<audio id="clickStart" preload="auto" src="./media/audio/flap-click-start.ogg"></audio>
-<audio id="clickEnd"   preload="auto" src="./media/audio/flap-click-end.ogg"></audio>
 </body>
 </html>
