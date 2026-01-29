@@ -20,7 +20,8 @@
       venueCity: g.venueCity || "",
       venueMap: g.venueMap || "#",
       plus: Number.isFinite(g.plus) ? g.plus : 0,
-      message: g.message || ""
+      message: g.message || "",
+      rsvpUrl: g.rsvpUrl || "https://forms.gle/XXXXXXXXXXXXXXX"
     };
   }
 

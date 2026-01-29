@@ -26,41 +26,111 @@
     <div class="whitefade" aria-hidden="true"></div>
 </div>
 
+<!-- ===== Capa de fondo con el camino (SVG fijo) ===== -->
+<svg id="pathLayer" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+        <linearGradient id="trailGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"  stop-color="rgba(200,169,106,0.85)"/>
+            <stop offset="100%" stop-color="rgba(200,169,106,0.45)"/>
+        </linearGradient>
+        <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <!-- Trazado completo (se revela con dashoffset) -->
+    <path id="pathTrail" class="trail" d="" fill="none" stroke="url(#trailGrad)" stroke-width="6" stroke-linecap="round" filter="url(#softGlow)"/>
+    <!-- Guinda: un puntito que “viaja” por el camino -->
+    <circle id="pathDot" r="6" fill="rgba(200,169,106,0.9)" cx="0" cy="0" />
+</svg>
+
 <!-- ===== Web normal (se revela tras el vídeo) ===== -->
 <main id="site" class="site" aria-live="polite" aria-hidden="true">
     <!-- Hero / tarjeta de invitación -->
-    <section class="hero">
-        <div id="letterMount" class="invite-card">
-            <!-- JS (guest.js) inyecta aquí los datos del invitado -->
+    <section class="hero reveal-up">
+        <div id="letterMount" class="invite-card"></div>
+    </section>
+
+    <!-- Story 1 (foto izquierda) -->
+    <section class="story left reveal-up">
+        <div class="story-inner">
+            <div class="story-image">
+                <img src="./media/sections/01.jpg" alt="Nosotros" loading="lazy" />
+            </div>
+            <div class="story-text">
+                <h3>Cómo empezó</h3>
+                <p>Un mensaje, un café, y el principio de nuestro camino juntos.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Galería (sustituye src por tus fotos reales) -->
-    <section class="gallery">
-        <h3 class="section-title">Unas fotos nuestras y del lugar</h3>
+    <!-- Story 2 (foto derecha) -->
+    <section class="story right reveal-up">
+        <div class="story-inner">
+            <div class="story-image">
+                <img src="./media/sections/02.jpg" alt="Un lugar especial" loading="lazy" />
+            </div>
+            <div class="story-text">
+                <h3>El lugar</h3>
+                <p>Elegimos un rincón que nos inspira y queremos compartirlo contigo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story 3 (foto izquierda) -->
+    <section class="story left reveal-up">
+        <div class="story-inner">
+            <div class="story-image">
+                <img src="./media/sections/03.jpg" alt="Nuestros planes" loading="lazy" />
+            </div>
+            <div class="story-text">
+                <h3>El gran día</h3>
+                <ul class="timeline">
+                    <li><span class="time">17:30</span> Ceremonia</li>
+                    <li><span class="time">18:30</span> Cóctel</li>
+                    <li><span class="time">20:00</span> Cena</li>
+                    <li><span class="time">23:30</span> Fiesta 🎉</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería simple -->
+    <section class="gallery reveal-up">
+        <h3 class="section-title">Momentos que nos encantan</h3>
         <div class="grid">
-            <img src="./media/gallery/01.jpg" alt="Foto 1" loading="lazy" />
-            <img src="./media/gallery/02.jpg" alt="Foto 2" loading="lazy" />
-            <img src="./media/gallery/03.jpg" alt="Foto 3" loading="lazy" />
-            <img src="./media/gallery/04.jpg" alt="Foto 4" loading="lazy" />
-            <img src="./media/gallery/05.jpg" alt="Foto 5" loading="lazy" />
-            <img src="./media/gallery/06.jpg" alt="Foto 6" loading="lazy" />
+            <img src="./media/gallery/01.jpg" alt="Galería 1" loading="lazy" />
+            <img src="./media/gallery/02.jpg" alt="Galería 2" loading="lazy" />
+            <img src="./media/gallery/03.jpg" alt="Galería 3" loading="lazy" />
+            <img src="./media/gallery/04.jpg" alt="Galería 4" loading="lazy" />
+            <img src="./media/gallery/05.jpg" alt="Galería 5" loading="lazy" />
+            <img src="./media/gallery/06.jpg" alt="Galería 6" loading="lazy" />
         </div>
     </section>
 
-    <!-- Info adicional -->
-    <section class="details">
-        <h3 class="section-title">Detalles</h3>
+    <!-- Info práctica -->
+    <section class="practical reveal-up">
+        <h3 class="section-title">Información útil</h3>
         <ul class="bullets">
             <li>Dress code: elegante cómodo.</li>
-            <li>Aparcamiento disponible en el recinto.</li>
-            <li>Si tienes alergias alimentarias, avísanos con tiempo.</li>
+            <li>Aparcamiento disponible.</li>
+            <li>Alérgenos: avísanos con antelación.</li>
         </ul>
+        <p class="center">
+            <a id="mapLink" class="btn" href="#" target="_blank" rel="noopener">Ver ubicación en Google Maps</a>
+        </p>
     </section>
 
-    <!-- CTA / Mapa -->
-    <section class="cta">
-        <a id="mapLink" class="btn" href="#" target="_blank" rel="noopener">Ver ubicación en Google Maps</a>
+    <!-- CTA final: Google Forms -->
+    <section class="rsvp reveal-up">
+        <h3 class="section-title">¿Te vienes?</h3>
+        <p class="center">
+            <a id="rsvpBtn" class="btn btn-accent" href="#" target="_blank" rel="noopener">Confirma tu asistencia</a>
+        </p>
+        <p class="center small">Se abrirá un formulario de Google Forms.</p>
     </section>
 
     <footer class="footer">
@@ -68,7 +138,7 @@
     </footer>
 </main>
 
-<!-- Datos invitado + lógica del vídeo -->
+<!-- Datos invitado + lógica del vídeo + camino + reveals -->
 <script defer src="./js/guest.js"></script>
 <script type="module" src="./js/envelope.js"></script>
 </body>

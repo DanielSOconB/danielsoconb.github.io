@@ -8,17 +8,8 @@
       "venueCity": "La Laguna",
       "venueMap": "https://maps.google.com/?q=Finca+Los+Naranjos+La+Laguna",
       "plus": 0,
-      "message": "Confirma tu asistencia respondiendo a este mensaje ❤️"
-    },
-    {
-      "slug": "lidia",
-      "displayName": "Lidia",
-      "when": "Sábado, 20 de junio de 2026 · 17:30",
-      "venueName": "Finca Los Naranjos",
-      "venueCity": "La Laguna",
-      "venueMap": "https://maps.google.com/?q=Finca+Los+Naranjos+La+Laguna",
-      "plus": 1,
-      "message": "¡Nos hará mucha ilusión verte!"
+      "message": "Confirma tu asistencia cuando puedas ❤️",
+      "rsvpUrl": "https://forms.gle/XXXXXXXXXXXXXXX"
     }
   ]
 }
