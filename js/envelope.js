@@ -39,9 +39,9 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
   }
 
   async function fadeToLetter() {
-    // 1) Subir a blanco
+    // 1) Flash blanco breve
     whitefade.style.opacity = "1";
-    await wait(260); // breve flash
+    await wait(260);
 
     // 2) Oculta vídeo
     stage?.classList.add("is-done");
@@ -59,7 +59,7 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
       ).finished;
     }
 
-    // 4) Bajar blanco
+    // 4) Quita el blanco
     whitefade.style.opacity = "0";
   }
 
@@ -76,7 +76,7 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
     }
 
     if (reduceMotion) {
-      // Sin vídeo, transición directa
+      // Sin vídeo por accesibilidad
       showLetterInstant();
       return;
     }
@@ -84,17 +84,16 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
     // Reproducción del vídeo
     stage?.classList.add("is-playing");
     try {
-      // iOS: usa pointerdown/click; muted + playsinline ayudan
       video.currentTime = 0;
       await video.play();
-    } catch (err) {
-      // Si falla (autoplay policies), muestra el botón
+    } catch {
+      // Si falla por políticas de autoplay, mostramos el botón
       playBtn.style.display = "inline-flex";
     }
   }
 
   function handleEnded() {
-    // Al terminar el vídeo: flash blanco y después la carta
+    // Al terminar el vídeo: transición a la carta
     fadeToLetter();
   }
 
@@ -105,8 +104,9 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
 
   // Eventos de reproducción
   stage?.addEventListener("click", (e) => {
-    // Evita que “Saltar” dispare play
-    if ((e.target as HTMLElement).id === "skipVideoBtn") return;
+    // Evita que el click en "Saltar" dispare el play (JS puro, sin TypeScript)
+    const target = e.target;
+    if (target && target.id === "skipVideoBtn") return;
     startVideo();
   });
   playBtn?.addEventListener("click", startVideo);
@@ -119,7 +119,7 @@ import { animate } from "https://cdn.jsdelivr.net/npm/motion@10.16.4/+esm";
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); startVideo(); }
   });
 
-  // Reset (si lo usas para depurar)
+  // Reset (útil en desarrollo)
   resetBtn?.addEventListener("click", () => {
     started = false;
     stage?.classList.remove("is-playing", "is-done");
