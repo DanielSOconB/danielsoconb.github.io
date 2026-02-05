@@ -85,7 +85,7 @@ body.no-scroll { overflow:hidden; height:100dvh; }
 .hero-caption h1{ margin: 0 0 4px; font-size: clamp(1.6rem, 4vw, 2.2rem); }
 .hero-caption p { margin: 0; }
 
-/* ===== Bloque 2: guest (usa landscape_background.png) ===== */
+/* ===== Bloque 2: guest (usa floral_background.png) ===== */
 .block-guest{
   background-image: url('../media/img/floral_background.png');
   background-size: cover;

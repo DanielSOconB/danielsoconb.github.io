@@ -1,73 +1,90 @@
-# Interactive Envelope Invite — README
+﻿# Invitación de Boda (vídeo + web por bloques)
 
-Este proyecto es una invitación digital interactiva para bodas, desplegable en GitHub Pages, que muestra un sobre animado con una carta personalizada para cada invitado. Se basa en HTML, CSS y JavaScript puros, y carga los datos de invitados desde un archivo JSON.
+Este proyecto es una invitación digital para boda pensada en **mobile first**. Al cargar la página se muestra un vídeo a pantalla completa; al hacer clic se reproduce, y al terminar hace un **fade out en blanco** para revelar la web principal. La web está organizada en bloques con información distinta y un botón final que enlaza a un **Google Forms** para confirmar asistencia.
 
 ---
 
-## 📂 Estructura del proyecto
+## Estructura del proyecto
 ```
 / (raíz del proyecto)
-  ├── index.html            # Página principal con la estructura del sobre y la carta
-  ├── /css/envelope.css     # Estilos del sobre, animaciones y layout
-  ├── /js/envelope.js       # Lógica de animación del sobre y carta
-  ├── /js/guest.js          # Carga de datos del invitado según la URL
-  ├── /data/guests.json     # Lista de invitados con sus datos personalizados
-  ├── 404.html              # Redirección para manejar rutas personalizadas en GitHub Pages
-  └── README.md             # Documentación del proyecto
+  ├── index.html            # Estructura principal (vídeo + bloques)
+  ├── /css/envelope.css     # Estilos y layout (mobile first)
+  ├── /js/guest.js          # Carga y normaliza datos del invitado
+  ├── /js/envelope.js       # Lógica de vídeo, fade y bloques
+  ├── /data/guests.json     # Datos de invitados
+  ├── /media/               # Vídeo e imágenes
+  ├── 404.html              # Mensaje en caso de enlace no encontrado
+  └── README.md             # Documentación
 ```
 
 ---
 
-## 🚀 Funcionamiento
-1. **URL personalizada**: cada invitado recibe una URL única, por ejemplo:
-    - En GitHub Pages: `https://tusitio.github.io/l9aQ7k`
-    - En local: `http://127.0.0.1:5500/#!/l9aQ7k` o `?code=l9aQ7k`
-
-2. **Carga de datos**:
-    - `guest.js` extrae el `slug` de la URL (ya sea de la ruta, del hash o del parámetro `code`).
-    - Se hace un `fetch` a `/data/guests.json` y se busca el invitado con ese `slug`.
-
-3. **Animación**:
-    - Al hacer clic, el sello se desvanece, el sobre se abre y la carta emerge con el contenido personalizado.
+## Cómo funciona (lógica actual)
+1. **Pantalla de vídeo**: se muestra el vídeo a pantalla completa y la web queda oculta.
+2. **Inicio**: al hacer clic (o con el botón “Abrir”), `envelope.js` carga el invitado y reproduce el vídeo.
+3. **Transición**: al finalizar, se hace un flash blanco y aparece la web. Si el usuario tiene reducción de movimiento, se salta el vídeo y se muestra la web al instante.
+4. **Relleno de bloques**:
+   - `guest.js` lee el slug desde `?g=...` o `?guest=...` (si no existe usa `default`).
+   - Carga `data/guests.json` con `cache: no-store` y busca el invitado (case-insensitive).
+   - Se pintan los bloques: carta, cuenta atrás, mapa, información útil y botón RSVP.
 
 ---
 
-## 🔗 Rutas y compatibilidad
-- **GitHub Pages**: el archivo `404.html` redirige cualquier URL no encontrada a la raíz con un hash (`#!/slug`), para que el JS pueda interpretar el slug.
-- **Local (Live Server)**: no soporta rutas personalizadas sin archivo físico. Usa `#!/slug` o `?code=slug` para pruebas.
+## URLs recomendadas
+- **GitHub Pages**: `https://tusitio.github.io/?g=slug` o `?guest=slug`
+- **Sin parámetro**: se utiliza el invitado `default`.
 
 ---
 
-## 🛠 Cómo desplegar
-1. Sube todos los archivos a un repositorio en GitHub.
-2. Activa GitHub Pages desde la rama `main` o `gh-pages`, carpeta `/` (root).
-3. Asegúrate de que `guests.json` esté en `/data/` y las rutas en el HTML apunten a `./css/` y `./js/`.
+## Página 404
+Si alguien llega a `404.html`, verá un mensaje indicando que se ponga en contacto con nosotros por WhatsApp.
 
 ---
 
-## 📌 Notas importantes
-- **Case-sensitive**: en GitHub Pages, `Guests.json` ≠ `guests.json`.
-- **Pruebas locales**: siempre usa hash o query param para evitar errores 404.
-- **Privacidad**: si la invitación contiene datos sensibles, evita hacer público el repo o cifra los datos.
+## Modelo de datos (`data/guests.json`)
+El archivo es un objeto con una clave `guests` que contiene un array de invitados:
 
----
-
-## 📄 Ejemplo de guests.json
 ```json
-[
-  {
-    "slug": "l9aQ7k",
-    "nombre": "Lidia",
-    "mensaje": "¡Te invitamos a nuestra boda el 12 de junio de 2026!"
-  },
-  {
-    "slug": "x8Bv3f",
-    "nombre": "Juan",
-    "mensaje": "¡Nos encantaría que nos acompañes en este día especial!"
-  }
-]
+{
+  "guests": [
+    {
+      "slug": "default",
+      "displayName": "Familia y amigos",
+      "message": "Nos hará muchísima ilusión contar contigo en este día tan especial.",
+      "when": "Sábado, 20 de junio de 2026 · 17:30",
+      "eventDateISO": "2026-06-20T17:30:00+01:00",
+      "venueName": "Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/xn9VsiUX7QV5tfTeA",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.4090376,-16.5433955",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/XXXXXXXXXXXXXXX"
+    }
+  ]
+}
 ```
+
+### Campos
+- `slug`: identificador único en la URL.
+- `displayName`: nombre visible del invitado.
+- `message`: mensaje personalizado.
+- `when`: texto libre mostrado en la invitación.
+- `eventDateISO`: fecha ISO para la cuenta atrás (opcional).
+- `venueName` / `venueCity`: nombre y ciudad del lugar.
+- `venueMap`: enlace a Google Maps para abrir en pestaña nueva.
+- `venueMapEmbed`: enlace de mapa embebido (si está vacío se usa `venueMap`).
+- `plus`: número de acompañantes permitidos.
+- `dressCode`: texto de dress code (se muestra tal cual).
+- `notes`: lista de notas adicionales.
+- `rsvpUrl`: URL del formulario de Google Forms.
 
 ---
 
-Con esto tendrás un sistema de invitaciones digitales interactivo, ligero y gratuito usando GitHub Pages.
+## Notas
+- El diseño está pensado en **mobile first**, con bloques a 100% de ancho y lectura clara en móvil.
+- Mantén las URLs relativas (`./css`, `./js`, `./media`) para que funcione en GitHub Pages.
