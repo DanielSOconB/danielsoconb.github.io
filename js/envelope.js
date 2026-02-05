@@ -9,7 +9,7 @@
   const skipBtn   = document.getElementById("skipVideoBtn");
   const site      = document.getElementById("site");
 
-  const blockGuest = document.getElementById("blockGuest");
+  const blockHero  = document.getElementById("blockHero");
   const mapEmbed   = document.getElementById("mapEmbed");
   const infoList   = document.getElementById("infoList");
   const rsvpBtn    = document.getElementById("rsvpBtn");
@@ -24,8 +24,8 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let started = false;
 
-  // TRUE: tras el vídeo, el bloque del invitado queda "arriba"
-  const SCROLL_TO_GUEST = true;
+  // TRUE: tras el vídeo, el bloque 1 (hero) queda "arriba"
+  const SCROLL_TO_HERO = true;
 
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
 
@@ -127,8 +127,8 @@
 
   function showSiteInstant() {
     showSiteBase();
-    if (SCROLL_TO_GUEST && blockGuest) {
-      setTimeout(() => { blockGuest.scrollIntoView({ behavior: "auto", block: "start" }); }, 30);
+    if (SCROLL_TO_HERO && blockHero) {
+      setTimeout(() => { blockHero.scrollIntoView({ behavior: "auto", block: "start" }); }, 30);
     } else {
       window.scrollTo({ top: 0, behavior: "auto" });
     }
@@ -140,8 +140,8 @@
     showSiteBase();
     if (whitefade) whitefade.style.opacity = "0";
 
-    if (SCROLL_TO_GUEST && blockGuest) {
-      setTimeout(() => { blockGuest.scrollIntoView({ behavior: "auto", block: "start" }); }, 30);
+    if (SCROLL_TO_HERO && blockHero) {
+      setTimeout(() => { blockHero.scrollIntoView({ behavior: "auto", block: "start" }); }, 30);
     } else {
       window.scrollTo({ top: 0, behavior: "auto" });
     }
