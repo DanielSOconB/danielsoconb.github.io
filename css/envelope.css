@@ -159,7 +159,13 @@ body.no-scroll { overflow:hidden; height:100dvh; }
 #letterMount{
   max-width: 640px;
   margin: 0 auto;
-  background: var(--paper);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(255, 253, 248, 0.84), rgba(255, 253, 248, 0.84)),
+    url('../media/img/tarjeta-fondo-invitacionjpeg.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 20px 18px;
