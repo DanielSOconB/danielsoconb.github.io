@@ -4,9 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Invitación de Boda</title>
+    <meta name="description" content="Invitación digital de boda con vídeo inicial, detalles del evento y confirmación de asistencia." />
+    <meta name="theme-color" content="#4b5e52" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Invitación de Boda" />
+    <meta property="og:description" content="Invitación digital con vídeo, ubicación y confirmación por formulario." />
+    <meta property="og:image" content="./media/img/horizontal-fing-box-1536.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Invitación de Boda" />
+    <meta name="twitter:description" content="Invitación digital con vídeo, ubicación y confirmación por formulario." />
+    <meta name="twitter:image" content="./media/img/horizontal-fing-box-1536.jpg" />
+    <link rel="icon" href="./favicon.ico" sizes="any" />
+    <link rel="preload" as="image" href="./media/img/vertical-fing-box-768.jpg" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600;6..96,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./css/envelope.css" />
 </head>
 <body>
@@ -30,11 +43,26 @@
 </div>
 
 <!-- ===== Web normal (aparece tras el vídeo) ===== -->
-<main id="site" class="site" aria-live="polite" aria-hidden="true">
+<main id="site" class="site" aria-hidden="true">
     <!-- Bloque 1: presentación (100% ancho, sin margen) -->
     <section id="blockHero" class="block block-hero reveal-up">
         <figure class="hero-figure">
-            <img src="./media/hero/couple.jpg" alt="Nuestra foto" loading="eager" />
+            <picture>
+                <source
+                        media="(min-width: 1024px)"
+                        srcset="./media/img/horizontal-fing-box-1024.jpg 1024w, ./media/img/horizontal-fing-box-1536.jpg 1536w"
+                        sizes="100vw" />
+                <img
+                        src="./media/img/vertical-fing-box-768.jpg"
+                        srcset="./media/img/vertical-fing-box-768.jpg 768w, ./media/img/vertical-fing-box-1024.jpg 1024w"
+                        sizes="100vw"
+                        alt="Nuestra foto"
+                        loading="eager"
+                        fetchpriority="high"
+                        decoding="async"
+                        width="1024"
+                        height="1536" />
+            </picture>
             <figcaption class="hero-caption">
                 <h1>¡Nos casamos!</h1>
                 <p>Qué ilusión compartir este día contigo.</p>
@@ -50,27 +78,35 @@
     <!-- Bloque 3: countdown -->
     <section id="blockCountdown" class="block block-countdown reveal-up">
         <h3>Cuenta atrás</h3>
-        <div class="count-grid" aria-live="polite">
+        <div class="count-grid" aria-hidden="true">
             <div><span id="cdDays">--</span><small>Días</small></div>
             <div><span id="cdHours">--</span><small>Horas</small></div>
             <div><span id="cdMinutes">--</span><small>Min</small></div>
             <div><span id="cdSeconds">--</span><small>Seg</small></div>
         </div>
         <p id="cdNote" class="cd-note"></p>
+        <p id="cdAnnounce" class="sr-only" aria-live="polite" aria-atomic="true"></p>
     </section>
 
     <!-- Bloque 4: imagen del sitio + mapa embebido -->
     <section id="blockVenue" class="block block-venue reveal-up">
         <figure class="venue-figure">
-            <img src="./media/venue/site.jpg" alt="El lugar de la celebración" loading="lazy" />
+            <img src="./media/img/hotel.jpeg" alt="El lugar de la celebración" loading="lazy" decoding="async" width="900" height="549" />
         </figure>
         <iframe id="mapEmbed" title="Mapa del lugar" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
     </section>
 
     <!-- Bloque 5: info práctica -->
     <section id="blockInfo" class="block block-info reveal-up">
-        <h3>Información útil</h3>
-        <ul class="info-list" id="infoList"></ul>
+        <figure class="info-figure">
+            <img
+                    src="./media/img/indicaciones-vestimenta.png"
+                    alt="Indicaciones de vestimenta"
+                    loading="lazy"
+                    decoding="async"
+                    width="1240"
+                    height="1748" />
+        </figure>
     </section>
 
     <!-- Bloque 6: RSVP (Google Forms) -->

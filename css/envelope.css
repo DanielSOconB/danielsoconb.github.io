@@ -109,6 +109,10 @@ body.no-scroll { overflow:hidden; height:100dvh; }
   overflow: hidden;
   height: 100dvh;
 }
+.hero-figure picture{
+  display: block;
+  height: 100%;
+}
 .hero-figure::after{
   content: "";
   position: absolute; inset: 0;
@@ -121,81 +125,269 @@ body.no-scroll { overflow:hidden; height:100dvh; }
   object-fit: cover;
 }
 .hero-caption{
-  position: absolute; left: 14px; bottom: 12px; right: 14px;
-  color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.65);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(20px, 7vh, 74px);
+  width: 100%;
+  padding: 0 clamp(18px, 5vw, 76px);
+  max-width: none;
+  color: #fff;
+  text-shadow:
+    0 16px 32px rgba(0,0,0,.38),
+    0 3px 10px rgba(0,0,0,.5);
   z-index: 1;
-  background: rgba(20,28,22,.45);
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 14px;
-  padding: 12px 14px;
-  backdrop-filter: blur(4px);
-  max-width: 640px;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+.hero-caption::before{
+  content: "";
+  display: block;
+  width: clamp(56px, 8vw, 84px);
+  height: 2px;
+  margin-bottom: clamp(10px, 1.6vw, 14px);
+  background: rgba(255,255,255,.78);
 }
 .hero-caption h1{
-  margin: 0 0 4px;
-  font-family: var(--font-serif);
+  margin: 0;
+  font-family: "Bodoni Moda", var(--font-serif);
   font-weight: 600;
-  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  font-size: clamp(2.7rem, 8.2vw, 5.5rem);
   letter-spacing: .4px;
+  line-height: .95;
+  color: #fff;
+  text-wrap: balance;
+  max-width: 12ch;
 }
-.hero-caption p { margin: 0; }
+.hero-caption p{
+  margin: clamp(10px, 1.6vw, 14px) 0 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 3.1vw, 1.9rem);
+  font-style: italic;
+  line-height: 1.18;
+  letter-spacing: .16px;
+  color: rgba(255,255,255,.96);
+  max-width: 28ch;
+}
+@media (max-width: 560px){
+  .hero-caption{
+    bottom: clamp(16px, 5.5vh, 28px);
+    padding: 0 14px;
+  }
+  .hero-caption::before{ margin-bottom: 8px; }
+  .hero-caption h1{ max-width: 11ch; }
+  .hero-caption p{
+    margin-top: 8px;
+    max-width: 22ch;
+  }
+}
 
-/* ===== Bloque 2: guest (usa floral_background.png) ===== */
+/* ===== Bloque 2: invitación (la tarjeta es el propio bloque) ===== */
 .block-guest{
-  background-image: url('../media/img/floral_background.png');
+  background-color: #eee4d5;
+  background-image:
+    linear-gradient(180deg, rgba(255,252,247,.62), rgba(247,239,226,.58)),
+    url('../media/img/tarjeta-fondo-invitacion.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
-  /* Si quieres más “aire” arriba/abajo, ajusta el padding del bloque: */
-  /* padding: 40px 14px; */
+  isolation: isolate;
+  padding-top: clamp(34px, 6vw, 56px);
+  padding-bottom: clamp(32px, 6vw, 52px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.55), inset 0 -1px 0 rgba(255,255,255,.55);
 }
 .block-guest::before{
   content: "";
-  position: absolute; inset: 0;
-  background: rgba(255,255,255,.74);
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255,253,248,.7) 0%, rgba(255,253,248,.48) 32%, rgba(255,253,248,.62) 100%),
+    radial-gradient(140% 120% at 0% 0%, rgba(176,196,181,.14), transparent 58%);
+  pointer-events: none;
+  z-index: 0;
 }
-.block-guest > *{ position: relative; z-index: 1; }
-#letterMount{
-  max-width: 640px;
-  margin: 0 auto;
-  background-color: var(--paper);
-  background-image:
-    linear-gradient(rgba(255, 253, 248, 0.84), rgba(255, 253, 248, 0.84)),
-    url('../media/img/tarjeta-fondo-invitacionjpeg.jpeg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: 1px solid var(--line);
+.block-guest::after{
+  content: "";
+  position: absolute;
+  inset: 12px 14px;
+  border: 1px solid rgba(92,79,65,.12);
   border-radius: 16px;
-  padding: 20px 18px;
-  box-shadow: var(--shadow);
+  pointer-events: none;
+  z-index: 0;
 }
-#letterMount .title{ font-size: 1.9rem; margin: 0 0 8px; }
-#letterMount .who{ font-size: 1.1rem; margin: 6px 0 12px; }
-#letterMount .meta{ color: #5b5b5b; }
+.block-guest > *{
+  position: relative;
+  z-index: 1;
+}
+#letterMount{
+  max-width: 780px;
+  margin: 0 auto;
+  padding: clamp(8px, 1.8vw, 12px) clamp(6px, 1.5vw, 12px);
+  color: #302922;
+  line-height: 1.55;
+}
 #letterMount .title{
-  font-family: var(--font-serif);
+  margin: 0;
+  font-family: "Bodoni Moda", var(--font-serif);
+  font-size: clamp(2rem, 5.3vw, 3rem);
   font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: .35px;
+  color: #2a241e;
+  text-wrap: balance;
+}
+#letterMount .title strong{
+  color: #34463c;
+  font-weight: 600;
+}
+#letterMount .who{
+  margin: 12px 0 18px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(82,70,58,.22);
+  max-width: 66ch;
+  font-family: var(--font-serif);
+  font-size: clamp(1.13rem, 2.5vw, 1.34rem);
+  font-style: italic;
+  color: #473d33;
+  line-height: 1.36;
+}
+#letterMount .meta{
+  margin: 9px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  color: #3e372f;
+}
+#letterMount .meta strong{
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 1.15px;
+  font-size: .76rem;
+  font-weight: 600;
+  color: #6d5f52;
+}
+#letterMount .meta span,
+#letterMount .meta a{
+  font-size: clamp(1rem, 2.2vw, 1.08rem);
+  font-weight: 600;
+  color: #2f2923;
+}
+#letterMount .meta a{
+  text-decoration-color: rgba(52,70,60,.45);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+#letterMount .meta a:hover{
+  color: #25362d;
 }
 
 /* ===== Bloque 3: countdown ===== */
-.block-countdown{ background: #f2eee7; text-align:center; }
-.block-countdown h3{ margin: 0 0 10px; }
+.block-countdown{
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 110% at 8% -12%, rgba(103,129,113,.2), transparent 60%),
+    radial-gradient(100% 90% at 100% 0%, rgba(199,182,156,.22), transparent 58%),
+    linear-gradient(180deg, #f4efe6 0%, #efe8dc 100%);
+}
+.block-countdown::before{
+  content: "";
+  position: absolute;
+  inset: 12px 14px;
+  border: 1px solid rgba(70,63,55,.12);
+  border-radius: 18px;
+  pointer-events: none;
+}
+.block-countdown h3{
+  margin: 0 auto 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #2f2a25;
+  font-size: clamp(1.8rem, 5vw, 2.45rem);
+  letter-spacing: .5px;
+}
+.block-countdown h3::before,
+.block-countdown h3::after{
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: rgba(63,83,71,.45);
+}
 .count-grid{
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 10px;
-  max-width: 640px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+@media (min-width: 760px){
+  .count-grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 .count-grid div{
-  padding: 12px 8px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(27,24,21,.08);
+  position: relative;
+  padding: 16px 10px 14px;
+  background: linear-gradient(180deg, rgba(255,254,250,.96), rgba(248,243,235,.95));
+  border: 1px solid rgba(74,66,58,.14);
+  border-radius: 16px;
+  box-shadow:
+    0 12px 22px rgba(27,24,21,.08),
+    inset 0 1px 0 rgba(255,255,255,.6);
+  transition: transform .25s ease, box-shadow .25s ease;
 }
-.count-grid span{ display:block; font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 800; }
-.count-grid small{ color:#555; }
-.cd-note{ margin: 8px 0 0; color:#555; }
+.count-grid div::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(140deg, rgba(255,255,255,.35), transparent 45%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+@media (hover: hover){
+  .count-grid div:hover{
+    transform: translateY(-2px);
+    box-shadow:
+      0 16px 28px rgba(27,24,21,.12),
+      inset 0 1px 0 rgba(255,255,255,.65);
+  }
+}
+.count-grid span{
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.85rem, 6vw, 2.7rem);
+  line-height: 1;
+  font-weight: 700;
+  color: #36463d;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+.count-grid small{
+  display: block;
+  margin-top: 7px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-size: .72rem;
+  color: #6b6358;
+  font-weight: 600;
+}
+.cd-note{
+  margin: 14px auto 0;
+  color: #5d564d;
+  max-width: 720px;
+  font-size: .98rem;
+  letter-spacing: .2px;
+}
 
 /* ===== Bloque 4: venue ===== */
 .block-venue{ background: #ffffff; }
@@ -212,10 +404,23 @@ body.no-scroll { overflow:hidden; height:100dvh; }
 }
 
 /* ===== Bloque 5: info ===== */
-.block-info{ background: #f6f5f2; }
-.block-info h3{ margin: 0 0 10px; text-align:center; }
-.info-list{ color:#333; padding-left: 18px; margin: 0 auto; max-width: 640px; }
-.info-list li{ margin: 6px 0; }
+.block-info{
+  background: #f6f5f2;
+  display: grid;
+  place-items: center;
+}
+.info-figure{
+  margin: 0;
+  width: min(100%, 760px);
+}
+.info-figure img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  border: 1px solid rgba(74,66,58,.14);
+  box-shadow: var(--shadow);
+}
 
 /* ===== Bloque 6: RSVP ===== */
 .block-rsvp{
@@ -232,6 +437,50 @@ body.no-scroll { overflow:hidden; height:100dvh; }
 .btn:hover{ filter: brightness(0.95); }
 .small{ font-size:.9rem; opacity:.9; }
 
+.block-rsvp .btn{
+  position: relative;
+  isolation: isolate;
+  font-family: "Bodoni Moda", var(--font-serif);
+  font-size: clamp(1.02rem, 2.6vw, 1.14rem);
+  font-weight: 600;
+  letter-spacing: .45px;
+  color: #2c261f;
+  background: linear-gradient(180deg, #fffdfa 0%, #f2ebdf 100%);
+  border: 1px solid rgba(84,72,60,.32);
+  padding: .94rem 1.7rem .9rem;
+  box-shadow:
+    0 16px 28px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.9);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+.block-rsvp .btn::before{
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: inherit;
+  border: 1px solid rgba(121,104,86,.2);
+  z-index: -1;
+}
+.block-rsvp .btn::after{
+  content: "↗";
+  margin-left: .5rem;
+  font-size: .95em;
+  opacity: .75;
+}
+@media (hover: hover){
+  .block-rsvp .btn:hover{
+    transform: translateY(-2px);
+    filter: brightness(1.02);
+    box-shadow:
+      0 20px 32px rgba(0,0,0,.28),
+      inset 0 1px 0 rgba(255,255,255,.95);
+  }
+}
+.block-rsvp .btn:focus-visible{
+  outline: 2px solid rgba(255,255,255,.9);
+  outline-offset: 3px;
+}
+
 /* ===== Bloque 7: thanks ===== */
 .block-thanks{ background: #ffffff; text-align:center; }
 .block-thanks p{ margin: 0; }
@@ -240,6 +489,18 @@ body.no-scroll { overflow:hidden; height:100dvh; }
 .footer{
   text-align:center; color:#6b6760; padding: 12px 12px 28px; margin: 0;
   font-family: var(--font-serif);
+}
+
+.sr-only{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
 }
 
 /* Reveal */

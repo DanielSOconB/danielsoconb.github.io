@@ -1,5 +1,5 @@
 // Vídeo full-screen FIJO → fade-out → aparece la web (bloques)
-// Autoscroll al Bloque 2 (letterMount). Sin parallax ni tarjetas internas.
+// Autoscroll al Bloque 1 (hero). Sin parallax ni tarjetas internas.
 (() => {
   const body      = document.body;
   const stage     = document.querySelector(".envelope-stage");
@@ -20,9 +20,13 @@
   const cdMinutes = document.getElementById("cdMinutes");
   const cdSeconds = document.getElementById("cdSeconds");
   const cdNote    = document.getElementById("cdNote");
+  const cdAnnounce = document.getElementById("cdAnnounce");
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let started = false;
+  let siteShown = false;
+  let guestReadyPromise = null;
+  let countdownTimer = null;
 
   // TRUE: tras el vídeo, el bloque 1 (hero) queda "arriba"
   const SCROLL_TO_HERO = true;
@@ -77,9 +81,22 @@
     }
   }
 
+  function ensureGuestLoaded() {
+    if (!guestReadyPromise) {
+      guestReadyPromise = loadGuestAndRender();
+    }
+    return guestReadyPromise;
+  }
+
   /* ===== Countdown ===== */
   function initCountdown(eventISO, whenText) {
     let target = null;
+    let lastAnnouncedMinute = null;
+    if (countdownTimer) {
+      clearInterval(countdownTimer);
+      countdownTimer = null;
+    }
+
     if (eventISO) {
       const t = Date.parse(eventISO);
       if (!Number.isNaN(t)) target = t;
@@ -92,6 +109,7 @@
         cdMinutes && (cdMinutes.textContent = "0");
         cdSeconds && (cdSeconds.textContent = "0");
         cdNote  && (cdNote.textContent  = "¡Hoy es el gran día!");
+        if (cdAnnounce) cdAnnounce.textContent = "Hoy es el gran día.";
         return;
       }
       const sec = Math.floor(diffMs / 1000);
@@ -105,19 +123,29 @@
       if (cdMinutes) cdMinutes.textContent = m.toString().padStart(2,"0");
       if (cdSeconds) cdSeconds.textContent = s.toString().padStart(2,"0");
       if (cdNote && whenText) cdNote.textContent = whenText;
+      if (cdAnnounce) {
+        const nowMinute = Math.floor(diffMs / 60000);
+        if (nowMinute !== lastAnnouncedMinute) {
+          lastAnnouncedMinute = nowMinute;
+          cdAnnounce.textContent = `${d} días, ${h} horas y ${m} minutos para la boda.`;
+        }
+      }
     }
 
     if (!target) {
       cdNote && (cdNote.textContent = whenText || "");
+      if (cdAnnounce) cdAnnounce.textContent = whenText || "";
       return;
     }
 
     render(target - Date.now());
-    setInterval(() => { render(target - Date.now()); }, 1000);
+    countdownTimer = setInterval(() => { render(target - Date.now()); }, 1000);
   }
 
   /* ===== Mostrar sitio ===== */
   function showSiteBase() {
+    if (siteShown) return;
+    siteShown = true;
     stage?.classList.add("is-done");         // oculta el vídeo fijo
     site?.classList.add("site--visible");
     site?.setAttribute("aria-hidden", "false");
@@ -150,25 +178,30 @@
   /* ===== Vídeo ===== */
   async function startVideo() {
     if (started) return;
-    started = true;
 
-    await loadGuestAndRender();
+    started = true;
+    await ensureGuestLoaded();
 
     if (reduceMotion) { showSiteInstant(); return; }
 
     body.classList.add("no-scroll");
     try {
-      if (video) {
-        video.currentTime = 0;
-        await video.play();
-      }
+      if (!video) { showSiteInstant(); return; }
+      video.currentTime = 0;
+      await video.play();
     } catch {
+      started = false;
+      body.classList.remove("no-scroll");
       if (playBtn) playBtn.style.display = "inline-flex";
     }
   }
 
   function handleEnded() { fadeToSite(); }
-  function skipVideo()   { try { video?.pause(); } catch {} showSiteInstant(); }
+  async function skipVideo() {
+    await ensureGuestLoaded();
+    try { video?.pause(); } catch {}
+    showSiteInstant();
+  }
 
   stage?.addEventListener("click", (e) => {
     const t = e.target;

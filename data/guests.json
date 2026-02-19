@@ -4,19 +4,37 @@
       "slug": "default",
       "displayName": "Familia y amigos",
       "message": "Nos hará muchísima ilusión contar contigo en este día tan especial.",
-      "when": "Sábado, 20 de junio de 2026 · 17:30",
-      "eventDateISO": "2026-06-20T17:30:00+01:00",
-      "venueName": "Parque Vacacional Eden",
+      "when": "Sábado, 4 de julio de 2026 · 13:00",
+      "eventDateISO": "2026-07-04T13:00:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
       "venueCity": "",
-      "venueMap": "https://maps.app.goo.gl/xn9VsiUX7QV5tfTeA",
-      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.4090376,-16.5433955",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
       "plus": 0,
       "dressCode": "Elegante cómodo",
       "notes": [
         "Aparcamiento disponible en el recinto.",
         "Si tienes alergias alimentarias, avísanos con tiempo."
       ],
-      "rsvpUrl": "https://forms.gle/XXXXXXXXXXXXXXX"
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "lidiaocon",
+      "displayName": "Lidia",
+      "message": "¡Hola Lidia! Literalmente pienso poner 2 estaciones de quesos solo para ti <3.",
+      "when": "Sábado, 4 de julio de 2026 · 13:00",
+      "eventDateISO": "2026-07-04T13:00:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
     }
   ]
 }
