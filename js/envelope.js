@@ -192,7 +192,6 @@
     } catch {
       started = false;
       body.classList.remove("no-scroll");
-      if (playBtn) playBtn.style.display = "inline-flex";
     }
   }
 
