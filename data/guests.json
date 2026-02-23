@@ -21,7 +21,79 @@
     {
       "slug": "lidiaocon",
       "displayName": "Lidia",
-      "message": "¡Hola Lidia! Literalmente pienso poner 2 estaciones de quesos solo para ti <3.",
+      "message": "Literalmente pienso poner 2 estaciones de quesos solo para ti <3. Recuerda, también, que eres testigo de la boda (la otra, la del juzgado) y que el día de la boda es el 4 de julio, no el 5. Lo pone un poco más abajo, pero por si acaso lo pongo aquí también. ¡Esta temporada llegamos a Máster!",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "gore",
+      "displayName": "Gore",
+      "message": "Esta es una de mis mayores ilusiones: poder compartir este momento tan importante en mi vida con quien realmente es mi familia. Porque todos estos años que hemos disfrutado juntos, me has visto crecer, me has ayudado y consentido, todo eso me ha hecho ser como soy. Te quiero mucho y no hay nadie que quisiera que estuviera más que tú en este día.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "lisdalia",
+      "displayName": "Lisdalia",
+      "message": "Porque una amistad no se hace de la noche a la mañana, sino que se va forjando con cada detalle, con cada conversación, con cada momento compartido. Y tú has sido parte de mi vida durante tanto tiempo que no puedo imaginar cómo hubiera sido mi vida sin ti. Mejores amigos es un título que no se da a cualquiera, y ese título no podría estar mejor representado que por ti. Gracias por ser esa persona que siempre ha estado ahí, en las buenas, en las malas y en las regulares. Espero que puedas estar este día tan especial.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "shadow-jose",
+      "displayName": "Shadow Jose",
+      "message": "Mi blanquito favorito",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "mikelson",
+      "displayName": "Miguel",
+      "message": "65% agua 90% sofá. No se me dan bien las mates.",
       "when": "Sábado, 4 de julio de 2026 · 13:30",
       "eventDateISO": "2026-07-04T13:30:00+01:00",
       "venueName": "Hotel Parque Vacacional Eden",
