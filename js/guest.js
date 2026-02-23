@@ -8,9 +8,22 @@
     return res.json();
   }
 
-  function getSlug() {
+  function getRequestedSlug() {
     const p = new URLSearchParams(location.search);
-    return p.get("g") || p.get("guest") || "default";
+
+    if (p.has("g")) {
+      return { slug: asString(p.get("g"), ""), hasExplicitSlug: true };
+    }
+    if (p.has("guest")) {
+      return { slug: asString(p.get("guest"), ""), hasExplicitSlug: true };
+    }
+
+    return { slug: "default", hasExplicitSlug: false };
+  }
+
+  function redirectToNotFound() {
+    const target = new URL("./404.html", location.href);
+    location.replace(target.href);
   }
 
   function asString(value, fallback) {
@@ -120,11 +133,17 @@
   }
 
   async function loadAndNormalize() {
-    const slug = getSlug();
+    const { slug, hasExplicitSlug } = getRequestedSlug();
     const data = await fetchGuests(); // { guests: [...] }
     const found = Array.isArray(data.guests)
       ? data.guests.find((x) => asString(x && x.slug, "").toLowerCase() === slug.toLowerCase())
       : null;
+
+    if (hasExplicitSlug && !found) {
+      redirectToNotFound();
+      throw new Error("Slug de invitado no encontrado");
+    }
+
     const g = normalize(found);
     renderLetter(g);
     return g;
