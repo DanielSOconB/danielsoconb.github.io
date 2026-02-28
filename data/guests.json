@@ -55,6 +55,24 @@
       "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
     },
     {
+      "slug": "canu",
+      "displayName": "Canu",
+      "message": "Este día es muy importante para nosotros y nos haría mucha ilusión contar contigo. Te agradezco de corazón todo lo que has hecho a lo largo de los años, y espero que puedas acompañarnos para celebrar un momento tan especial.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
       "slug": "lisdalia",
       "displayName": "Lisdalia",
       "message": "Porque una amistad no se hace de la noche a la mañana, sino que se va forjando con cada detalle, con cada conversación, con cada momento compartido. Y tú has sido parte de mi vida durante tanto tiempo que no puedo imaginar cómo hubiera sido mi vida sin ti. Mejores amigos es un título que no se da a cualquiera, y ese título no podría estar mejor representado que por ti. Gracias por ser esa persona que siempre ha estado ahí, en las buenas, en las malas y en las regulares. Espero que puedas estar este día tan especial.",
@@ -75,7 +93,25 @@
     {
       "slug": "shadow-jose",
       "displayName": "Shadow Jose",
-      "message": "Mi blanquito favorito",
+      "message": "¡HERMOSO! Mi blanquito favorito. Bienvenido al club. Está usted cordialmente invitado a mi boda y recuerda, no somos el gobierno de Canarias así que... ¡Por Malta!",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "aissa",
+      "displayName": "Aïssa",
+      "message": "Te otorgo el real honor de cuidar de mi nalguitas de melocotón (redonditas, suaves, dulces y deliciosas). La idea es pasarlo genial y grabar vídeos por si las moscas, porque igual algunos desperamos en las costas de Malta y no nos acordamos de nada.",
       "when": "Sábado, 4 de julio de 2026 · 13:30",
       "eventDateISO": "2026-07-04T13:30:00+01:00",
       "venueName": "Hotel Parque Vacacional Eden",
@@ -93,7 +129,241 @@
     {
       "slug": "mikelson",
       "displayName": "Miguel",
-      "message": "65% agua 90% sofá. No se me dan bien las mates.",
+      "message": "Estoy super emocionado por que vengas a mi boda. Gracias a ti he podido vivir todo lo que he vivido y eso me ha llevado al día de hoy. Después de todo, mereció sacar el calzón del sofá. Y sobre todo, gracias por ser mi amigo, por estar ahí. Le debemos mucho a La Purga.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "aura",
+      "displayName": "Aura",
+      "message": "Estoy muy emocionado por que vengas a mi boda. !Gracias por darme las oportunidades de vivir unas experiencias increibles! La idea es comer bien para poder hacer buen uso de la barra libre después jejeje. Y la boda, no nos olvidemos de la boda. Te esperamos <3",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "darlin",
+      "displayName": "Darlin",
+      "message": "Es para mi un honor invitar al negrito ojos claros. Para el siguiente road-trip ya tendré el carnet así que los Balcanes nos esperan. Pero antes, la boda. Te esperamos con los brazos abiertos.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "yayo",
+      "displayName": "Christian",
+      "message": "Brokie!!!! Te espero el día de la boda con un Rolieee!! No lleves la Steam Deck. Pero en serio, me haría muchísima ilusión que vinieras a celebrar este día tan especial con nosotros. Espero que puedas acompañarnos.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "elpendejuco",
+      "displayName": "Edu",
+      "message": "No hay huevos de pasarse el Fallout 4 de nuevo, pero espero que te sobren para venir a la boda. Y como de costumbre, probablemente nos veamos 28 meses después.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "jim",
+      "displayName": "Jim",
+      "message": "No pensé que llegarría este día, pero aquí estamos. Y pensar que casi no lo consigo olvidando el anillo en tu casa... Literalmente eres la persona más imporante (después de Ana, I guess) que tiene que venir a mi boda (bueno, yo también tengo que venir... Creo) porque queremos que seas tú el que nos una en matrimonio. Literalmente nos conocemos de hace más de 20 años, hemos vivido tantas cosas juntos, y no puedo imaginar este día sin ti. Si no vienes mando a un sicario a por ti, así que ya sabes lo que tienes que hacer. Te quiero mucho <3 y espero verte el día de la boda.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "nia",
+      "displayName": "Nia",
+      "message": "Deutsch: Jemand, der mich hat aufwachsen sehen und mich immer wie ihr eigenes Kind geliebt hat, dürfte an diesem Tag nicht fehlen. Danke, dass du mir geholfen hast, das möglich zu machen (ich bin manchmal echt schusselig, haha, aber jetzt habe ich immerhin eine lustige Geschichte zu erzählen). Ich hab dich sehr lieb und hoffe, dass du mit uns diesen ganz besonderen Tag feiern kannst.\nEnglish: Someone who watched me grow up and has always loved me like her own child could not be missing from this day. Thank you for helping me make this possible (I’m a bit scatterbrained haha, but now I have a funny story to tell). I love you very much, and I hope you can join us to celebrate this very special day.\nEspañol: Alguien que me vio crecer y que siempre me ha querido como mi propia madre no podría faltar a este día. Gracias por ayudarme a hacer esto posible (soy un despiste, jeje, pero ahora tengo una historia divertida para contar). Te quiero mucho y espero que puedas acompañarnos a celebrar este día tan especial.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "sheila",
+      "displayName": "Sheila",
+      "message": "Deutsch: Es ist völlig ausgeschlossen, dass ich meine deutsche Schwester, meine persönliche Friseurin und die absolut größte Katzenliebhaberin nicht einlade. Ich kann mir meine Hochzeit ohne so einen coolen Menschen gar nicht vorstellen (cooler als Jim, das kann ich dir versprechen). Wir würden uns riesig freuen, dich dabei zu haben, aber wenn du am Ende doch nicht kommen kannst, ist das überhaupt nicht schlimm — das Studium geht natürlich vor. Wir haben dich sehr lieb!\nEnglish: There’s simply no way I wouldn’t invite my German sister, my personal hairdresser, and the ultimate cat lover. I honestly can’t imagine my wedding without someone that cool (cooler than Jim, I promise you). We’d absolutely love to have you there, but if you end up not being able to make it, that’s completely okay — your studies come first, of course. We love you very much!\nEspañol: Es completamente imposible que no invite a mi hermana alemana, a mi peluquera personal y a la amante suprema de los gatos. No me imagino mi boda sin una persona tan cool (más cool que Jim, te lo prometo). Nos haría muchísima ilusión verte allí, pero si al final no puedes venir, no pasa absolutamente nada: los estudios van primero. ¡Te queremos muchísimo!",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "danielpb9",
+      "displayName": "Daniel",
+      "message": "No pensé que fuera a pasar, pero me caso. Creeme, estoy flipando, pero estoy muy emocionado. Apunta el 4 de julio en tu calendario. Y no hace falta que hagas la previa antes de venir a la boda porque habrá barra libre. Y pensar que todo empezó con un `te invito a pizza`... Más de 10 años después, míranos aquí. Hemos cambiado un montón, pero lo que no ha cambiado es que eres una de las personas que más ha impactado en mi vida, y no puedo imaginar este día sin ti. Espero que puedas venir a celebrar este día.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "aimar",
+      "displayName": "Aimar",
+      "message": "Espero que te pongas tus mejores galas para venir a celebrar este día. Hace más de 10 años que nos conocemos ya con la tontería. Definitivamente me alegro de haberte conocido, y lo más importante, que no haya sido `el namigo de un amigo` sino que hayamos forjado una amistad de verdad. Hablando de forjar, tenemos pendiente forjar lo que dijimos que íbamos a forjar. Espero que puedas venir a celebrar este día tan especial con nosotros.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "josemanuel",
+      "displayName": "Jose",
+      "message": "Espero que puedas venir a celebrar este día tan especial con nosotros. Aún después de todo lo que ha pasado entre nosotros en los últimos 10 años, quiero que vengas a mi boda, eres mi padre con todo lo que ello conlleva. Te quiero mucho y me daría mucha pena no tenerte a mi lado en un día tan importante para mí. Gracias por tener siempre la puerta abierta para mí, por ser mi padre, por ser mi amigo, por ser mi familia. Espero que puedas venir a celebrar este día tan especial con nosotros.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "susi",
+      "displayName": "Susi",
+      "message": "Te prometo que habrá cervezas, así que no tienes excusa para no venir a celebrar, es más, habrá barra libre. Espero que puedas venir a celebrar este día tan especial con nosotros. Y a lo mejor te cruzas con algún mozo guapete jejeje.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "mariajose",
+      "displayName": "María José",
+      "message": "Necesito en mi boda a la tía más cañera de todas, si no vienes, tendré que contratar a una doble de acción o algo así. Espero que puedas venir y prepara esa rodilla mecánica porque hay pista de baile.",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "andres",
+      "displayName": "Andrés",
+      "message": "Estoy muy agradecido de que nuesta amistad haya sido tan duradera a lo largo de los años (y los que quedan por delante), y me haría muchísima ilusión que pudieras venir a celebrar este día tan especial con nosotros. Literalente no me puedo imaginar cómo hubiera terminado mi vida si no te tuviera allí, por suerte eras la parte que me mantenía en el lado bueno. Espero que puedas venir a celebrar este día tan especial con nosotros. Ah, y no te olvides que me debes la Play 7 cuando salga, no me he olvidado.",
       "when": "Sábado, 4 de julio de 2026 · 13:30",
       "eventDateISO": "2026-07-04T13:30:00+01:00",
       "venueName": "Hotel Parque Vacacional Eden",
