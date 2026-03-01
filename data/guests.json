@@ -379,6 +379,24 @@
       "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
     },
     {
+      "slug": "xxxxx",
+      "displayName": "Mr./Ms. X",
+      "message": "_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante cómodo",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
       "slug": "melania",
       "displayName": "Melania",
       "message": "No olvides la Lactasa porque pienso poner dos estaciones de queso sólo para ti <3",
