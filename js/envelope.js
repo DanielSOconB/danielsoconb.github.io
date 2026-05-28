@@ -11,7 +11,6 @@
 
   const blockHero  = document.getElementById("blockHero");
   const mapEmbed   = document.getElementById("mapEmbed");
-  const infoList   = document.getElementById("infoList");
   const rsvpBtn    = document.getElementById("rsvpBtn");
 
   // Countdown refs
@@ -44,29 +43,6 @@
           mapEmbed.src = g.venueMapEmbed;
         } else if (g.venueMap) {
           mapEmbed.src = g.venueMap;
-        }
-      }
-
-      // Bloque 5: info práctica
-      if (infoList) {
-        infoList.innerHTML = "";
-        if (g.dressCode) {
-          const li = document.createElement("li");
-          li.textContent = `Dress code: ${g.dressCode}.`;
-          infoList.appendChild(li);
-        }
-        const liPlus = document.createElement("li");
-        liPlus.textContent = g.plus > 0
-          ? `Puedes venir con ${g.plus} acompañante(s).`
-          : `Sin acompañante.`;
-        infoList.appendChild(liPlus);
-
-        if (Array.isArray(g.notes) && g.notes.length) {
-          g.notes.forEach(n => {
-            const li = document.createElement("li");
-            li.textContent = n;
-            infoList.appendChild(li);
-          });
         }
       }
 
