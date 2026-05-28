@@ -683,6 +683,24 @@
         "Si tienes alergias alimentarias, avísanos con tiempo."
       ],
       "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
+    },
+    {
+      "slug": "luz",
+      "displayName": "Luz",
+      "message": "Me enorgullece permitirme poder invitar a una persona tan increíble a mi boda. Ambos sabemos que pasen 2 semanas o 2 años, siempre podemos contar el uno con el otro. Me haría muchísima ilusión que pudieras venir a celebrar este día tan especial con nosotros. Y como te he dicho ya mil veces antes y lo seguiré diciendo, te deseo todo lo mejor en tu vida, sabes que siempre puedes contar conmigo para lo que necesites. Jamás olvidaré todo lo que has hecho por mí, y espero poder devolverte el favor algún día. Nos vemos el 4 de julio!",
+      "when": "Sábado, 4 de julio de 2026 · 13:30",
+      "eventDateISO": "2026-07-04T13:30:00+01:00",
+      "venueName": "Hotel Parque Vacacional Eden",
+      "venueCity": "",
+      "venueMap": "https://maps.app.goo.gl/EQX45kfXZXocVnGz7",
+      "venueMapEmbed": "https://www.google.com/maps?output=embed&q=28.408040,-16.542443",
+      "plus": 0,
+      "dressCode": "Elegante, cómodo. Colores prohibidos: Blanco o que se confunda con el blanco y azul eléctrico.",
+      "notes": [
+        "Aparcamiento disponible en el recinto.",
+        "Si tienes alergias alimentarias, avísanos con tiempo."
+      ],
+      "rsvpUrl": "https://forms.gle/Ji6xnzei4y6FcLvM6"
     }
   ]
 }
